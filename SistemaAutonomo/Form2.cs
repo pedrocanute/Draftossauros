@@ -1,14 +1,15 @@
 ﻿using Draft;
+using Draft;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Draft;
 
 namespace SistemaAutonomo
 {
@@ -76,6 +77,55 @@ namespace SistemaAutonomo
             Form1 janelaPrincipal = new Form1(partidaCriada);
             janelaPrincipal.Show();
             // this.Close();
+        }
+
+        private void lstListaPartidas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstListaPartidas.SelectedItem == null) return;
+
+            string partida = lstListaPartidas.SelectedItem.ToString();
+
+            string[] dadosPartida = partida.Split(',');
+
+            if (dadosPartida.Length < 3) return;
+
+            partidaCriada.idPartida = Convert.ToInt32(dadosPartida[0]);
+            partidaCriada.senha = txtSenha.Text;
+            string nomePartida = dadosPartida[1];
+            string data = dadosPartida[2];
+
+            /* lblIdPartida.Text = partidaCriada.idPartida.ToString();
+            lblNomePartida.Text = nomePartida;
+            lblDataPartida.Text = data;
+            lstListaJogadores.Items.Clear();*/
+
+        }
+
+        private void btnEntrar_Click(object sender, EventArgs e)
+
+        {
+            if (lstListaPartidas.SelectedItem == null) return;
+            string partida = lstListaPartidas.SelectedItem.ToString();
+            
+
+            string[] dadosPartida = partida.Split(',');
+
+            if (dadosPartida.Length < 3) return;
+
+            partidaCriada.idPartida = Convert.ToInt32(dadosPartida[0]);
+            
+
+
+            if (txtSenha.Text != partidaCriada.senha)
+            {
+                MessageBox.Show("A senha da partida é invalida", "SENHA INVÁLIDO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+           
+            
+            Form1 janelaPrincipal = new Form1(partidaCriada);
+            janelaPrincipal.Show();
+
         }
     }
 }

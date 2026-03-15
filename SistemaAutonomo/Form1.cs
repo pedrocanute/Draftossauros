@@ -126,6 +126,8 @@ namespace SistemaAutonomo
                 return;
             }
 
+            
+
             infoJogador = infoJogador.Replace("\r", "").Replace("\n", "");
             string[] splitInfoJogador = infoJogador.Split(',');
 

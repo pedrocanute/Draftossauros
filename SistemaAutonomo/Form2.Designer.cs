@@ -187,6 +187,7 @@
             this.btnEntrar.TabIndex = 32;
             this.btnEntrar.Text = "Entrar na Partida";
             this.btnEntrar.UseVisualStyleBackColor = true;
+            this.btnEntrar.Click += new System.EventHandler(this.btnEntrar_Click);
             // 
             // Lobby
             // 
