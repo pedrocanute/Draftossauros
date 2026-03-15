@@ -52,12 +52,29 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblIdGerado = new System.Windows.Forms.Label();
             this.cmbStatusPartidas = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnIniciar = new System.Windows.Forms.Button();
+            this.btnCriarJogador = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblIdJogador = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblSenhaJogador = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtNomeJogador = new System.Windows.Forms.TextBox();
+            this.lstMaoDinossauros = new System.Windows.Forms.ListBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lblDadoSorteado = new System.Windows.Forms.Label();
+            this.lblTeste = new System.Windows.Forms.Label();
             this.grpDadosPartida.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnListarPartida
             // 
-            this.btnListarPartida.Location = new System.Drawing.Point(40, 129);
+            this.btnListarPartida.Location = new System.Drawing.Point(30, 111);
             this.btnListarPartida.Name = "btnListarPartida";
             this.btnListarPartida.Size = new System.Drawing.Size(86, 23);
             this.btnListarPartida.TabIndex = 0;
@@ -67,7 +84,7 @@
             // 
             // txtListaPartida
             // 
-            this.txtListaPartida.Location = new System.Drawing.Point(40, 158);
+            this.txtListaPartida.Location = new System.Drawing.Point(30, 140);
             this.txtListaPartida.Multiline = true;
             this.txtListaPartida.Name = "txtListaPartida";
             this.txtListaPartida.Size = new System.Drawing.Size(236, 188);
@@ -77,7 +94,7 @@
             // lstListaPartidas
             // 
             this.lstListaPartidas.FormattingEnabled = true;
-            this.lstListaPartidas.Location = new System.Drawing.Point(40, 160);
+            this.lstListaPartidas.Location = new System.Drawing.Point(30, 142);
             this.lstListaPartidas.Name = "lstListaPartidas";
             this.lstListaPartidas.Size = new System.Drawing.Size(229, 225);
             this.lstListaPartidas.TabIndex = 2;
@@ -120,7 +137,7 @@
             this.grpDadosPartida.Controls.Add(this.lbl1);
             this.grpDadosPartida.Controls.Add(this.lbl3);
             this.grpDadosPartida.Controls.Add(this.lbl2);
-            this.grpDadosPartida.Location = new System.Drawing.Point(282, 155);
+            this.grpDadosPartida.Location = new System.Drawing.Point(30, 375);
             this.grpDadosPartida.Name = "grpDadosPartida";
             this.grpDadosPartida.Size = new System.Drawing.Size(259, 262);
             this.grpDadosPartida.TabIndex = 6;
@@ -172,7 +189,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(435, 457);
+            this.label1.Location = new System.Drawing.Point(1161, 901);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 7;
@@ -181,7 +198,7 @@
             // lblVersao
             // 
             this.lblVersao.AutoSize = true;
-            this.lblVersao.Location = new System.Drawing.Point(484, 457);
+            this.lblVersao.Location = new System.Drawing.Point(1210, 901);
             this.lblVersao.Name = "lblVersao";
             this.lblVersao.Size = new System.Drawing.Size(0, 13);
             this.lblVersao.TabIndex = 8;
@@ -189,7 +206,7 @@
             // lblGrupo
             // 
             this.lblGrupo.AutoSize = true;
-            this.lblGrupo.Location = new System.Drawing.Point(435, 437);
+            this.lblGrupo.Location = new System.Drawing.Point(1161, 881);
             this.lblGrupo.Name = "lblGrupo";
             this.lblGrupo.Size = new System.Drawing.Size(39, 13);
             this.lblGrupo.TabIndex = 9;
@@ -198,7 +215,7 @@
             // lblNomeGrupo
             // 
             this.lblNomeGrupo.AutoSize = true;
-            this.lblNomeGrupo.Location = new System.Drawing.Point(484, 437);
+            this.lblNomeGrupo.Location = new System.Drawing.Point(1210, 881);
             this.lblNomeGrupo.Name = "lblNomeGrupo";
             this.lblNomeGrupo.Size = new System.Drawing.Size(57, 13);
             this.lblNomeGrupo.TabIndex = 10;
@@ -206,7 +223,7 @@
             // 
             // txtNomePartida
             // 
-            this.txtNomePartida.Location = new System.Drawing.Point(40, 43);
+            this.txtNomePartida.Location = new System.Drawing.Point(30, 25);
             this.txtNomePartida.Name = "txtNomePartida";
             this.txtNomePartida.Size = new System.Drawing.Size(148, 20);
             this.txtNomePartida.TabIndex = 11;
@@ -214,7 +231,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 27);
+            this.label3.Location = new System.Drawing.Point(27, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 13);
             this.label3.TabIndex = 12;
@@ -223,7 +240,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(37, 66);
+            this.label4.Location = new System.Drawing.Point(27, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 13);
             this.label4.TabIndex = 14;
@@ -231,14 +248,14 @@
             // 
             // txtSenha
             // 
-            this.txtSenha.Location = new System.Drawing.Point(40, 82);
+            this.txtSenha.Location = new System.Drawing.Point(30, 64);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.Size = new System.Drawing.Size(148, 20);
             this.txtSenha.TabIndex = 13;
             // 
             // btnCriarPartida
             // 
-            this.btnCriarPartida.Location = new System.Drawing.Point(194, 43);
+            this.btnCriarPartida.Location = new System.Drawing.Point(184, 25);
             this.btnCriarPartida.Name = "btnCriarPartida";
             this.btnCriarPartida.Size = new System.Drawing.Size(75, 59);
             this.btnCriarPartida.TabIndex = 15;
@@ -249,7 +266,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(191, 105);
+            this.label5.Location = new System.Drawing.Point(181, 87);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 13);
             this.label5.TabIndex = 16;
@@ -258,7 +275,7 @@
             // lblIdGerado
             // 
             this.lblIdGerado.AutoSize = true;
-            this.lblIdGerado.Location = new System.Drawing.Point(248, 105);
+            this.lblIdGerado.Location = new System.Drawing.Point(238, 87);
             this.lblIdGerado.Name = "lblIdGerado";
             this.lblIdGerado.Size = new System.Drawing.Size(0, 13);
             this.lblIdGerado.TabIndex = 17;
@@ -267,16 +284,172 @@
             // 
             this.cmbStatusPartidas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatusPartidas.FormattingEnabled = true;
-            this.cmbStatusPartidas.Location = new System.Drawing.Point(148, 131);
+            this.cmbStatusPartidas.Location = new System.Drawing.Point(138, 113);
             this.cmbStatusPartidas.Name = "cmbStatusPartidas";
             this.cmbStatusPartidas.Size = new System.Drawing.Size(121, 21);
             this.cmbStatusPartidas.TabIndex = 18;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Tabuleiro;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Location = new System.Drawing.Point(486, 30);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(838, 842);
+            this.panel1.TabIndex = 19;
+            // 
+            // btnIniciar
+            // 
+            this.btnIniciar.Location = new System.Drawing.Point(101, 776);
+            this.btnIniciar.Name = "btnIniciar";
+            this.btnIniciar.Size = new System.Drawing.Size(114, 23);
+            this.btnIniciar.TabIndex = 20;
+            this.btnIniciar.Text = "Iniciar Partida";
+            this.btnIniciar.UseVisualStyleBackColor = true;
+            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
+            // 
+            // btnCriarJogador
+            // 
+            this.btnCriarJogador.Location = new System.Drawing.Point(178, 45);
+            this.btnCriarJogador.Name = "btnCriarJogador";
+            this.btnCriarJogador.Size = new System.Drawing.Size(75, 23);
+            this.btnCriarJogador.TabIndex = 21;
+            this.btnCriarJogador.Text = "Criar";
+            this.btnCriarJogador.UseVisualStyleBackColor = true;
+            this.btnCriarJogador.Click += new System.EventHandler(this.btnCriarJogador_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 79);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "ID Jogador:";
+            // 
+            // lblIdJogador
+            // 
+            this.lblIdJogador.AutoSize = true;
+            this.lblIdJogador.Location = new System.Drawing.Point(106, 79);
+            this.lblIdJogador.Name = "lblIdJogador";
+            this.lblIdJogador.Size = new System.Drawing.Size(0, 13);
+            this.lblIdJogador.TabIndex = 23;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 99);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(82, 13);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "Senha Jogador:";
+            // 
+            // lblSenhaJogador
+            // 
+            this.lblSenhaJogador.Location = new System.Drawing.Point(106, 99);
+            this.lblSenhaJogador.Name = "lblSenhaJogador";
+            this.lblSenhaJogador.Size = new System.Drawing.Size(100, 13);
+            this.lblSenhaJogador.TabIndex = 32;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.txtNomeJogador);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.lblSenhaJogador);
+            this.groupBox1.Controls.Add(this.btnCriarJogador);
+            this.groupBox1.Controls.Add(this.lblIdJogador);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Location = new System.Drawing.Point(29, 643);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(260, 127);
+            this.groupBox1.TabIndex = 26;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Dados Jogador:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(95, 99);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(0, 13);
+            this.label7.TabIndex = 31;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(10, 27);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(94, 13);
+            this.label9.TabIndex = 30;
+            this.label9.Text = "Nome do Jogador:";
+            // 
+            // txtNomeJogador
+            // 
+            this.txtNomeJogador.Location = new System.Drawing.Point(10, 46);
+            this.txtNomeJogador.Name = "txtNomeJogador";
+            this.txtNomeJogador.Size = new System.Drawing.Size(163, 20);
+            this.txtNomeJogador.TabIndex = 29;
+            // 
+            // lstMaoDinossauros
+            // 
+            this.lstMaoDinossauros.FormattingEnabled = true;
+            this.lstMaoDinossauros.Location = new System.Drawing.Point(27, 836);
+            this.lstMaoDinossauros.Name = "lstMaoDinossauros";
+            this.lstMaoDinossauros.Size = new System.Drawing.Size(262, 69);
+            this.lstMaoDinossauros.TabIndex = 27;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(27, 812);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(87, 13);
+            this.label8.TabIndex = 28;
+            this.label8.Text = "Mão do Jogador:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(156, 812);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(82, 13);
+            this.label10.TabIndex = 29;
+            this.label10.Text = "Dado Sorteado:";
+            // 
+            // lblDadoSorteado
+            // 
+            this.lblDadoSorteado.AutoSize = true;
+            this.lblDadoSorteado.Location = new System.Drawing.Point(244, 812);
+            this.lblDadoSorteado.Name = "lblDadoSorteado";
+            this.lblDadoSorteado.Size = new System.Drawing.Size(0, 13);
+            this.lblDadoSorteado.TabIndex = 30;
+            // 
+            // lblTeste
+            // 
+            this.lblTeste.AutoSize = true;
+            this.lblTeste.Location = new System.Drawing.Point(319, 776);
+            this.lblTeste.Name = "lblTeste";
+            this.lblTeste.Size = new System.Drawing.Size(41, 13);
+            this.lblTeste.TabIndex = 31;
+            this.lblTeste.Text = "label11";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(552, 483);
+            this.BackColor = System.Drawing.Color.LightCyan;
+            this.ClientSize = new System.Drawing.Size(1353, 930);
+            this.Controls.Add(this.lblTeste);
+            this.Controls.Add(this.lblDadoSorteado);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lstMaoDinossauros);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btnIniciar);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.cmbStatusPartidas);
             this.Controls.Add(this.lblIdGerado);
             this.Controls.Add(this.label5);
@@ -293,13 +466,15 @@
             this.Controls.Add(this.lstListaPartidas);
             this.Controls.Add(this.txtListaPartida);
             this.Controls.Add(this.btnListarPartida);
-            this.MaximumSize = new System.Drawing.Size(568, 522);
-            this.MinimumSize = new System.Drawing.Size(568, 522);
+            this.MaximumSize = new System.Drawing.Size(1511, 1400);
+            this.MinimumSize = new System.Drawing.Size(1311, 39);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Draftossauros";
             this.grpDadosPartida.ResumeLayout(false);
             this.grpDadosPartida.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -331,6 +506,22 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblIdGerado;
         private System.Windows.Forms.ComboBox cmbStatusPartidas;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnIniciar;
+        private System.Windows.Forms.Button btnCriarJogador;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblIdJogador;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblSenhaJogador;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListBox lstMaoDinossauros;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtNomeJogador;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblDadoSorteado;
+        private System.Windows.Forms.Label lblTeste;
     }
 }
 

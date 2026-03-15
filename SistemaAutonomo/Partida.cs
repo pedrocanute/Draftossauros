@@ -1,4 +1,5 @@
 ﻿public class Partida
 {
-    public int idPartidaSelecionada { get; set; }
+   
+    public int idPartida { get; set; }
 }
