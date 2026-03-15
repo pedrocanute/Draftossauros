@@ -50,7 +50,11 @@ namespace SistemaAutonomo
                 lstListaPartidas.Items.Add(partidas[i]);
             }
 
+           
+
         }
+
+
 
         private void btnCriarPartida_Click(object sender, EventArgs e)
         {
@@ -68,6 +72,10 @@ namespace SistemaAutonomo
             string idGerado = Jogo.CriarPartida(txtNomePartida.Text, txtSenha.Text, lblNomeGrupo.Text);
             partidaCriada.idPartida = Convert.ToInt32(idGerado);
             lblIdGerado.Text = idGerado;
+            partidaCriada.senha = txtSenha.Text;
+            Form1 janelaPrincipal = new Form1(partidaCriada);
+            janelaPrincipal.Show();
+            // this.Close();
         }
     }
 }

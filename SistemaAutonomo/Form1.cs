@@ -13,11 +13,12 @@ namespace SistemaAutonomo
 {
     public partial class Form1 : Form
     {
-        Partida partidaCriada = new Partida(); //Instanciando a partida
+        Partida partidaCriada; //= new Partida(); //Instanciando a partida
         List<Jogador> listaJogadores = new List<Jogador>();
         Jogador jogadorAtual;
-        public Form1()
+        public Form1(Partida partida)
         {
+            partidaCriada = partida;
             InitializeComponent();
             lblVersao.Text = Jogo.versao; //Versionando o jogo no label
             cmbStatusPartidas.Items.Add("Todas");
@@ -116,7 +117,7 @@ namespace SistemaAutonomo
 
         private void btnCriarJogador_Click(object sender, EventArgs e)
         {
-            string infoJogador = Jogo.Entrar(partidaCriada.idPartida, txtNomeJogador.Text, txtSenha.Text);
+            string infoJogador = Jogo.Entrar(partidaCriada.idPartida, txtNomeJogador.Text, partidaCriada.senha/*txtSenha.Text*/);
             
             // Verificar se houve erro
             if (infoJogador.StartsWith("ERRO"))
