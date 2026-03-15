@@ -202,7 +202,7 @@
             // lblVersao
             // 
             this.lblVersao.AutoSize = true;
-            this.lblVersao.Location = new System.Drawing.Point(1210, 901);
+            this.lblVersao.Location = new System.Drawing.Point(988, 602);
             this.lblVersao.Name = "lblVersao";
             this.lblVersao.Size = new System.Drawing.Size(0, 13);
             this.lblVersao.TabIndex = 8;
@@ -298,15 +298,15 @@
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel1.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Tabuleiro;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1.Location = new System.Drawing.Point(317, -48);
+            this.panel1.Location = new System.Drawing.Point(388, 9);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(419, 421);
+            this.panel1.Size = new System.Drawing.Size(461, 452);
             this.panel1.TabIndex = 19;
             // 
             // btnIniciar
             // 
             this.btnIniciar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnIniciar.Location = new System.Drawing.Point(75, 116);
+            this.btnIniciar.Location = new System.Drawing.Point(124, 107);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(114, 23);
             this.btnIniciar.TabIndex = 20;
@@ -359,6 +359,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.txtNomeJogador);
@@ -367,8 +368,9 @@
             this.groupBox1.Controls.Add(this.btnCriarJogador);
             this.groupBox1.Controls.Add(this.lblIdJogador);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(350, 445);
+            this.groupBox1.Location = new System.Drawing.Point(323, 471);
             this.groupBox1.Name = "groupBox1";
+            this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.groupBox1.Size = new System.Drawing.Size(260, 127);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
@@ -402,7 +404,7 @@
             // 
             this.lstMaoDinossauros.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lstMaoDinossauros.FormattingEnabled = true;
-            this.lstMaoDinossauros.Location = new System.Drawing.Point(16, 31);
+            this.lstMaoDinossauros.Location = new System.Drawing.Point(6, 32);
             this.lstMaoDinossauros.Name = "lstMaoDinossauros";
             this.lstMaoDinossauros.Size = new System.Drawing.Size(151, 69);
             this.lstMaoDinossauros.TabIndex = 27;
@@ -411,7 +413,7 @@
             // 
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(14, 15);
+            this.label8.Location = new System.Drawing.Point(6, 16);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(87, 13);
             this.label8.TabIndex = 28;
@@ -421,7 +423,7 @@
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(184, 33);
+            this.label10.Location = new System.Drawing.Point(189, 23);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(82, 13);
             this.label10.TabIndex = 29;
@@ -431,7 +433,7 @@
             // 
             this.lblDadoSorteado.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDadoSorteado.AutoSize = true;
-            this.lblDadoSorteado.Location = new System.Drawing.Point(272, 33);
+            this.lblDadoSorteado.Location = new System.Drawing.Point(277, 23);
             this.lblDadoSorteado.Name = "lblDadoSorteado";
             this.lblDadoSorteado.Size = new System.Drawing.Size(0, 13);
             this.lblDadoSorteado.TabIndex = 30;
@@ -450,7 +452,7 @@
             // 
             this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(184, 51);
+            this.label11.Location = new System.Drawing.Point(189, 40);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(48, 13);
             this.label11.TabIndex = 32;
@@ -474,9 +476,9 @@
             this.gprPartida.Controls.Add(this.label11);
             this.gprPartida.Controls.Add(this.label10);
             this.gprPartida.Controls.Add(this.lblDadoSorteado);
-            this.gprPartida.Location = new System.Drawing.Point(667, 456);
+            this.gprPartida.Location = new System.Drawing.Point(599, 472);
             this.gprPartida.Name = "gprPartida";
-            this.gprPartida.Size = new System.Drawing.Size(283, 162);
+            this.gprPartida.Size = new System.Drawing.Size(361, 140);
             this.gprPartida.TabIndex = 34;
             this.gprPartida.TabStop = false;
             this.gprPartida.Text = "Partida";
@@ -486,7 +488,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(1295, 624);
+            this.ClientSize = new System.Drawing.Size(1000, 624);
             this.Controls.Add(this.gprPartida);
             this.Controls.Add(this.lblTeste);
             this.Controls.Add(this.groupBox1);
@@ -507,6 +509,8 @@
             this.Controls.Add(this.lstListaPartidas);
             this.Controls.Add(this.txtListaPartida);
             this.Controls.Add(this.btnListarPartida);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1511, 1400);
             this.MinimumSize = new System.Drawing.Size(1000, 39);
             this.Name = "Form1";
