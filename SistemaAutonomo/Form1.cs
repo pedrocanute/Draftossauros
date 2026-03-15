@@ -34,6 +34,13 @@ namespace SistemaAutonomo
 
             txtListaPartida.Text = retorno;
 
+            if (string.IsNullOrEmpty(retorno))
+            {
+                lstListaPartidas.Items.Clear();
+                lstListaPartidas.Items.Add("Não há partidas com este status");
+                return;
+            }
+
             retorno = retorno.Replace("\r", "");
             retorno = retorno.Substring(0, retorno.Length - 1);
             string[] partidas = retorno.Split('\n');
@@ -48,8 +55,14 @@ namespace SistemaAutonomo
 
         private void lstListaPartidas_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lstListaPartidas.SelectedItem == null) return;
+
             string partida = lstListaPartidas.SelectedItem.ToString();
+
             string[] dadosPartida = partida.Split(',');
+
+            if (dadosPartida.Length < 3) return;
+
             partidaCriada.idPartida = Convert.ToInt32(dadosPartida[0]);
             string nomePartida = dadosPartida[1];
             string data = dadosPartida[2];
@@ -111,34 +124,42 @@ namespace SistemaAutonomo
                 MessageBox.Show(infoJogador, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
+            infoJogador = infoJogador.Replace("\r", "").Replace("\n", "");
             string[] splitInfoJogador = infoJogador.Split(',');
 
             int idJogador = Convert.ToInt32(splitInfoJogador[0]);
             string senhaJogador = splitInfoJogador[1];
 
             lblIdJogador.Text = idJogador.ToString();
-            lblSenhaJogador.Text = senhaJogador; // Atualizado de txtSenhaJogador para lblSenhaJogador
+            lblSenhaJogador.Text = senhaJogador; 
 
             jogadorAtual = CriarJogador(idJogador, txtNomeJogador.Text, senhaJogador);
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            if (jogadorAtual == null)
+            if (listaJogadores.Count == 0)
             {
                 MessageBox.Show("Crie um jogador!","ERRO",MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string dadoInicial = Jogo.Iniciar(jogadorAtual.Id, jogadorAtual.Senha);
             
-            // Verificar se houve erro
             if (listaJogadores.Count < 2)
             {
                 MessageBox.Show("São necessários, pelo menos, 2 jogadores!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             
+            Jogador donoDaPartida = listaJogadores[0];
+            string dadoInicial = Jogo.Iniciar(donoDaPartida.Id, donoDaPartida.Senha);
+
+            if (dadoInicial.StartsWith("ERRO"))
+            {
+                MessageBox.Show(dadoInicial, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string[] splitDadoInicial = dadoInicial.Split(',');
             int idJogador = Convert.ToInt32(splitDadoInicial[0]);
             string faceDoDado = splitDadoInicial[1];
@@ -166,11 +187,27 @@ namespace SistemaAutonomo
                     break;
 
             }
-            string maoJogador = Jogo.ExibirMao(idJogador, jogadorAtual.Senha);
+            Jogador jogadorDaVez = BuscarJogador(idJogador);
+
+            if(jogadorDaVez == null)
+            {
+                MessageBox.Show("Não temos a senha deste jogador localmente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string maoJogador = Jogo.ExibirMao(idJogador, jogadorDaVez.Senha);
             lblTeste.Text = maoJogador;
+
+            if (maoJogador.StartsWith("ERRO"))
+            {
+                MessageBox.Show(maoJogador, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             maoJogador = maoJogador.Replace("\r", "");
             string[] dinossauros = maoJogador.Split('\n');
+
+            lblRodada.Text = dinossauros[0];
 
             lstMaoDinossauros.Items.Clear();
 

@@ -68,6 +68,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.lblDadoSorteado = new System.Windows.Forms.Label();
             this.lblTeste = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lblRodada = new System.Windows.Forms.Label();
             this.grpDadosPartida.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -398,7 +400,7 @@
             this.lstMaoDinossauros.FormattingEnabled = true;
             this.lstMaoDinossauros.Location = new System.Drawing.Point(27, 836);
             this.lstMaoDinossauros.Name = "lstMaoDinossauros";
-            this.lstMaoDinossauros.Size = new System.Drawing.Size(262, 69);
+            this.lstMaoDinossauros.Size = new System.Drawing.Size(151, 69);
             this.lstMaoDinossauros.TabIndex = 27;
             // 
             // label8
@@ -413,7 +415,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(156, 812);
+            this.label10.Location = new System.Drawing.Point(184, 836);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(82, 13);
             this.label10.TabIndex = 29;
@@ -422,7 +424,7 @@
             // lblDadoSorteado
             // 
             this.lblDadoSorteado.AutoSize = true;
-            this.lblDadoSorteado.Location = new System.Drawing.Point(244, 812);
+            this.lblDadoSorteado.Location = new System.Drawing.Point(272, 836);
             this.lblDadoSorteado.Name = "lblDadoSorteado";
             this.lblDadoSorteado.Size = new System.Drawing.Size(0, 13);
             this.lblDadoSorteado.TabIndex = 30;
@@ -430,11 +432,29 @@
             // lblTeste
             // 
             this.lblTeste.AutoSize = true;
-            this.lblTeste.Location = new System.Drawing.Point(319, 776);
+            this.lblTeste.Location = new System.Drawing.Point(379, 836);
             this.lblTeste.Name = "lblTeste";
             this.lblTeste.Size = new System.Drawing.Size(41, 13);
             this.lblTeste.TabIndex = 31;
             this.lblTeste.Text = "label11";
+            this.lblTeste.Visible = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(184, 854);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(48, 13);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "Rodada:";
+            // 
+            // lblRodada
+            // 
+            this.lblRodada.AutoSize = true;
+            this.lblRodada.Location = new System.Drawing.Point(238, 854);
+            this.lblRodada.Name = "lblRodada";
+            this.lblRodada.Size = new System.Drawing.Size(0, 13);
+            this.lblRodada.TabIndex = 33;
             // 
             // Form1
             // 
@@ -442,6 +462,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(1353, 930);
+            this.Controls.Add(this.lblRodada);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.lblTeste);
             this.Controls.Add(this.lblDadoSorteado);
             this.Controls.Add(this.label10);
@@ -522,6 +544,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblDadoSorteado;
         private System.Windows.Forms.Label lblTeste;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblRodada;
     }
 }
 
