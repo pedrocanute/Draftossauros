@@ -43,6 +43,9 @@
             this.txtListaPartida = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnEntrar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblVersaoDll = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,7 +146,7 @@
             // lblNomeGrupo
             // 
             this.lblNomeGrupo.AutoSize = true;
-            this.lblNomeGrupo.Location = new System.Drawing.Point(237, 358);
+            this.lblNomeGrupo.Location = new System.Drawing.Point(300, 358);
             this.lblNomeGrupo.Name = "lblNomeGrupo";
             this.lblNomeGrupo.Size = new System.Drawing.Size(57, 13);
             this.lblNomeGrupo.TabIndex = 30;
@@ -189,11 +192,41 @@
             this.btnEntrar.UseVisualStyleBackColor = true;
             this.btnEntrar.Click += new System.EventHandler(this.btnEntrar_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(237, 376);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 35;
+            this.label1.Text = "Versão:";
+            // 
+            // lblVersaoDll
+            // 
+            this.lblVersaoDll.AutoSize = true;
+            this.lblVersaoDll.Location = new System.Drawing.Point(300, 376);
+            this.lblVersaoDll.Name = "lblVersaoDll";
+            this.lblVersaoDll.Size = new System.Drawing.Size(43, 13);
+            this.lblVersaoDll.TabIndex = 34;
+            this.lblVersaoDll.Text = "Versão:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(237, 358);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 13);
+            this.label2.TabIndex = 36;
+            this.label2.Text = "Grupo:";
+            // 
             // Lobby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 380);
+            this.ClientSize = new System.Drawing.Size(384, 398);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblVersaoDll);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblNomeGrupo);
             this.Controls.Add(this.lblVersao);
@@ -226,5 +259,8 @@
         private System.Windows.Forms.TextBox txtListaPartida;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnEntrar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblVersaoDll;
+        private System.Windows.Forms.Label label2;
     }
 }

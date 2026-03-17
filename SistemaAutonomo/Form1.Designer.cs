@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnListarPartida = new System.Windows.Forms.Button();
-            this.txtListaPartida = new System.Windows.Forms.TextBox();
-            this.lstListaPartidas = new System.Windows.Forms.ListBox();
             this.lbl1 = new System.Windows.Forms.Label();
             this.lbl2 = new System.Windows.Forms.Label();
             this.lbl3 = new System.Windows.Forms.Label();
@@ -44,14 +41,6 @@
             this.lblVersao = new System.Windows.Forms.Label();
             this.lblGrupo = new System.Windows.Forms.Label();
             this.lblNomeGrupo = new System.Windows.Forms.Label();
-            this.txtNomePartida = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtSenha = new System.Windows.Forms.TextBox();
-            this.btnCriarPartida = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblIdGerado = new System.Windows.Forms.Label();
-            this.cmbStatusPartidas = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnIniciar = new System.Windows.Forms.Button();
             this.btnCriarJogador = new System.Windows.Forms.Button();
@@ -69,40 +58,16 @@
             this.lblDadoSorteado = new System.Windows.Forms.Label();
             this.lblTeste = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.lblRodada = new System.Windows.Forms.Label();
             this.gprPartida = new System.Windows.Forms.GroupBox();
+            this.lblRodada = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblVersao2 = new System.Windows.Forms.Label();
             this.grpDadosPartida.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gprPartida.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnListarPartida
-            // 
-            this.btnListarPartida.Location = new System.Drawing.Point(30, 111);
-            this.btnListarPartida.Name = "btnListarPartida";
-            this.btnListarPartida.Size = new System.Drawing.Size(86, 23);
-            this.btnListarPartida.TabIndex = 0;
-            this.btnListarPartida.Text = "Listar Partidas";
-            this.btnListarPartida.UseVisualStyleBackColor = true;
-            this.btnListarPartida.Click += new System.EventHandler(this.btnListarPartida_Click);
-            // 
-            // txtListaPartida
-            // 
-            this.txtListaPartida.Location = new System.Drawing.Point(30, 140);
-            this.txtListaPartida.Multiline = true;
-            this.txtListaPartida.Name = "txtListaPartida";
-            this.txtListaPartida.Size = new System.Drawing.Size(236, 188);
-            this.txtListaPartida.TabIndex = 1;
-            this.txtListaPartida.Visible = false;
-            // 
-            // lstListaPartidas
-            // 
-            this.lstListaPartidas.FormattingEnabled = true;
-            this.lstListaPartidas.Location = new System.Drawing.Point(30, 142);
-            this.lstListaPartidas.Name = "lstListaPartidas";
-            this.lstListaPartidas.Size = new System.Drawing.Size(229, 186);
-            this.lstListaPartidas.TabIndex = 2;
-            this.lstListaPartidas.SelectedIndexChanged += new System.EventHandler(this.lstListaPartidas_SelectedIndexChanged);
             // 
             // lbl1
             // 
@@ -141,9 +106,9 @@
             this.grpDadosPartida.Controls.Add(this.lbl1);
             this.grpDadosPartida.Controls.Add(this.lbl3);
             this.grpDadosPartida.Controls.Add(this.lbl2);
-            this.grpDadosPartida.Location = new System.Drawing.Point(30, 345);
+            this.grpDadosPartida.Location = new System.Drawing.Point(12, 12);
             this.grpDadosPartida.Name = "grpDadosPartida";
-            this.grpDadosPartida.Size = new System.Drawing.Size(259, 262);
+            this.grpDadosPartida.Size = new System.Drawing.Size(259, 240);
             this.grpDadosPartida.TabIndex = 6;
             this.grpDadosPartida.TabStop = false;
             this.grpDadosPartida.Text = "Dados da Partida:";
@@ -163,7 +128,7 @@
             this.lstListaJogadores.FormattingEnabled = true;
             this.lstListaJogadores.Location = new System.Drawing.Point(20, 137);
             this.lstListaJogadores.Name = "lstListaJogadores";
-            this.lstListaJogadores.Size = new System.Drawing.Size(214, 95);
+            this.lstListaJogadores.Size = new System.Drawing.Size(214, 69);
             this.lstListaJogadores.TabIndex = 7;
             // 
             // lblDataPartida
@@ -225,88 +190,20 @@
             this.lblNomeGrupo.TabIndex = 10;
             this.lblNomeGrupo.Text = "Primordiais";
             // 
-            // txtNomePartida
-            // 
-            this.txtNomePartida.Location = new System.Drawing.Point(30, 25);
-            this.txtNomePartida.Name = "txtNomePartida";
-            this.txtNomePartida.Size = new System.Drawing.Size(148, 20);
-            this.txtNomePartida.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Nome da Partida:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 48);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Senha:";
-            // 
-            // txtSenha
-            // 
-            this.txtSenha.Location = new System.Drawing.Point(30, 64);
-            this.txtSenha.Name = "txtSenha";
-            this.txtSenha.Size = new System.Drawing.Size(148, 20);
-            this.txtSenha.TabIndex = 13;
-            // 
-            // btnCriarPartida
-            // 
-            this.btnCriarPartida.Location = new System.Drawing.Point(184, 25);
-            this.btnCriarPartida.Name = "btnCriarPartida";
-            this.btnCriarPartida.Size = new System.Drawing.Size(75, 59);
-            this.btnCriarPartida.TabIndex = 15;
-            this.btnCriarPartida.Text = "Criar Partida";
-            this.btnCriarPartida.UseVisualStyleBackColor = true;
-            this.btnCriarPartida.Click += new System.EventHandler(this.btnCriarPartida_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(181, 87);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "ID Criado:";
-            // 
-            // lblIdGerado
-            // 
-            this.lblIdGerado.AutoSize = true;
-            this.lblIdGerado.Location = new System.Drawing.Point(238, 87);
-            this.lblIdGerado.Name = "lblIdGerado";
-            this.lblIdGerado.Size = new System.Drawing.Size(0, 13);
-            this.lblIdGerado.TabIndex = 17;
-            // 
-            // cmbStatusPartidas
-            // 
-            this.cmbStatusPartidas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStatusPartidas.FormattingEnabled = true;
-            this.cmbStatusPartidas.Location = new System.Drawing.Point(138, 113);
-            this.cmbStatusPartidas.Name = "cmbStatusPartidas";
-            this.cmbStatusPartidas.Size = new System.Drawing.Size(121, 21);
-            this.cmbStatusPartidas.TabIndex = 18;
-            // 
             // panel1
             // 
-            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.panel1.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Tabuleiro;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1.Location = new System.Drawing.Point(388, 9);
+            this.panel1.Location = new System.Drawing.Point(310, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(461, 452);
+            this.panel1.Size = new System.Drawing.Size(662, 629);
             this.panel1.TabIndex = 19;
             // 
             // btnIniciar
             // 
             this.btnIniciar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnIniciar.Location = new System.Drawing.Point(124, 107);
+            this.btnIniciar.Location = new System.Drawing.Point(71, 132);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(114, 23);
             this.btnIniciar.TabIndex = 20;
@@ -363,15 +260,16 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.txtNomeJogador);
+            this.groupBox1.Controls.Add(this.btnIniciar);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lblSenhaJogador);
             this.groupBox1.Controls.Add(this.btnCriarJogador);
             this.groupBox1.Controls.Add(this.lblIdJogador);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(323, 471);
+            this.groupBox1.Location = new System.Drawing.Point(12, 276);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(260, 127);
+            this.groupBox1.Size = new System.Drawing.Size(260, 161);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dados Jogador:";
@@ -402,18 +300,18 @@
             // 
             // lstMaoDinossauros
             // 
-            this.lstMaoDinossauros.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lstMaoDinossauros.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lstMaoDinossauros.FormattingEnabled = true;
-            this.lstMaoDinossauros.Location = new System.Drawing.Point(6, 32);
+            this.lstMaoDinossauros.Location = new System.Drawing.Point(6, 80);
             this.lstMaoDinossauros.Name = "lstMaoDinossauros";
             this.lstMaoDinossauros.Size = new System.Drawing.Size(151, 69);
             this.lstMaoDinossauros.TabIndex = 27;
             // 
             // label8
             // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 16);
+            this.label8.Location = new System.Drawing.Point(6, 64);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(87, 13);
             this.label8.TabIndex = 28;
@@ -421,9 +319,9 @@
             // 
             // label10
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(189, 23);
+            this.label10.Location = new System.Drawing.Point(6, 25);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(82, 13);
             this.label10.TabIndex = 29;
@@ -433,7 +331,7 @@
             // 
             this.lblDadoSorteado.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDadoSorteado.AutoSize = true;
-            this.lblDadoSorteado.Location = new System.Drawing.Point(277, 23);
+            this.lblDadoSorteado.Location = new System.Drawing.Point(-59, 25);
             this.lblDadoSorteado.Name = "lblDadoSorteado";
             this.lblDadoSorteado.Size = new System.Drawing.Size(0, 13);
             this.lblDadoSorteado.TabIndex = 30;
@@ -450,69 +348,97 @@
             // 
             // label11
             // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(189, 40);
+            this.label11.Location = new System.Drawing.Point(6, 42);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(48, 13);
             this.label11.TabIndex = 32;
             this.label11.Text = "Rodada:";
             // 
-            // lblRodada
-            // 
-            this.lblRodada.AutoSize = true;
-            this.lblRodada.Location = new System.Drawing.Point(238, 51);
-            this.lblRodada.Name = "lblRodada";
-            this.lblRodada.Size = new System.Drawing.Size(0, 13);
-            this.lblRodada.TabIndex = 33;
-            // 
             // gprPartida
             // 
             this.gprPartida.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.gprPartida.Controls.Add(this.lstMaoDinossauros);
             this.gprPartida.Controls.Add(this.lblRodada);
+            this.gprPartida.Controls.Add(this.lstMaoDinossauros);
             this.gprPartida.Controls.Add(this.label8);
-            this.gprPartida.Controls.Add(this.btnIniciar);
             this.gprPartida.Controls.Add(this.label11);
             this.gprPartida.Controls.Add(this.label10);
             this.gprPartida.Controls.Add(this.lblDadoSorteado);
-            this.gprPartida.Location = new System.Drawing.Point(599, 472);
+            this.gprPartida.Location = new System.Drawing.Point(12, 443);
             this.gprPartida.Name = "gprPartida";
-            this.gprPartida.Size = new System.Drawing.Size(361, 140);
+            this.gprPartida.Size = new System.Drawing.Size(260, 170);
             this.gprPartida.TabIndex = 34;
             this.gprPartida.TabStop = false;
             this.gprPartida.Text = "Partida";
+            // 
+            // lblRodada
+            // 
+            this.lblRodada.AutoSize = true;
+            this.lblRodada.Location = new System.Drawing.Point(60, 42);
+            this.lblRodada.Name = "lblRodada";
+            this.lblRodada.Size = new System.Drawing.Size(0, 13);
+            this.lblRodada.TabIndex = 34;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 639);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 35;
+            this.label3.Text = "Versão:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 621);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 36;
+            this.label4.Text = "Grupo:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(58, 621);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 13);
+            this.label5.TabIndex = 37;
+            this.label5.Text = "PRIMORDIAIS";
+            // 
+            // lblVersao2
+            // 
+            this.lblVersao2.AutoSize = true;
+            this.lblVersao2.Location = new System.Drawing.Point(62, 639);
+            this.lblVersao2.Name = "lblVersao2";
+            this.lblVersao2.Size = new System.Drawing.Size(43, 13);
+            this.lblVersao2.TabIndex = 38;
+            this.lblVersao2.Text = "Versão:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(1000, 624);
+            this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.lblVersao2);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.gprPartida);
             this.Controls.Add(this.lblTeste);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.cmbStatusPartidas);
-            this.Controls.Add(this.lblIdGerado);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.btnCriarPartida);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtSenha);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtNomePartida);
             this.Controls.Add(this.lblNomeGrupo);
             this.Controls.Add(this.lblGrupo);
             this.Controls.Add(this.lblVersao);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grpDadosPartida);
-            this.Controls.Add(this.lstListaPartidas);
-            this.Controls.Add(this.txtListaPartida);
-            this.Controls.Add(this.btnListarPartida);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1511, 1400);
-            this.MinimumSize = new System.Drawing.Size(1000, 39);
+            this.MaximumSize = new System.Drawing.Size(1000, 700);
+            this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Draftossauros";
@@ -528,10 +454,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnListarPartida;
-        private System.Windows.Forms.TextBox txtListaPartida;
-        private System.Windows.Forms.ListBox lstListaPartidas;
         private System.Windows.Forms.Label lbl1;
         private System.Windows.Forms.Label lbl2;
         private System.Windows.Forms.Label lbl3;
@@ -545,14 +467,6 @@
         private System.Windows.Forms.Label lblVersao;
         private System.Windows.Forms.Label lblGrupo;
         private System.Windows.Forms.Label lblNomeGrupo;
-        private System.Windows.Forms.TextBox txtNomePartida;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtSenha;
-        private System.Windows.Forms.Button btnCriarPartida;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label lblIdGerado;
-        private System.Windows.Forms.ComboBox cmbStatusPartidas;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.Button btnCriarJogador;
@@ -570,8 +484,12 @@
         private System.Windows.Forms.Label lblDadoSorteado;
         private System.Windows.Forms.Label lblTeste;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label lblRodada;
         private System.Windows.Forms.GroupBox gprPartida;
+        private System.Windows.Forms.Label lblRodada;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblVersao2;
     }
 }
 
