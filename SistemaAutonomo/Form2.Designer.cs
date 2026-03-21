@@ -180,7 +180,7 @@
             this.groupBox1.Size = new System.Drawing.Size(333, 343);
             this.groupBox1.TabIndex = 33;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Lobby";
             // 
             // btnEntrar
             // 
