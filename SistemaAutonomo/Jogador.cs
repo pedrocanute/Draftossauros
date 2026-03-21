@@ -1,11 +1,14 @@
-﻿public class Jogador
+﻿using System.Collections.Generic;
+
+public class Jogador
 {
 
     int id;
     string senha;
     string nome;
+    public List<Dinossauros> listaDinossauros = new List<Dinossauros>();
 
-   
+
     public int Id
     {
         get { return id; }

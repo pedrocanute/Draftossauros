@@ -163,6 +163,15 @@ namespace SistemaAutonomo
                 string sigla = splitDinossauros[0];
                 string quantidade = splitDinossauros[1];
 
+                int quantidadeNumero = Convert.ToInt32(quantidade);
+
+                // Adiciona o dinossauro à mão do jogador
+                for (int j = 0; j < quantidadeNumero; j++)
+                {
+                    Dinossauros dinossauro = new Dinossauros(sigla);
+                    jogadorDaVez.listaDinossauros.Add(dinossauro);
+                }
+
                 switch (sigla)
                 {
                     case "Br":
@@ -178,13 +187,137 @@ namespace SistemaAutonomo
                         lstMaoDinossauros.Items.Add("Parasaurolófo Qtd: " + quantidade);
                         break;
                     case "Ti":
-                        lstMaoDinossauros.Items.Add("Tiranossauro Rex Qtd: " + quantidade);
+                        lstMaoDinossauros.Items.Add("Tiranossauro-Rex Qtd: " + quantidade);
                         break;
                     case "Tr":
                         lstMaoDinossauros.Items.Add("Tricerátops Qtd: " + quantidade);
                         break;
                 }
+
             }
+            lblIdJogador.Text = jogadorDaVez.Id.ToString();
+        }
+        private void btnRealizarJogada_Click(object sender, EventArgs e)
+        {
+            if(lstMaoDinossauros.SelectedItem == null)
+            {
+                MessageBox.Show("Selecione um dinossauro para jogar!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            } 
+
+            string dinossauroSelecionado = lstMaoDinossauros.SelectedItem.ToString();
+            string[] dinossauroSelecionadoSplit = dinossauroSelecionado.Split(' ');
+            string siglaDinossauro = "";
+
+
+            switch (dinossauroSelecionadoSplit[0])
+            {
+                case "Braquiossauro":
+                    siglaDinossauro = "Br";
+                    break;
+                case "Espinossauro":
+                    siglaDinossauro = "Ep";
+                    break;
+                case "Estegossauro":
+                    siglaDinossauro = "Et";
+                    break;
+                case "Parasaurolófo":
+                    siglaDinossauro = "Pa";
+                    break;
+                case "Tiranossauro-Rex":
+                    siglaDinossauro = "Ti";
+                    break;
+                case "Tricerátops":
+                    siglaDinossauro = "Tr";
+                    break;
+            }
+
+            if (lstCercados.SelectedItem == null)
+            {
+                MessageBox.Show("Selecione um cercado para jogar!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string cercadoSelecionado = lstCercados.SelectedItem.ToString();
+            string[] cercadoSelecionadoSplit = cercadoSelecionado.Split(' ');
+            string siglaCercado = "";
+
+            switch (cercadoSelecionadoSplit[0])
+            {
+                case "Igualdade":
+                    siglaCercado = "FI";
+                    break;
+                case "Rei da Selva":
+                    siglaCercado = "RS";
+                    break;
+                case "Mata Tripla":
+                    siglaCercado = "MT";
+                    break;
+                case "Diferença":
+                    siglaCercado = "CD";
+                    break;
+                case "Amor":
+                    siglaCercado = "PA";
+                    break;
+                case "Solitária":
+                    siglaCercado = "IS";
+                    break;
+            }
+
+            int IdJogadorDoDado = Convert.ToInt32(lblIdJogador.Text);
+
+            if (jogadorAtual.Id != IdJogadorDoDado)
+            {
+                switch (lblDadoSorteado.Text)
+                {
+                    case "Floresta":
+                        if (lstCercados.SelectedItem.ToString() == "Amor" || lstCercados.SelectedItem.ToString() == "Solitária" || lstCercados.SelectedItem.ToString() == "Diferença")
+                        {
+                            MessageBox.Show("O dado sorteado é Floresta, você só pode jogar nos cercados Igualdade, Rei da Selva ou Mata Tripla!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        break;
+                    case "Pradaria":
+                        if (lstCercados.SelectedItem.ToString() == "Igualdade" || lstCercados.SelectedItem.ToString() == "Mata Tripla" || lstCercados.SelectedItem.ToString() == "Rei da Selva")
+                        {
+                            MessageBox.Show("O dado sorteado é Pradaria, você só pode jogar nos cercados Amor, Solitária ou Diferença!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        break;
+                    case "Banheiros":
+                        if (lstCercados.SelectedItem.ToString() == "Igualdade" || lstCercados.SelectedItem.ToString() == "Mata Tripla" || lstCercados.SelectedItem.ToString() == "Amor")
+                        {
+                            MessageBox.Show("O dado sorteado é Banheiros, você só pode jogar nos cercados Rei da Selva, Solitária ou Diferença!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        break;
+                    case "Alimentação":
+                        if (lstCercados.SelectedItem.ToString() == "Diferença" || lstCercados.SelectedItem.ToString() == "Rei da Selva" || lstCercados.SelectedItem.ToString() == "Solitária")
+                        {
+                            MessageBox.Show("O dado sorteado é Alimentação, você só pode jogar nos cercados Rei da Selva, Solitária ou Diferença!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        break;
+                    //case "Cercado Vazio":
+                    //    if (lstCercados.SelectedItem.ToString() == "Diferença" || lstCercados.SelectedItem.ToString() == "Rei da Selva" || lstCercados.SelectedItem.ToString() == "Solitária")
+                    //    {
+                    //        MessageBox.Show("O dado sorteado é Pradaria, você só pode jogar nos cercados Rei da Selva, Solitária ou Diferença!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //        return;
+                    //    }
+                    //    break;
+                    //case "T-Rex":
+                    //    if (lstCercados.SelectedItem.ToString() == "Diferença" || lstCercados.SelectedItem.ToString() == "Rei da Selva" || lstCercados.SelectedItem.ToString() == "Solitária")
+                    //    {
+                    //        MessageBox.Show("O dado sorteado é Pradaria, você só pode jogar nos cercados Rei da Selva, Solitária ou Diferença!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //        return;
+                    //    }
+                    //    break;
+                }
+            }
+
+            Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, siglaDinossauro, siglaCercado);
+            Dinossauros dinossauro = new Dinossauros(siglaDinossauro);
+            jogadorAtual.listaDinossauros.Remove(dinossauro);
         }
 
         public Jogador CriarJogador(int id, string nome, string senha)
@@ -207,5 +340,6 @@ namespace SistemaAutonomo
             MessageBox.Show("Jogador ja existe","ERRO",MessageBoxButtons.OK, MessageBoxIcon.Error);
             return null;
         }
+
     }
 }

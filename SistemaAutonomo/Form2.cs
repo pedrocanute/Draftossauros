@@ -80,7 +80,7 @@ namespace SistemaAutonomo
             lblIdGerado.Text = idGerado;
             Form1 janelaPrincipal = new Form1(partidaCriada);
             janelaPrincipal.Show();
-            
+
         }
 
         private void lstListaPartidas_SelectedIndexChanged(object sender, EventArgs e)
