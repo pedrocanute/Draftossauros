@@ -58,6 +58,8 @@
             this.lblTeste = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.gprPartida = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lstCercados = new System.Windows.Forms.ListBox();
             this.btnRealizarJogada = new System.Windows.Forms.Button();
             this.lblNomeJogador = new System.Windows.Forms.Label();
             this.lblDadoSorteado = new System.Windows.Forms.Label();
@@ -66,11 +68,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblVersao2 = new System.Windows.Forms.Label();
-            this.lstCercados = new System.Windows.Forms.ListBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.gprStatusPartida = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.grpDadosPartida.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gprPartida.SuspendLayout();
+            this.gprStatusPartida.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl1
@@ -199,9 +202,9 @@
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.panel1.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Tabuleiro;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1.Location = new System.Drawing.Point(310, 19);
+            this.panel1.Location = new System.Drawing.Point(298, 234);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(662, 629);
+            this.panel1.Size = new System.Drawing.Size(432, 414);
             this.panel1.TabIndex = 19;
             // 
             // btnIniciar
@@ -334,12 +337,10 @@
             // lblTeste
             // 
             this.lblTeste.AutoSize = true;
-            this.lblTeste.Location = new System.Drawing.Point(379, 836);
+            this.lblTeste.Location = new System.Drawing.Point(6, 42);
             this.lblTeste.Name = "lblTeste";
-            this.lblTeste.Size = new System.Drawing.Size(41, 13);
+            this.lblTeste.Size = new System.Drawing.Size(0, 13);
             this.lblTeste.TabIndex = 31;
-            this.lblTeste.Text = "label11";
-            this.lblTeste.Visible = false;
             // 
             // label11
             // 
@@ -371,9 +372,33 @@
             this.gprPartida.TabStop = false;
             this.gprPartida.Text = "Partida";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(160, 64);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(50, 13);
+            this.label12.TabIndex = 39;
+            this.label12.Text = "Cercado:";
+            // 
+            // lstCercados
+            // 
+            this.lstCercados.FormattingEnabled = true;
+            this.lstCercados.Items.AddRange(new object[] {
+            "Igualdade",
+            "Rei da Selva",
+            "Mata Tripla",
+            "Diferença",
+            "Amor",
+            "Solitária"});
+            this.lstCercados.Location = new System.Drawing.Point(160, 80);
+            this.lstCercados.Name = "lstCercados";
+            this.lstCercados.Size = new System.Drawing.Size(95, 82);
+            this.lstCercados.TabIndex = 38;
+            // 
             // btnRealizarJogada
             // 
-            this.btnRealizarJogada.Location = new System.Drawing.Point(158, 20);
+            this.btnRealizarJogada.Location = new System.Drawing.Point(158, 19);
             this.btnRealizarJogada.Name = "btnRealizarJogada";
             this.btnRealizarJogada.Size = new System.Drawing.Size(97, 23);
             this.btnRealizarJogada.TabIndex = 37;
@@ -442,29 +467,25 @@
             this.lblVersao2.TabIndex = 38;
             this.lblVersao2.Text = "Versão:";
             // 
-            // lstCercados
+            // gprStatusPartida
             // 
-            this.lstCercados.FormattingEnabled = true;
-            this.lstCercados.Items.AddRange(new object[] {
-            "Igualdade",
-            "Rei da Selva",
-            "Mata Tripla",
-            "Diferença",
-            "Amor",
-            "Solitária"});
-            this.lstCercados.Location = new System.Drawing.Point(160, 80);
-            this.lstCercados.Name = "lstCercados";
-            this.lstCercados.Size = new System.Drawing.Size(95, 82);
-            this.lstCercados.TabIndex = 38;
+            this.gprStatusPartida.Controls.Add(this.label13);
+            this.gprStatusPartida.Controls.Add(this.lblTeste);
+            this.gprStatusPartida.Location = new System.Drawing.Point(298, 12);
+            this.gprStatusPartida.Name = "gprStatusPartida";
+            this.gprStatusPartida.Size = new System.Drawing.Size(198, 206);
+            this.gprStatusPartida.TabIndex = 39;
+            this.gprStatusPartida.TabStop = false;
+            this.gprStatusPartida.Text = "Status Partida:";
             // 
-            // label12
+            // label13
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(160, 64);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(50, 13);
-            this.label12.TabIndex = 39;
-            this.label12.Text = "Cercado:";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 25);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(51, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Tabuleiro";
             // 
             // Form1
             // 
@@ -472,12 +493,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(983, 660);
+            this.Controls.Add(this.gprStatusPartida);
             this.Controls.Add(this.lblVersao2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.gprPartida);
-            this.Controls.Add(this.lblTeste);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblNomeGrupo);
@@ -498,6 +519,8 @@
             this.groupBox1.PerformLayout();
             this.gprPartida.ResumeLayout(false);
             this.gprPartida.PerformLayout();
+            this.gprStatusPartida.ResumeLayout(false);
+            this.gprStatusPartida.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -544,6 +567,8 @@
         private System.Windows.Forms.Button btnRealizarJogada;
         private System.Windows.Forms.ListBox lstCercados;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.GroupBox gprStatusPartida;
+        private System.Windows.Forms.Label label13;
     }
 }
 
