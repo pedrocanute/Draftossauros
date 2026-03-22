@@ -375,7 +375,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(160, 64);
+            this.label12.Location = new System.Drawing.Point(157, 64);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(50, 13);
             this.label12.TabIndex = 39;
@@ -390,7 +390,8 @@
             "Mata Tripla",
             "Diferença",
             "Amor",
-            "Solitária"});
+            "Solitária",
+            "Rio"});
             this.lstCercados.Location = new System.Drawing.Point(160, 80);
             this.lstCercados.Name = "lstCercados";
             this.lstCercados.Size = new System.Drawing.Size(95, 82);
@@ -473,7 +474,7 @@
             this.gprStatusPartida.Controls.Add(this.lblTeste);
             this.gprStatusPartida.Location = new System.Drawing.Point(298, 12);
             this.gprStatusPartida.Name = "gprStatusPartida";
-            this.gprStatusPartida.Size = new System.Drawing.Size(198, 206);
+            this.gprStatusPartida.Size = new System.Drawing.Size(264, 206);
             this.gprStatusPartida.TabIndex = 39;
             this.gprStatusPartida.TabStop = false;
             this.gprStatusPartida.Text = "Status Partida:";

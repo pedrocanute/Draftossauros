@@ -97,7 +97,7 @@ namespace SistemaAutonomo
             LancarDado(donoDaPartida);
 
             //Chama a função de exibir a mão do jogador
-            ExibirMaoJogador(donoDaPartida.Id);
+            ExibirMaoJogador(jogadorAtual.Id);
 
             //Exibe o id do jogador que lançou o dado
             lblIdJogador.Text = donoDaPartida.Id.ToString();
@@ -150,11 +150,11 @@ namespace SistemaAutonomo
                 return;
             }
 
-            string cercadoSelecionado = lstCercados.SelectedItem.ToString();
-            string[] cercadoSelecionadoSplit = cercadoSelecionado.Split(' ');
+            string cercadoSelecionado = lstCercados.SelectedItem.ToString().Trim();
             string siglaCercado = "";
 
-            switch (cercadoSelecionadoSplit[0])
+            // Use the full selected string to match multi-word options like "Rei da Selva" and "Mata Tripla"
+            switch (cercadoSelecionado)
             {
                 case "Igualdade":
                     siglaCercado = "FI";
@@ -173,6 +173,12 @@ namespace SistemaAutonomo
                     break;
                 case "Solitária":
                     siglaCercado = "IS";
+                    break;
+                case "Rio":
+                    siglaCercado = "RI";
+                    break;
+                default:
+                    siglaCercado = "";
                     break;
             }
 
@@ -227,8 +233,25 @@ namespace SistemaAutonomo
                 }
             }
 
+
             // Realiza a Jogada
-            Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, siglaDinossauro, siglaCercado);
+            //Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, siglaDinossauro, siglaCercado);
+            // preparar debug: quais siglas estão sendo enviadas
+            string enviado = $"Dinossauro={siglaDinossauro}, Cercado={siglaCercado}";
+
+            // chamar jogar e checar retorno
+            string resultadoJogar = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, siglaDinossauro, siglaCercado);
+
+            // se houver erro, mostrar o que foi enviado e a resposta do servidor para diagnosticar
+            if (!string.IsNullOrEmpty(resultadoJogar) && resultadoJogar.StartsWith("ERRO"))
+            {
+                string msg = $"Erro ao jogar. Enviado: {enviado}\nResposta servidor: {resultadoJogar}";
+                MessageBox.Show(msg, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblTeste.Text = msg;
+                lblTeste.Visible = true;
+                return;
+            }
+
             // Remove o dinossauro jogado da mão do jogador
             var dinossauroParaRemover = jogadorAtual.listaDinossauros.FirstOrDefault(d => d.SiglaNome == siglaDinossauro);
             if (dinossauroParaRemover != null)
@@ -371,7 +394,79 @@ namespace SistemaAutonomo
         public void ExibirTabuleiroJogador(Jogador jogador)
         {
             string tabuleiro = Jogo.ExibirTabuleiro(jogador.Id, jogador.Senha);
-            lblTeste.Text = tabuleiro;
+            if (string.IsNullOrEmpty(tabuleiro) || tabuleiro.StartsWith("ERRO"))
+            {
+                MessageBox.Show(tabuleiro, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Normaliza quebras de linha e espaços antes de fazer o split
+            tabuleiro = tabuleiro.Replace("\r", "").Trim();
+            string[] splitTabuleiro = tabuleiro.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            if (splitTabuleiro.Length < 3)
+            {
+                // resposta inesperada
+                lblTeste.Text = "Resposta do servidor inesperada: [" + tabuleiro + "]";
+                lblTeste.Visible = true;
+                return;
+            }
+
+            string siglaCercado = splitTabuleiro[0].Trim();
+            string siglaDinossauro = splitTabuleiro[1].Trim();
+            string quantidade = splitTabuleiro[2].Trim();
+            // em alguns casos a quantidade pode trazer uma nova linha com outros registros;
+            // pega apenas a primeira linha
+            if (quantidade.Contains("\n")) quantidade = quantidade.Split('\n')[0].Trim();
+
+            string dinossauro = "";
+            switch (siglaDinossauro)
+            {
+                case "Br":
+                    dinossauro = "Tem " + quantidade + " de Braquiossauro no ";
+                    break;
+                case "Ep":
+                    dinossauro = "Tem " + quantidade + " de Espinossauro no ";
+                    break;
+                case "Et":
+                    dinossauro = "Tem " + quantidade + " de Estegossauro no ";
+                    break;
+                case "Pa":
+                    dinossauro = "Tem " + quantidade + " de Parasaurolófo no ";
+                    break;
+                case "Ti":
+                    dinossauro = "Tem " + quantidade + " de Tiranossauro-Rex no ";
+                    break;
+                case "Tr":
+                    dinossauro = "Tem " + quantidade + " de Tricerátops no ";
+                    break;
+            }
+
+            string cercado = "";
+            switch (siglaCercado)
+            {
+                case "CD":
+                    cercado = "cercado da Diferença";
+                    break;
+                case "FI":
+                    cercado = "cercado da Igualdade";
+                    break;
+                case "IS":
+                    cercado = "cercado Solitário";
+                    break;
+                case "MT":
+                    cercado = "cercado Triplo";
+                    break;
+                case "PA":
+                    cercado = "cercado do Amor";
+                    break;
+                case "RI":
+                    cercado = "Rio";
+                    break;
+                case "RS":
+                    cercado = "cercado do Rei da Selva";
+                    break;
+            }
+            lblTeste.Text = dinossauro + cercado;
         }
     }
 }
