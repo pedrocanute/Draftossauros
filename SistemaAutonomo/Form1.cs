@@ -109,6 +109,8 @@ namespace SistemaAutonomo
 
         private void btnRealizarJogada_Click(object sender, EventArgs e)
         {
+          
+
             //Verifica qual dinossauro foi selecionado e atribui a sigla correspondente para realizar a jogada e trata o erro do jogador não ter selecionado um cercado para jogar
             if (lstMaoDinossauros.SelectedItem == null)
             {
@@ -216,20 +218,6 @@ namespace SistemaAutonomo
                             return;
                         }
                         break;
-                        //case "Cercado Vazio":
-                        //    if (lstCercados.SelectedItem.ToString() == "Diferença" || lstCercados.SelectedItem.ToString() == "Rei da Selva" || lstCercados.SelectedItem.ToString() == "Solitária")
-                        //    {
-                        //        MessageBox.Show("O dado sorteado é Pradaria, você só pode jogar nos cercados Rei da Selva, Solitária ou Diferença!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        //        return;
-                        //    }
-                        //    break;
-                        //case "T-Rex":
-                        //    if (lstCercados.SelectedItem.ToString() == "Diferença" || lstCercados.SelectedItem.ToString() == "Rei da Selva" || lstCercados.SelectedItem.ToString() == "Solitária")
-                        //    {
-                        //        MessageBox.Show("O dado sorteado é Pradaria, você só pode jogar nos cercados Rei da Selva, Solitária ou Diferença!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        //        return;
-                        //    }
-                        //    break;
                 }
             }
 
