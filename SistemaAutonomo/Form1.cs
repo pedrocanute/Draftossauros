@@ -51,7 +51,6 @@ namespace SistemaAutonomo
 
         private void btnCriarJogador_Click(object sender, EventArgs e)
         {
-
             if (listaJogadores.Count >= 5)
             {
                 MessageBox.Show("Quantidade maxima de jogadores: 5", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -92,16 +91,16 @@ namespace SistemaAutonomo
                 return;
             }
 
-            Jogador donoDaPartida = listaJogadores[0];
+            jogadorAtual = listaJogadores[0];
             //Chama a função de lançar o dado para o jogador que criou a partida e exibe o resultado do dado
-            LancarDado(donoDaPartida);
+            LancarDado(jogadorAtual);
 
             //Chama a função de exibir a mão do jogador
             ExibirMaoJogador(jogadorAtual.Id);
 
             //Exibe o id do jogador que lançou o dado
-            lblIdJogador.Text = donoDaPartida.Id.ToString();
-            txtNomeJogador.Text = donoDaPartida.Nome;
+            lblIdJogador.Text = jogadorAtual.Id.ToString();
+            txtNomeJogador.Text = jogadorAtual.Nome;
 
             //Exibe o nome do jogador atual que está realizando a jogada
             lblNomeJogador.Text = jogadorAtual.Nome;
@@ -247,15 +246,25 @@ namespace SistemaAutonomo
                 jogadorAtual.listaDinossauros.Remove(dinossauroParaRemover);
             }
 
+            Jogador jogadorAntigo = jogadorAtual;
             int indiceJogadorAtual = listaJogadores.FindIndex(j => j.Id == jogadorAtual.Id);
-            int proxJogador = (indiceJogadorAtual + 1) % listaJogadores.Count;
+            int proxJogador = (indiceJogadorAtual + 1);
+
+
+            if(proxJogador >= listaJogadores.Count)
+            {
+                proxJogador = 0;
+    
+            }
             jogadorAtual = listaJogadores[proxJogador];
             
             lblNomeJogador.Text = jogadorAtual.Nome;
 
             //Exibe a mão do jogador após a jogada
+
             ExibirMaoJogador(jogadorAtual.Id);
-            ExibirTabuleiroJogador(jogadorAtual);
+            ExibirTabuleiroJogador(jogadorAntigo);
+
         }
 
         public Jogador CriarJogador(int id, string nome, string senha)
