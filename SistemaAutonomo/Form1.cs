@@ -246,6 +246,13 @@ namespace SistemaAutonomo
             {
                 jogadorAtual.listaDinossauros.Remove(dinossauroParaRemover);
             }
+
+            int indiceJogadorAtual = listaJogadores.FindIndex(j => j.Id == jogadorAtual.Id);
+            int proxJogador = (indiceJogadorAtual + 1) % listaJogadores.Count;
+            jogadorAtual = listaJogadores[proxJogador];
+            
+            lblNomeJogador.Text = jogadorAtual.Nome;
+
             //Exibe a mão do jogador após a jogada
             ExibirMaoJogador(jogadorAtual.Id);
             ExibirTabuleiroJogador(jogadorAtual);
