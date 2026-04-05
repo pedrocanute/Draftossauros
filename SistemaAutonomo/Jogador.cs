@@ -6,6 +6,7 @@ public class Jogador
     int id;
     string senha;
     string nome;
+    int pontuacao;
     public List<Dinossauros> listaDinossauros = new List<Dinossauros>();
 
 
@@ -27,10 +28,17 @@ public class Jogador
         set { nome = value; }
     }
 
+    public int Pontuacao
+    {
+        get { return pontuacao; }
+        set { pontuacao = value; }
+    }
+
     public Jogador(int id, string senha)
     {
-        this.id = id;
-        this.senha = senha;
+        this.Id = id;
+        this.Senha = senha;
     }
+    public Jogador(int id) : this(id, null) { }
 
 }

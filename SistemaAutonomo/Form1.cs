@@ -85,24 +85,45 @@ namespace SistemaAutonomo
                 return;
             }
 
-            if (listaJogadores.Count < 2)
+            string retornoJogadores = Jogo.ListarJogadores(partidaCriada.idPartida);
+
+            if (retornoJogadores.StartsWith("ERRO"))
             {
-                MessageBox.Show("São necessários, pelo menos, 2 jogadores!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(retornoJogadores, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            jogadorAtual = listaJogadores[0];
-            //Chama a função de lançar o dado para o jogador que criou a partida e exibe o resultado do dado
+            List<Jogador> jogadores = new List<Jogador>();
+
+            string retorno = retornoJogadores.Replace("\r", "").Trim();
+            string[] linhas = retorno.Split('\n');
+
+            foreach (string linha in linhas)
+            {
+                string[] dados = linha.Split(',');
+
+                int id = Convert.ToInt32(dados[0]);
+                string nome = dados[1];
+                int pontuacao = Convert.ToInt32(dados[2]);
+
+                Jogador jogador = new Jogador(id);
+                jogador.Nome = nome;
+
+                jogadores.Add(jogador);
+            }
+
+            if (jogadores.Count < 2)
+            {
+                MessageBox.Show(retornoJogadores, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             LancarDado(jogadorAtual);
 
-            //Chama a função de exibir a mão do jogador
             ExibirMaoJogador(jogadorAtual.Id);
 
-            //Exibe o id do jogador que lançou o dado
             lblIdJogador.Text = jogadorAtual.Id.ToString();
             txtNomeJogador.Text = jogadorAtual.Nome;
-
-            //Exibe o nome do jogador atual que está realizando a jogada
             lblNomeJogador.Text = jogadorAtual.Nome;
         }
 
@@ -218,6 +239,7 @@ namespace SistemaAutonomo
                         }
                         break;
                 }
+
             }
 
 
@@ -227,6 +249,7 @@ namespace SistemaAutonomo
             string enviado = $"Dinossauro={siglaDinossauro}, Cercado={siglaCercado}";
 
             // chamar jogar e checar retorno
+            //lblTesteDoThiago.Text = Jogo.VerificarTurno(partidaCriada.idPartida);
             string resultadoJogar = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, siglaDinossauro, siglaCercado);
 
             // se houver erro, mostrar o que foi enviado e a resposta do servidor para diagnosticar
@@ -264,6 +287,7 @@ namespace SistemaAutonomo
 
             ExibirMaoJogador(jogadorAtual.Id);
             ExibirTabuleiroJogador(jogadorAntigo);
+            
 
         }
 
@@ -471,6 +495,42 @@ namespace SistemaAutonomo
                     break;
             }
             lblTeste.Text = dinossauro + cercado;
+        }
+
+        private void btnVerificarTurno_Click(object sender, EventArgs e)
+        {
+            
+            string retornoAtualizar = Jogo.VerificarPartida(partidaCriada.idPartida);
+            
+            string[] linhas = retornoAtualizar.Split(',');
+            string faceDoDado = linhas[4].Trim();
+
+            switch (faceDoDado)
+            {
+                case "AL":
+                    lblDadoSorteado.Text = "Alimentação";
+                    break;
+                case "FL":
+                    lblDadoSorteado.Text = "Floresta";
+                    break;
+                case "PR":
+                    lblDadoSorteado.Text = "Pradaria";
+                    break;
+                case "TI":
+                    lblDadoSorteado.Text = "T-Rex";
+                    break;
+                case "VZ":
+                    lblDadoSorteado.Text = "Cercado Vazio";
+                    break;
+                case "WC":
+                    lblDadoSorteado.Text = "Banheiros";
+                    break;
+            }
+        }
+
+        private void btnExibirMao_Click(object sender, EventArgs e)
+        {
+            ExibirMaoJogador(jogadorAtual.Id);
         }
     }
 }

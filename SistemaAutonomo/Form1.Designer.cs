@@ -70,6 +70,10 @@
             this.lblVersao2 = new System.Windows.Forms.Label();
             this.gprStatusPartida = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.btnVerificarTurno = new System.Windows.Forms.Button();
+            this.lblTesteVerificarPartida = new System.Windows.Forms.Label();
+            this.btnExibirMao = new System.Windows.Forms.Button();
+            this.lblTesteAtualizar = new System.Windows.Forms.Label();
             this.grpDadosPartida.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gprPartida.SuspendLayout();
@@ -488,12 +492,54 @@
             this.label13.TabIndex = 0;
             this.label13.Text = "Tabuleiro";
             // 
+            // btnVerificarTurno
+            // 
+            this.btnVerificarTurno.Location = new System.Drawing.Point(682, 32);
+            this.btnVerificarTurno.Name = "btnVerificarTurno";
+            this.btnVerificarTurno.Size = new System.Drawing.Size(111, 23);
+            this.btnVerificarTurno.TabIndex = 41;
+            this.btnVerificarTurno.Text = "Atualizar";
+            this.btnVerificarTurno.UseVisualStyleBackColor = true;
+            this.btnVerificarTurno.Click += new System.EventHandler(this.btnVerificarTurno_Click);
+            // 
+            // lblTesteVerificarPartida
+            // 
+            this.lblTesteVerificarPartida.AutoSize = true;
+            this.lblTesteVerificarPartida.Location = new System.Drawing.Point(692, 80);
+            this.lblTesteVerificarPartida.Name = "lblTesteVerificarPartida";
+            this.lblTesteVerificarPartida.Size = new System.Drawing.Size(41, 13);
+            this.lblTesteVerificarPartida.TabIndex = 42;
+            this.lblTesteVerificarPartida.Text = "label14";
+            // 
+            // btnExibirMao
+            // 
+            this.btnExibirMao.Location = new System.Drawing.Point(695, 129);
+            this.btnExibirMao.Name = "btnExibirMao";
+            this.btnExibirMao.Size = new System.Drawing.Size(75, 23);
+            this.btnExibirMao.TabIndex = 43;
+            this.btnExibirMao.Text = "Exibir Mao";
+            this.btnExibirMao.UseVisualStyleBackColor = true;
+            this.btnExibirMao.Click += new System.EventHandler(this.btnExibirMao_Click);
+            // 
+            // lblTesteAtualizar
+            // 
+            this.lblTesteAtualizar.AutoSize = true;
+            this.lblTesteAtualizar.Location = new System.Drawing.Point(853, 81);
+            this.lblTesteAtualizar.Name = "lblTesteAtualizar";
+            this.lblTesteAtualizar.Size = new System.Drawing.Size(41, 13);
+            this.lblTesteAtualizar.TabIndex = 44;
+            this.lblTesteAtualizar.Text = "label14";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(983, 660);
+            this.Controls.Add(this.lblTesteAtualizar);
+            this.Controls.Add(this.btnExibirMao);
+            this.Controls.Add(this.lblTesteVerificarPartida);
+            this.Controls.Add(this.btnVerificarTurno);
             this.Controls.Add(this.gprStatusPartida);
             this.Controls.Add(this.lblVersao2);
             this.Controls.Add(this.label5);
@@ -570,6 +616,10 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.GroupBox gprStatusPartida;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnVerificarTurno;
+        private System.Windows.Forms.Label lblTesteVerificarPartida;
+        private System.Windows.Forms.Button btnExibirMao;
+        private System.Windows.Forms.Label lblTesteAtualizar;
     }
 }
 
