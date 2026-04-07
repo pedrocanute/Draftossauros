@@ -41,7 +41,6 @@
             this.lblVersao = new System.Windows.Forms.Label();
             this.lblGrupo = new System.Windows.Forms.Label();
             this.lblNomeGrupo = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.btnIniciar = new System.Windows.Forms.Button();
             this.btnCriarJogador = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -74,10 +73,13 @@
             this.lblTesteVerificarPartida = new System.Windows.Forms.Label();
             this.btnExibirMao = new System.Windows.Forms.Button();
             this.lblTesteAtualizar = new System.Windows.Forms.Label();
+            this.pnlTabuleiro = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
             this.grpDadosPartida.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gprPartida.SuspendLayout();
             this.gprStatusPartida.SuspendLayout();
+            this.pnlTabuleiro.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl1
@@ -200,16 +202,6 @@
             this.lblNomeGrupo.Size = new System.Drawing.Size(57, 13);
             this.lblNomeGrupo.TabIndex = 10;
             this.lblNomeGrupo.Text = "Primordiais";
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.panel1.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Tabuleiro;
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1.Location = new System.Drawing.Point(298, 234);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(432, 414);
-            this.panel1.TabIndex = 19;
             // 
             // btnIniciar
             // 
@@ -530,6 +522,26 @@
             this.lblTesteAtualizar.TabIndex = 44;
             this.lblTesteAtualizar.Text = "label14";
             // 
+            // pnlTabuleiro
+            // 
+            this.pnlTabuleiro.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pnlTabuleiro.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Tabuleiro;
+            this.pnlTabuleiro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlTabuleiro.Controls.Add(this.label14);
+            this.pnlTabuleiro.Location = new System.Drawing.Point(298, 234);
+            this.pnlTabuleiro.Name = "pnlTabuleiro";
+            this.pnlTabuleiro.Size = new System.Drawing.Size(432, 414);
+            this.pnlTabuleiro.TabIndex = 19;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(223, 345);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 13);
+            this.label14.TabIndex = 45;
+            this.label14.Text = "label14";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -547,7 +559,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.gprPartida);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlTabuleiro);
             this.Controls.Add(this.lblNomeGrupo);
             this.Controls.Add(this.lblGrupo);
             this.Controls.Add(this.lblVersao);
@@ -568,6 +580,8 @@
             this.gprPartida.PerformLayout();
             this.gprStatusPartida.ResumeLayout(false);
             this.gprStatusPartida.PerformLayout();
+            this.pnlTabuleiro.ResumeLayout(false);
+            this.pnlTabuleiro.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -587,7 +601,7 @@
         private System.Windows.Forms.Label lblVersao;
         private System.Windows.Forms.Label lblGrupo;
         private System.Windows.Forms.Label lblNomeGrupo;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlTabuleiro;
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.Button btnCriarJogador;
         private System.Windows.Forms.Label label2;
@@ -620,6 +634,7 @@
         private System.Windows.Forms.Label lblTesteVerificarPartida;
         private System.Windows.Forms.Button btnExibirMao;
         private System.Windows.Forms.Label lblTesteAtualizar;
+        private System.Windows.Forms.Label label14;
     }
 }
 

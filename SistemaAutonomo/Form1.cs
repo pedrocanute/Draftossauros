@@ -20,6 +20,10 @@ namespace SistemaAutonomo
         {
             partidaCriada = partida;
             InitializeComponent();
+
+            pnlTabuleiro.BackgroundImage = Properties.Resources.Tabuleiro;
+            pnlTabuleiro.BackgroundImageLayout = ImageLayout.Stretch;
+
             lblVersao2.Text = Jogo.versao;
             lblIdPartida.Text = partidaCriada.idPartida.ToString();
             lblNomePartida.Text = partidaCriada.NomePartida;
@@ -261,6 +265,8 @@ namespace SistemaAutonomo
                 lblTeste.Visible = true;
                 return;
             }
+
+            CriarDinossauroNoCercado(siglaDinossauro, siglaCercado); //ADICIONEI A FUNCAO DE COLOCAR O DINOSSAURo
 
             // Remove o dinossauro jogado da mão do jogador
             var dinossauroParaRemover = jogadorAtual.listaDinossauros.FirstOrDefault(d => d.SiglaNome == siglaDinossauro);
@@ -532,5 +538,68 @@ namespace SistemaAutonomo
         {
             ExibirMaoJogador(jogadorAtual.Id);
         }
+
+        private void CriarDinossauroNoCercado(string siglaDinossauro, string siglaCercado)
+        {
+            PictureBox novoDino = new PictureBox();
+            novoDino.Size = new Size(60, 60);
+            novoDino.SizeMode = PictureBoxSizeMode.StretchImage;
+            novoDino.BackColor = Color.Transparent;
+
+            switch (siglaDinossauro)
+            {
+                case "Br":
+                    novoDino.Image = Properties.Resources.Braquiossauro;
+                    break;
+                case "Ep":
+                    novoDino.Image = Properties.Resources.Espinossauro;
+                    break;
+                case "Et":
+                    novoDino.Image = Properties.Resources.Estegossauro;
+                    break;
+                case "Pa":
+                    novoDino.Image = Properties.Resources.Parasaurolofo;
+                    break;
+                case "Ti":
+                    novoDino.Image = Properties.Resources.Rex;
+                    break;
+                case "Tr":
+                    novoDino.Image = Properties.Resources.Triceratops;
+                    break;
+                default:
+                    return;
+            }
+
+            switch (siglaCercado)
+            {
+                case "FI":
+                    novoDino.Location = new Point(16, 69);
+                    break;
+                case "RS":
+                    novoDino.Location = new Point(362, 23);
+                    break;
+                case "MT":
+                    novoDino.Location = new Point(40, 190);
+                    break;
+                case "CD":
+                    novoDino.Location = new Point(262, 228);
+                    break;
+                case "PA":
+                    novoDino.Location = new Point(66, 331);
+                    break;
+                case "IS":
+                    novoDino.Location = new Point(350, 309);
+                    break;
+                case "RI":
+                    novoDino.Location = new Point(223, 345);
+                    break;
+                default:
+                    return;
+            }
+
+            pnlTabuleiro.Controls.Add(novoDino);
+            novoDino.BringToFront();
+        }
     }
+
 }
