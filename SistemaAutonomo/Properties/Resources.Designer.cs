@@ -73,6 +73,16 @@ namespace SistemaAutonomo.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dadoFaces {
+            get {
+                object obj = ResourceManager.GetObject("dadoFaces", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Espinossauro {
             get {
                 object obj = ResourceManager.GetObject("Espinossauro", resourceCulture);
@@ -86,6 +96,46 @@ namespace SistemaAutonomo.Properties {
         internal static System.Drawing.Bitmap Estegossauro {
             get {
                 object obj = ResourceManager.GetObject("Estegossauro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FundoGame {
+            get {
+                object obj = ResourceManager.GetObject("FundoGame", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FundoPanel {
+            get {
+                object obj = ResourceManager.GetObject("FundoPanel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FundoPanelLarge {
+            get {
+                object obj = ResourceManager.GetObject("FundoPanelLarge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IniciarPartidaBtn {
+            get {
+                object obj = ResourceManager.GetObject("IniciarPartidaBtn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

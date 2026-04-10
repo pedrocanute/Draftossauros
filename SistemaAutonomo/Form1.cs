@@ -127,13 +127,13 @@ namespace SistemaAutonomo
             ExibirMaoJogador(jogadorAtual.Id);
 
             lblIdJogador.Text = jogadorAtual.Id.ToString();
-            txtNomeJogador.Text = jogadorAtual.Nome;
+            lblJogadorDado.Text = jogadorAtual.Nome;
             lblNomeJogador.Text = jogadorAtual.Nome;
         }
 
         private void btnRealizarJogada_Click(object sender, EventArgs e)
         {
-          
+
 
             //Verifica qual dinossauro foi selecionado e atribui a sigla correspondente para realizar a jogada e trata o erro do jogador não ter selecionado um cercado para jogar
             if (lstMaoDinossauros.SelectedItem == null)
@@ -280,20 +280,20 @@ namespace SistemaAutonomo
             int proxJogador = (indiceJogadorAtual + 1);
 
 
-            if(proxJogador >= listaJogadores.Count)
+            if (proxJogador >= listaJogadores.Count)
             {
                 proxJogador = 0;
-    
+
             }
             jogadorAtual = listaJogadores[proxJogador];
-            
+
             lblNomeJogador.Text = jogadorAtual.Nome;
 
             //Exibe a mão do jogador após a jogada
 
             ExibirMaoJogador(jogadorAtual.Id);
             ExibirTabuleiroJogador(jogadorAntigo);
-            
+
 
         }
 
@@ -384,6 +384,50 @@ namespace SistemaAutonomo
                     case "Tr":
                         lstMaoDinossauros.Items.Add("Tricerátops Qtd: " + quantidade);
                         break;
+                }
+            }
+
+            AtualizarBotoesDinos(jogadorDaVez.listaDinossauros);
+        }
+
+        private void AtualizarBotoesDinos(List<Dinossauros> listaDinossauros)
+        {
+            Button[] botoes = { btnPrimeiroDino, btnSegundoDino, btnTerceiroDino, btnQuartoDino, btnQuintoDino, btnSextoDino };
+
+            for (int i = 0; i < botoes.Length; i++)
+            {
+                if (i < listaDinossauros.Count)
+                {
+                    switch (listaDinossauros[i].SiglaNome)
+                    {
+                        case "Br":
+                            botoes[i].BackgroundImage = Properties.Resources.Braquiossauro;
+                            break;
+                        case "Ep":
+                            botoes[i].BackgroundImage = Properties.Resources.Espinossauro;
+                            break;
+                        case "Et":
+                            botoes[i].BackgroundImage = Properties.Resources.Estegossauro;
+                            break;
+                        case "Pa":
+                            botoes[i].BackgroundImage = Properties.Resources.Parasaurolofo;
+                            break;
+                        case "Ti":
+                            botoes[i].BackgroundImage = Properties.Resources.Rex;
+                            break;
+                        case "Tr":
+                            botoes[i].BackgroundImage = Properties.Resources.Triceratops;
+                            break;
+                        default:
+                            botoes[i].BackgroundImage = null;
+                            break;
+                    }
+                    botoes[i].Visible = true;
+                }
+                else
+                {
+                    botoes[i].BackgroundImage = null;
+                    botoes[i].Visible = false;
                 }
             }
         }
@@ -505,9 +549,9 @@ namespace SistemaAutonomo
 
         private void btnVerificarTurno_Click(object sender, EventArgs e)
         {
-            
+
             string retornoAtualizar = Jogo.VerificarPartida(partidaCriada.idPartida);
-            
+
             string[] linhas = retornoAtualizar.Split(',');
             string faceDoDado = linhas[4].Trim();
 
@@ -601,5 +645,4 @@ namespace SistemaAutonomo
             novoDino.BringToFront();
         }
     }
-
 }

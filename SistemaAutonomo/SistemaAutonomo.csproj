@@ -100,8 +100,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Braquiossauro.png" />
+    <None Include="Resources\dadoFaces.png" />
     <Content Include="Resources\Espinossauro.png" />
     <Content Include="Resources\Estegossauro.png" />
+    <None Include="Resources\FundoGame.png" />
+    <None Include="Resources\FundoPanel.png" />
+    <None Include="Resources\FundoPanelLarge.png" />
+    <None Include="Resources\IniciarPartidaBtn.png" />
     <Content Include="Resources\Parasaurolofo.png" />
     <Content Include="Resources\Rex.png" />
     <Content Include="Resources\Triceratops.png" />
