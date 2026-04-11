@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +17,7 @@ namespace SistemaAutonomo
     {
         Partida partidaCriada; //= new Partida(); //Instanciando a partida
         List<Jogador> listaJogadores = new List<Jogador>();
+        Dictionary<string, int> qtdDinossaurosCercado = new Dictionary<string, int>();
         Jogador jogadorAtual;
         public Form1(Partida partida)
         {
@@ -28,6 +31,14 @@ namespace SistemaAutonomo
             lblIdPartida.Text = partidaCriada.idPartida.ToString();
             lblNomePartida.Text = partidaCriada.NomePartida;
             lblDataPartida.Text = partidaCriada.DataPartida;
+
+            qtdDinossaurosCercado["FI"] = 0;
+            qtdDinossaurosCercado["RS"] = 0;
+            qtdDinossaurosCercado["MT"] = 0;
+            qtdDinossaurosCercado["CD"] = 0;
+            qtdDinossaurosCercado["PA"] = 0;
+            qtdDinossaurosCercado["IS"] = 0;
+            qtdDinossaurosCercado["RI"] = 0;
 
         }
 
@@ -554,6 +565,8 @@ namespace SistemaAutonomo
             string[] linhas = retornoAtualizar.Split(',');
             string faceDoDado = linhas[4].Trim();
 
+            
+
             switch (faceDoDado)
             {
                 case "AL":
@@ -585,9 +598,10 @@ namespace SistemaAutonomo
         private void CriarDinossauroNoCercado(string siglaDinossauro, string siglaCercado)
         {
             PictureBox novoDino = new PictureBox();
-            novoDino.Size = new Size(60, 60);
+            novoDino.Size = new Size(30, 30);
             novoDino.SizeMode = PictureBoxSizeMode.StretchImage;
             novoDino.BackColor = Color.Transparent;
+            int offsetX;
 
             switch (siglaDinossauro)
             {
@@ -616,25 +630,81 @@ namespace SistemaAutonomo
             switch (siglaCercado)
             {
                 case "FI":
-                    novoDino.Location = new Point(16, 49);
+                    if (qtdDinossaurosCercado["FI"] == 0)
+                    {
+                        novoDino.Location = new Point(30, 49);
+                        qtdDinossaurosCercado["FI"]++;
+                        break;
+                    }
+                    offsetX = 30 * qtdDinossaurosCercado["FI"];
+                    novoDino.Location = new Point(30+ offsetX, 49);
+                    qtdDinossaurosCercado["FI"]++;
                     break;
                 case "RS":
-                    novoDino.Location = new Point(392, 23);
+                    if(qtdDinossaurosCercado["RS"] == 0)
+                        {
+                            novoDino.Location = new Point(412, 43);
+                            qtdDinossaurosCercado["RS"]++;
+                            break;
+                    }
+                    offsetX = 30 * qtdDinossaurosCercado["RS"];
+                    novoDino.Location = new Point(412 + offsetX, 43);
+                    qtdDinossaurosCercado["RS"]++;
                     break;
                 case "MT":
-                    novoDino.Location = new Point(40, 190);
+                    if(qtdDinossaurosCercado["MT"] == 0)
+                    {
+                        novoDino.Location = new Point(60, 190);
+                        qtdDinossaurosCercado["MT"]++;
+                        break;
+                    }
+                    offsetX = 30 * qtdDinossaurosCercado["MT"];
+                    novoDino.Location = new Point(60 + offsetX, 190);
+                    qtdDinossaurosCercado["MT"]++;
                     break;
                 case "CD":
-                    novoDino.Location = new Point(332, 228);
+                    if(qtdDinossaurosCercado["CD"] == 0)
+                    {
+                        novoDino.Location = new Point(352, 228);
+                        qtdDinossaurosCercado["CD"]++;
+                        break;
+                    }
+                    offsetX = 30 * qtdDinossaurosCercado["CD"];
+                    novoDino.Location = new Point(352 + offsetX, 228);
+                    qtdDinossaurosCercado["CD"]++;
                     break;
                 case "PA":
-                    novoDino.Location = new Point(66, 331);
+                    if(qtdDinossaurosCercado["PA"] == 0)
+                    {
+                        novoDino.Location = new Point(86, 331);
+                        qtdDinossaurosCercado["PA"]++;
+                        break;
+                    }
+                    offsetX = 30 * qtdDinossaurosCercado["PA"];
+                    novoDino.Location = new Point(86 + offsetX, 331);
+                    qtdDinossaurosCercado["PA"]++;
                     break;
                 case "IS":
-                    novoDino.Location = new Point(455, 309);
+                    if(qtdDinossaurosCercado["IS"] == 0)
+                    {
+                        novoDino.Location = new Point(475, 309);
+                        qtdDinossaurosCercado["IS"]++;
+                        break;
+                    }
+                    offsetX = 30 * qtdDinossaurosCercado["IS"];
+                    novoDino.Location = new Point(475 + offsetX, 309);
+                    qtdDinossaurosCercado["IS"]++;
                     break;
                 case "RI":
-                    novoDino.Location = new Point(223, 345);
+                    if(qtdDinossaurosCercado["RI"] == 0)
+                    {
+                        novoDino.Location = new Point(243, 345);
+                        qtdDinossaurosCercado["RI"]++;
+                        break;
+                    }
+                    offsetX = 30 * qtdDinossaurosCercado["RI"];
+                    novoDino.Location = new Point(243 + offsetX, 345);
+                    qtdDinossaurosCercado["RI"]++;
                     break;
                 default:
                     return;
