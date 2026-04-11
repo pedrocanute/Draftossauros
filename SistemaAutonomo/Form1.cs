@@ -179,7 +179,6 @@ namespace SistemaAutonomo
             string cercadoSelecionado = lstCercados.SelectedItem.ToString().Trim();
             string siglaCercado = "";
 
-            // Use the full selected string to match multi-word options like "Rei da Selva" and "Mata Tripla"
             switch (cercadoSelecionado)
             {
                 case "Igualdade":
@@ -617,22 +616,22 @@ namespace SistemaAutonomo
             switch (siglaCercado)
             {
                 case "FI":
-                    novoDino.Location = new Point(16, 69);
+                    novoDino.Location = new Point(16, 49);
                     break;
                 case "RS":
-                    novoDino.Location = new Point(362, 23);
+                    novoDino.Location = new Point(392, 23);
                     break;
                 case "MT":
                     novoDino.Location = new Point(40, 190);
                     break;
                 case "CD":
-                    novoDino.Location = new Point(262, 228);
+                    novoDino.Location = new Point(332, 228);
                     break;
                 case "PA":
                     novoDino.Location = new Point(66, 331);
                     break;
                 case "IS":
-                    novoDino.Location = new Point(350, 309);
+                    novoDino.Location = new Point(455, 309);
                     break;
                 case "RI":
                     novoDino.Location = new Point(223, 345);
