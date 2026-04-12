@@ -27,6 +27,10 @@ namespace SistemaAutonomo
             pnlTabuleiro.BackgroundImage = Properties.Resources.Tabuleiro;
             pnlTabuleiro.BackgroundImageLayout = ImageLayout.Stretch;
 
+            this.BackgroundImage = Properties.Resources.FundoGame;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+
             lblVersao2.Text = Jogo.versao;
             lblIdPartida.Text = partidaCriada.idPartida.ToString();
             lblNomePartida.Text = partidaCriada.NomePartida;
@@ -113,41 +117,14 @@ namespace SistemaAutonomo
 
         private void btnRealizarJogada_Click(object sender, EventArgs e)
         {
-
-
             //Verifica qual dinossauro foi selecionado e atribui a sigla correspondente para realizar a jogada e trata o erro do jogador não ter selecionado um cercado para jogar
-            if (lstMaoDinossauros.SelectedItem == null)
+            if (jogadorAtual.DinossauroSelecionado == null)
             {
                 MessageBox.Show("Selecione um dinossauro para jogar!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string dinossauroSelecionado = lstMaoDinossauros.SelectedItem.ToString();
-            string[] dinossauroSelecionadoSplit = dinossauroSelecionado.Split(' ');
-            string siglaDinossauro = "";
-
-
-            switch (dinossauroSelecionadoSplit[0])
-            {
-                case "Braquiossauro":
-                    siglaDinossauro = "Br";
-                    break;
-                case "Espinossauro":
-                    siglaDinossauro = "Ep";
-                    break;
-                case "Estegossauro":
-                    siglaDinossauro = "Et";
-                    break;
-                case "Parasaurolófo":
-                    siglaDinossauro = "Pa";
-                    break;
-                case "Tiranossauro-Rex":
-                    siglaDinossauro = "Ti";
-                    break;
-                case "Tricerátops":
-                    siglaDinossauro = "Tr";
-                    break;
-            }
+            string dinossauroSelecionado = jogadorAtual.DinossauroSelecionado;
 
             //Verifica qual cercado foi selecionado e atribui a sigla correspondente para realizar a jogada e trata o erro do jogador não ter selecionado um cercado para jogar
             if (lstCercados.SelectedItem == null)
@@ -229,11 +206,11 @@ namespace SistemaAutonomo
             // Realiza a Jogada
             //Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, siglaDinossauro, siglaCercado);
             // preparar debug: quais siglas estão sendo enviadas
-            string enviado = $"Dinossauro={siglaDinossauro}, Cercado={siglaCercado}";
+            string enviado = $"Dinossauro={dinossauroSelecionado}, Cercado={siglaCercado}";
 
             // chamar jogar e checar retorno
             //lblTesteDoThiago.Text = Jogo.VerificarTurno(partidaCriada.idPartida);
-            string resultadoJogar = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, siglaDinossauro, siglaCercado);
+            string resultadoJogar = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, dinossauroSelecionado, siglaCercado);
 
             // se houver erro, mostrar o que foi enviado e a resposta do servidor para diagnosticar
             if (!string.IsNullOrEmpty(resultadoJogar) && resultadoJogar.StartsWith("ERRO"))
@@ -245,10 +222,10 @@ namespace SistemaAutonomo
                 return;
             }
 
-            CriarDinossauroNoCercado(siglaDinossauro, siglaCercado); //ADICIONEI A FUNCAO DE COLOCAR O DINOSSAURo
+            CriarDinossauroNoCercado(dinossauroSelecionado, siglaCercado); //ADICIONEI A FUNCAO DE COLOCAR O DINOSSAURo
 
             // Remove o dinossauro jogado da mão do jogador
-            var dinossauroParaRemover = jogadorAtual.listaDinossauros.FirstOrDefault(d => d.SiglaNome == siglaDinossauro);
+            var dinossauroParaRemover = jogadorAtual.listaDinossauros.FirstOrDefault(d => d.SiglaNome == dinossauroSelecionado);
             if (dinossauroParaRemover != null)
             {
                 jogadorAtual.listaDinossauros.Remove(dinossauroParaRemover);
@@ -355,6 +332,7 @@ namespace SistemaAutonomo
             {
                 if (i < listaDinossauros.Count)
                 {
+                    botoes[i].Tag = listaDinossauros[i].SiglaNome;
                     switch (listaDinossauros[i].SiglaNome)
                     {
                         case "Br":
@@ -370,13 +348,14 @@ namespace SistemaAutonomo
                             botoes[i].BackgroundImage = Properties.Resources.Parasaurolofo;
                             break;
                         case "Ti":
-                            botoes[i].BackgroundImage = Properties.Resources.Rex;
+                            botoes[i].BackgroundImage = Properties.Resources.Tiranossauro_Rex;
                             break;
                         case "Tr":
                             botoes[i].BackgroundImage = Properties.Resources.Triceratops;
                             break;
                         default:
                             botoes[i].BackgroundImage = null;
+                            botoes[i].Tag = null;
                             break;
                     }
                     botoes[i].Visible = true;
@@ -538,7 +517,7 @@ namespace SistemaAutonomo
                     novoDino.Image = Properties.Resources.Parasaurolofo;
                     break;
                 case "Ti":
-                    novoDino.Image = Properties.Resources.Rex;
+                    novoDino.Image = Properties.Resources.Tiranossauro_Rex;
                     break;
                 case "Tr":
                     novoDino.Image = Properties.Resources.Triceratops;
@@ -664,7 +643,39 @@ namespace SistemaAutonomo
 
             lblJogadorDado.Text = JogadorDado.Nome;
 
+            jogadorAtual.DinossauroSelecionado = null;
+
             ExibirMaoJogador(jogadorAtual.Id);
+        }
+
+        private void btnPrimeiroDino_Click(object sender, EventArgs e)
+        {
+            jogadorAtual.DinossauroSelecionado = btnPrimeiroDino.Tag.ToString();
+        }
+
+        private void btnSegundoDino_Click(object sender, EventArgs e)
+        {
+            jogadorAtual.DinossauroSelecionado = btnSegundoDino.Tag.ToString();
+        }
+
+        private void btnTerceiroDino_Click(object sender, EventArgs e)
+        {
+            jogadorAtual.DinossauroSelecionado = btnTerceiroDino.Tag.ToString();
+        }
+
+        private void btnQuartoDino_Click(object sender, EventArgs e)
+        {
+            jogadorAtual.DinossauroSelecionado = btnQuartoDino.Tag.ToString();
+        }
+
+        private void btnQuintoDino_Click(object sender, EventArgs e)
+        {
+            jogadorAtual.DinossauroSelecionado = btnQuintoDino.Tag.ToString();
+        }
+
+        private void btnSextoDino_Click(object sender, EventArgs e)
+        {
+            jogadorAtual.DinossauroSelecionado = btnSextoDino.Tag.ToString();
         }
     }
 }

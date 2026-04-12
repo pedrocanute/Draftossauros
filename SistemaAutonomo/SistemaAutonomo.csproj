@@ -115,7 +115,7 @@
     <Content Include="Resources\FacePradaria.png" />
     <Content Include="Resources\FaceTRex.png" />
     <Content Include="Resources\Parasaurolofo.png" />
-    <Content Include="Resources\Rex.png" />
+    <Content Include="Resources\Tiranossauro-Rex.png" />
     <Content Include="Resources\Triceratops.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,6 +8,7 @@ public class Jogador
     string nome;
     int pontuacao;
     public List<Dinossauros> listaDinossauros = new List<Dinossauros>();
+    string dinossauroSelecionado = null;
 
 
     public int Id
@@ -32,6 +33,12 @@ public class Jogador
     {
         get { return pontuacao; }
         set { pontuacao = value; }
+    }
+
+    public string DinossauroSelecionado
+    {
+        get { return dinossauroSelecionado; }
+        set { dinossauroSelecionado = value; }
     }
 
     public Jogador(int id, string senha)

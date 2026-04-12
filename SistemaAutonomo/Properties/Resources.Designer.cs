@@ -213,9 +213,9 @@ namespace SistemaAutonomo.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Rex {
+        internal static System.Drawing.Bitmap Tabuleiro {
             get {
-                object obj = ResourceManager.GetObject("Rex", resourceCulture);
+                object obj = ResourceManager.GetObject("Tabuleiro", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -223,9 +223,9 @@ namespace SistemaAutonomo.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Tabuleiro {
+        internal static System.Drawing.Bitmap Tiranossauro_Rex {
             get {
-                object obj = ResourceManager.GetObject("Tabuleiro", resourceCulture);
+                object obj = ResourceManager.GetObject("Tiranossauro-Rex", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

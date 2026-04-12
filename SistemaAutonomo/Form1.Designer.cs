@@ -402,7 +402,6 @@
             // 
             // btnQuintoDino
             // 
-            this.btnQuintoDino.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Espinossauro;
             this.btnQuintoDino.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnQuintoDino.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQuintoDino.FlatAppearance.BorderSize = 0;
@@ -415,10 +414,10 @@
             this.btnQuintoDino.TabIndex = 4;
             this.btnQuintoDino.UseVisualStyleBackColor = true;
             this.btnQuintoDino.Visible = false;
+            this.btnQuintoDino.Click += new System.EventHandler(this.btnQuintoDino_Click);
             // 
             // btnSextoDino
             // 
-            this.btnSextoDino.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Espinossauro;
             this.btnSextoDino.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSextoDino.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSextoDino.FlatAppearance.BorderSize = 0;
@@ -431,10 +430,10 @@
             this.btnSextoDino.TabIndex = 4;
             this.btnSextoDino.UseVisualStyleBackColor = true;
             this.btnSextoDino.Visible = false;
+            this.btnSextoDino.Click += new System.EventHandler(this.btnSextoDino_Click);
             // 
             // btnQuartoDino
             // 
-            this.btnQuartoDino.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Espinossauro;
             this.btnQuartoDino.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnQuartoDino.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQuartoDino.FlatAppearance.BorderSize = 0;
@@ -447,10 +446,10 @@
             this.btnQuartoDino.TabIndex = 3;
             this.btnQuartoDino.UseVisualStyleBackColor = true;
             this.btnQuartoDino.Visible = false;
+            this.btnQuartoDino.Click += new System.EventHandler(this.btnQuartoDino_Click);
             // 
             // btnSegundoDino
             // 
-            this.btnSegundoDino.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Espinossauro;
             this.btnSegundoDino.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSegundoDino.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSegundoDino.FlatAppearance.BorderSize = 0;
@@ -463,10 +462,10 @@
             this.btnSegundoDino.TabIndex = 2;
             this.btnSegundoDino.UseVisualStyleBackColor = true;
             this.btnSegundoDino.Visible = false;
+            this.btnSegundoDino.Click += new System.EventHandler(this.btnSegundoDino_Click);
             // 
             // btnTerceiroDino
             // 
-            this.btnTerceiroDino.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Espinossauro;
             this.btnTerceiroDino.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnTerceiroDino.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTerceiroDino.FlatAppearance.BorderSize = 0;
@@ -479,6 +478,7 @@
             this.btnTerceiroDino.TabIndex = 2;
             this.btnTerceiroDino.UseVisualStyleBackColor = true;
             this.btnTerceiroDino.Visible = false;
+            this.btnTerceiroDino.Click += new System.EventHandler(this.btnTerceiroDino_Click);
             // 
             // btnPrimeiroDino
             // 
@@ -495,6 +495,7 @@
             this.btnPrimeiroDino.TabIndex = 1;
             this.btnPrimeiroDino.UseVisualStyleBackColor = true;
             this.btnPrimeiroDino.Visible = false;
+            this.btnPrimeiroDino.Click += new System.EventHandler(this.btnPrimeiroDino_Click);
             // 
             // label10
             // 
