@@ -89,49 +89,18 @@ namespace SistemaAutonomo
             lblIdJogador.Text = idJogador.ToString();
             lblSenhaJogador.Text = senhaJogador;
 
-            jogadorAtual = CriarJogador(idJogador, txtNomeJogador.Text, senhaJogador);
+            CriarJogador(idJogador, txtNomeJogador.Text, senhaJogador);
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            if (listaJogadores.Count == 0)
+            if (jogadorAtual == null)
             {
                 MessageBox.Show("Crie um jogador!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            string retornoJogadores = Jogo.ListarJogadores(partidaCriada.idPartida);
-
-            if (retornoJogadores.StartsWith("ERRO"))
-            {
-                MessageBox.Show(retornoJogadores, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            List<Jogador> jogadores = new List<Jogador>();
-
-            string retorno = retornoJogadores.Replace("\r", "").Trim();
-            string[] linhas = retorno.Split('\n');
-
-            foreach (string linha in linhas)
-            {
-                string[] dados = linha.Split(',');
-
-                int id = Convert.ToInt32(dados[0]);
-                string nome = dados[1];
-                int pontuacao = Convert.ToInt32(dados[2]);
-
-                Jogador jogador = new Jogador(id);
-                jogador.Nome = nome;
-
-                jogadores.Add(jogador);
-            }
-
-            if (jogadores.Count < 2)
-            {
-                MessageBox.Show(retornoJogadores, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            Atualizarlistarogadores();
 
             LancarDado(jogadorAtual);
 
@@ -285,38 +254,18 @@ namespace SistemaAutonomo
                 jogadorAtual.listaDinossauros.Remove(dinossauroParaRemover);
             }
 
-            Jogador jogadorAntigo = jogadorAtual;
-            int indiceJogadorAtual = listaJogadores.FindIndex(j => j.Id == jogadorAtual.Id);
-            int proxJogador = (indiceJogadorAtual + 1);
-
-
-            if (proxJogador >= listaJogadores.Count)
-            {
-                proxJogador = 0;
-
-            }
-            jogadorAtual = listaJogadores[proxJogador];
-
-            lblNomeJogador.Text = jogadorAtual.Nome;
-
-            //Exibe a mão do jogador após a jogada
-
-            ExibirMaoJogador(jogadorAtual.Id);
-            ExibirTabuleiroJogador(jogadorAntigo);
-
-
+            AtualizarInformacoesJogador();
         }
 
-        public Jogador CriarJogador(int id, string nome, string senha)
+        public void CriarJogador(int id, string nome, string senha)
         {
-            Jogador jogador = new Jogador(id, senha);
-            jogador.Nome = nome;
-            listaJogadores.Add(jogador);
-            return jogador;
+            jogadorAtual = new Jogador(id, senha);
+            jogadorAtual.Nome = nome;
         }
 
         public Jogador BuscarJogador(int id)
         {
+            Atualizarlistarogadores();
             foreach (Jogador jogador in listaJogadores)
             {
                 if (jogador.Id == id)
@@ -330,16 +279,14 @@ namespace SistemaAutonomo
 
         public void ExibirMaoJogador(int idJogador)
         {
-            Jogador jogadorDaVez = BuscarJogador(idJogador);
-
-            if (jogadorDaVez == null)
+            if (jogadorAtual == null)
             {
                 MessageBox.Show("Não temos a senha deste jogador localmente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            jogadorDaVez.listaDinossauros.Clear();
-            string maoJogador = Jogo.ExibirMao(jogadorDaVez.Id, jogadorDaVez.Senha);
+            jogadorAtual.listaDinossauros.Clear();
+            string maoJogador = Jogo.ExibirMao(jogadorAtual.Id, jogadorAtual.Senha);
 
             if (maoJogador.StartsWith("ERRO"))
             {
@@ -371,7 +318,7 @@ namespace SistemaAutonomo
                 for (int j = 0; j < quantidadeNumero; j++)
                 {
                     Dinossauros dinossauro = new Dinossauros(sigla);
-                    jogadorDaVez.listaDinossauros.Add(dinossauro);
+                    jogadorAtual.listaDinossauros.Add(dinossauro);
                 }
 
                 switch (sigla)
@@ -397,7 +344,7 @@ namespace SistemaAutonomo
                 }
             }
 
-            AtualizarBotoesDinos(jogadorDaVez.listaDinossauros);
+            AtualizarBotoesDinos(jogadorAtual.listaDinossauros);
         }
 
         private void AtualizarBotoesDinos(List<Dinossauros> listaDinossauros)
@@ -559,35 +506,7 @@ namespace SistemaAutonomo
 
         private void btnVerificarTurno_Click(object sender, EventArgs e)
         {
-
-            string retornoAtualizar = Jogo.VerificarPartida(partidaCriada.idPartida);
-
-            string[] linhas = retornoAtualizar.Split(',');
-            string faceDoDado = linhas[4].Trim();
-
-            
-
-            switch (faceDoDado)
-            {
-                case "AL":
-                    lblDadoSorteado.Text = "Alimentação";
-                    break;
-                case "FL":
-                    lblDadoSorteado.Text = "Floresta";
-                    break;
-                case "PR":
-                    lblDadoSorteado.Text = "Pradaria";
-                    break;
-                case "TI":
-                    lblDadoSorteado.Text = "T-Rex";
-                    break;
-                case "VZ":
-                    lblDadoSorteado.Text = "Cercado Vazio";
-                    break;
-                case "WC":
-                    lblDadoSorteado.Text = "Banheiros";
-                    break;
-            }
+            AtualizarInformacoesJogador();
         }
 
         private void btnExibirMao_Click(object sender, EventArgs e)
@@ -712,6 +631,75 @@ namespace SistemaAutonomo
 
             pnlTabuleiro.Controls.Add(novoDino);
             novoDino.BringToFront();
+        }
+
+        void Atualizarlistarogadores()
+        {
+            string retornoJogadores = Jogo.ListarJogadores(partidaCriada.idPartida);
+
+            if (retornoJogadores.StartsWith("ERRO"))
+            {
+                MessageBox.Show(retornoJogadores, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string retorno = retornoJogadores.Replace("\r", "").Trim();
+            string[] linhas = retorno.Split('\n');
+
+            foreach (string linha in linhas)
+            {
+                string[] dados = linha.Split(',');
+
+                int id = Convert.ToInt32(dados[0]);
+                string nome = dados[1];
+                int pontuacao = Convert.ToInt32(dados[2]);
+
+                Jogador jogador = new Jogador(id);
+                jogador.Nome = nome;
+
+                listaJogadores.Add(jogador);
+            }
+
+            if (listaJogadores.Count < 2)
+            {
+                MessageBox.Show(retornoJogadores, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        void AtualizarInformacoesJogador()
+        {
+            string retornoAtualizar = Jogo.VerificarPartida(partidaCriada.idPartida);
+
+            string[] linhas = retornoAtualizar.Split(',');
+            string faceDoDado = linhas[4].Trim();
+            Jogador JogadorDado = BuscarJogador(Convert.ToInt32(linhas[3].Trim()));
+
+            switch (faceDoDado)
+            {
+                case "AL":
+                    lblDadoSorteado.Text = "Alimentação";
+                    break;
+                case "FL":
+                    lblDadoSorteado.Text = "Floresta";
+                    break;
+                case "PR":
+                    lblDadoSorteado.Text = "Pradaria";
+                    break;
+                case "TI":
+                    lblDadoSorteado.Text = "T-Rex";
+                    break;
+                case "VZ":
+                    lblDadoSorteado.Text = "Cercado Vazio";
+                    break;
+                case "WC":
+                    lblDadoSorteado.Text = "Banheiros";
+                    break;
+            }
+
+            lblJogadorDado.Text = JogadorDado.Nome;
+
+            ExibirMaoJogador(jogadorAtual.Id);
         }
     }
 }
