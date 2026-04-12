@@ -107,6 +107,13 @@
     <None Include="Resources\FundoPanel.png" />
     <None Include="Resources\FundoPanelLarge.png" />
     <None Include="Resources\IniciarPartidaBtn.png" />
+    <None Include="Resources\FaceAlimentacao.png" />
+    <Content Include="Resources\FaceBanheiro.png" />
+    <Content Include="Resources\FaceCafeteria.png" />
+    <Content Include="Resources\FaceCercadoVazio.png" />
+    <Content Include="Resources\FaceFloresta.png" />
+    <Content Include="Resources\FacePradaria.png" />
+    <Content Include="Resources\FaceTRex.png" />
     <Content Include="Resources\Parasaurolofo.png" />
     <Content Include="Resources\Rex.png" />
     <Content Include="Resources\Triceratops.png" />

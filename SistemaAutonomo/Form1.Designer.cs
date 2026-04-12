@@ -47,7 +47,6 @@
             this.lblVersao2 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.btnVerificarTurno = new System.Windows.Forms.Button();
-            this.btnExibirMao = new System.Windows.Forms.Button();
             this.pnlTabuleiro = new System.Windows.Forms.Panel();
             this.pnlBotaoInfo = new System.Windows.Forms.Panel();
             this.lblJogadorDado = new System.Windows.Forms.Label();
@@ -76,6 +75,7 @@
             this.lblDadosJogadorTitulo = new System.Windows.Forms.Label();
             this.btnIniciar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblTeste = new System.Windows.Forms.Label();
             this.lbl3 = new System.Windows.Forms.Label();
             this.lbl2 = new System.Windows.Forms.Label();
             this.lstListaJogadores = new System.Windows.Forms.ListBox();
@@ -85,7 +85,6 @@
             this.lblNomePartida = new System.Windows.Forms.Label();
             this.lblIdPartida = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblTeste = new System.Windows.Forms.Label();
             this.gprPartida.SuspendLayout();
             this.pnlBotaoInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDado)).BeginInit();
@@ -297,22 +296,12 @@
             this.btnVerificarTurno.UseVisualStyleBackColor = true;
             this.btnVerificarTurno.Click += new System.EventHandler(this.btnVerificarTurno_Click);
             // 
-            // btnExibirMao
-            // 
-            this.btnExibirMao.Location = new System.Drawing.Point(543, 708);
-            this.btnExibirMao.Name = "btnExibirMao";
-            this.btnExibirMao.Size = new System.Drawing.Size(75, 23);
-            this.btnExibirMao.TabIndex = 43;
-            this.btnExibirMao.Text = "Exibir Mao";
-            this.btnExibirMao.UseVisualStyleBackColor = true;
-            this.btnExibirMao.Click += new System.EventHandler(this.btnExibirMao_Click);
-            // 
             // pnlTabuleiro
             // 
             this.pnlTabuleiro.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pnlTabuleiro.BackgroundImage = global::SistemaAutonomo.Properties.Resources.Tabuleiro;
             this.pnlTabuleiro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlTabuleiro.Location = new System.Drawing.Point(293, 11);
+            this.pnlTabuleiro.Location = new System.Drawing.Point(285, 11);
             this.pnlTabuleiro.Name = "pnlTabuleiro";
             this.pnlTabuleiro.Size = new System.Drawing.Size(592, 464);
             this.pnlTabuleiro.TabIndex = 19;
@@ -376,7 +365,6 @@
             // 
             // pbDado
             // 
-            this.pbDado.BackgroundImage = global::SistemaAutonomo.Properties.Resources.dadoFaces;
             this.pbDado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pbDado.Location = new System.Drawing.Point(83, 66);
             this.pbDado.Name = "pbDado";
@@ -407,7 +395,7 @@
             this.pnlMaoJogador.Controls.Add(this.btnTerceiroDino);
             this.pnlMaoJogador.Controls.Add(this.btnPrimeiroDino);
             this.pnlMaoJogador.Controls.Add(this.label10);
-            this.pnlMaoJogador.Location = new System.Drawing.Point(293, 509);
+            this.pnlMaoJogador.Location = new System.Drawing.Point(289, 509);
             this.pnlMaoJogador.Name = "pnlMaoJogador";
             this.pnlMaoJogador.Size = new System.Drawing.Size(592, 178);
             this.pnlMaoJogador.TabIndex = 46;
@@ -633,7 +621,7 @@
             this.btnIniciar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnIniciar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnIniciar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIniciar.Location = new System.Drawing.Point(922, 596);
+            this.btnIniciar.Location = new System.Drawing.Point(925, 589);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(238, 86);
             this.btnIniciar.TabIndex = 48;
@@ -651,6 +639,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(281, 216);
             this.panel2.TabIndex = 0;
+            // 
+            // lblTeste
+            // 
+            this.lblTeste.AutoSize = true;
+            this.lblTeste.BackColor = System.Drawing.Color.Transparent;
+            this.lblTeste.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.lblTeste.Location = new System.Drawing.Point(15, 70);
+            this.lblTeste.Name = "lblTeste";
+            this.lblTeste.Size = new System.Drawing.Size(0, 13);
+            this.lblTeste.TabIndex = 31;
             // 
             // lbl3
             // 
@@ -745,16 +743,6 @@
             this.panel1.Size = new System.Drawing.Size(260, 227);
             this.panel1.TabIndex = 49;
             // 
-            // lblTeste
-            // 
-            this.lblTeste.AutoSize = true;
-            this.lblTeste.BackColor = System.Drawing.Color.Transparent;
-            this.lblTeste.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.lblTeste.Location = new System.Drawing.Point(15, 70);
-            this.lblTeste.Name = "lblTeste";
-            this.lblTeste.Size = new System.Drawing.Size(0, 13);
-            this.lblTeste.TabIndex = 31;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -769,7 +757,6 @@
             this.Controls.Add(this.pnlDadosJogador);
             this.Controls.Add(this.pnlMaoJogador);
             this.Controls.Add(this.pnlBotaoInfo);
-            this.Controls.Add(this.btnExibirMao);
             this.Controls.Add(this.btnVerificarTurno);
             this.Controls.Add(this.lblVersao2);
             this.Controls.Add(this.label5);
@@ -828,7 +815,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnVerificarTurno;
-        private System.Windows.Forms.Button btnExibirMao;
         private System.Windows.Forms.Panel pnlBotaoInfo;
         private System.Windows.Forms.PictureBox pbDado;
         private System.Windows.Forms.Label label15;

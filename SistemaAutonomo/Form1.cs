@@ -407,21 +407,27 @@ namespace SistemaAutonomo
             {
                 case "AL":
                     lblDadoSorteado.Text = "Alimentação";
+                    pbDado.BackgroundImage = Properties.Resources.FaceAlimentacao;
                     break;
                 case "FL":
                     lblDadoSorteado.Text = "Floresta";
+                    pbDado.BackgroundImage = Properties.Resources.FaceFloresta;
                     break;
                 case "PR":
                     lblDadoSorteado.Text = "Pradaria";
+                    pbDado.BackgroundImage = Properties.Resources.FacePradaria;
                     break;
                 case "TI":
                     lblDadoSorteado.Text = "T-Rex";
+                    pbDado.BackgroundImage = Properties.Resources.FaceTRex;
                     break;
                 case "VZ":
                     lblDadoSorteado.Text = "Cercado Vazio";
+                    pbDado.BackgroundImage = Properties.Resources.FaceCercadoVazio;
                     break;
                 case "WC":
                     lblDadoSorteado.Text = "Banheiros";
+                    pbDado.BackgroundImage = Properties.Resources.FaceBanheiro;
                     break;
             }
         }
@@ -509,11 +515,6 @@ namespace SistemaAutonomo
             AtualizarInformacoesJogador();
         }
 
-        private void btnExibirMao_Click(object sender, EventArgs e)
-        {
-            ExibirMaoJogador(jogadorAtual.Id);
-        }
-
         private void CriarDinossauroNoCercado(string siglaDinossauro, string siglaCercado)
         {
             PictureBox novoDino = new PictureBox();
@@ -549,78 +550,36 @@ namespace SistemaAutonomo
             switch (siglaCercado)
             {
                 case "FI":
-                    if (qtdDinossaurosCercado["FI"] == 0)
-                    {
-                        novoDino.Location = new Point(30, 49);
-                        qtdDinossaurosCercado["FI"]++;
-                        break;
-                    }
                     offsetX = 30 * qtdDinossaurosCercado["FI"];
                     novoDino.Location = new Point(30+ offsetX, 49);
                     qtdDinossaurosCercado["FI"]++;
                     break;
                 case "RS":
-                    if(qtdDinossaurosCercado["RS"] == 0)
-                        {
-                            novoDino.Location = new Point(412, 43);
-                            qtdDinossaurosCercado["RS"]++;
-                            break;
-                    }
                     offsetX = 30 * qtdDinossaurosCercado["RS"];
                     novoDino.Location = new Point(412 + offsetX, 43);
                     qtdDinossaurosCercado["RS"]++;
                     break;
                 case "MT":
-                    if(qtdDinossaurosCercado["MT"] == 0)
-                    {
-                        novoDino.Location = new Point(60, 190);
-                        qtdDinossaurosCercado["MT"]++;
-                        break;
-                    }
                     offsetX = 30 * qtdDinossaurosCercado["MT"];
                     novoDino.Location = new Point(60 + offsetX, 190);
                     qtdDinossaurosCercado["MT"]++;
                     break;
                 case "CD":
-                    if(qtdDinossaurosCercado["CD"] == 0)
-                    {
-                        novoDino.Location = new Point(352, 228);
-                        qtdDinossaurosCercado["CD"]++;
-                        break;
-                    }
                     offsetX = 30 * qtdDinossaurosCercado["CD"];
                     novoDino.Location = new Point(352 + offsetX, 228);
                     qtdDinossaurosCercado["CD"]++;
                     break;
                 case "PA":
-                    if(qtdDinossaurosCercado["PA"] == 0)
-                    {
-                        novoDino.Location = new Point(86, 331);
-                        qtdDinossaurosCercado["PA"]++;
-                        break;
-                    }
                     offsetX = 30 * qtdDinossaurosCercado["PA"];
                     novoDino.Location = new Point(86 + offsetX, 331);
                     qtdDinossaurosCercado["PA"]++;
                     break;
                 case "IS":
-                    if(qtdDinossaurosCercado["IS"] == 0)
-                    {
-                        novoDino.Location = new Point(475, 309);
-                        qtdDinossaurosCercado["IS"]++;
-                        break;
-                    }
                     offsetX = 30 * qtdDinossaurosCercado["IS"];
                     novoDino.Location = new Point(475 + offsetX, 309);
                     qtdDinossaurosCercado["IS"]++;
                     break;
                 case "RI":
-                    if(qtdDinossaurosCercado["RI"] == 0)
-                    {
-                        novoDino.Location = new Point(243, 345);
-                        qtdDinossaurosCercado["RI"]++;
-                        break;
-                    }
                     offsetX = 30 * qtdDinossaurosCercado["RI"];
                     novoDino.Location = new Point(243 + offsetX, 345);
                     qtdDinossaurosCercado["RI"]++;
@@ -679,21 +638,27 @@ namespace SistemaAutonomo
             {
                 case "AL":
                     lblDadoSorteado.Text = "Alimentação";
+                    pbDado.BackgroundImage = Properties.Resources.FaceAlimentacao;
                     break;
                 case "FL":
                     lblDadoSorteado.Text = "Floresta";
+                    pbDado.BackgroundImage = Properties.Resources.FaceFloresta;
                     break;
                 case "PR":
                     lblDadoSorteado.Text = "Pradaria";
+                    pbDado.BackgroundImage = Properties.Resources.FacePradaria;
                     break;
                 case "TI":
                     lblDadoSorteado.Text = "T-Rex";
+                    pbDado.BackgroundImage = Properties.Resources.FaceTRex;
                     break;
                 case "VZ":
                     lblDadoSorteado.Text = "Cercado Vazio";
+                    pbDado.BackgroundImage = Properties.Resources.FaceCercadoVazio;
                     break;
                 case "WC":
                     lblDadoSorteado.Text = "Banheiros";
+                    pbDado.BackgroundImage = Properties.Resources.FaceBanheiro;
                     break;
             }
 
