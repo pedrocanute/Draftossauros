@@ -41,19 +41,19 @@
             this.lblVersao = new System.Windows.Forms.Label();
             this.lblNomeGrupo = new System.Windows.Forms.Label();
             this.txtListaPartida = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnEntrar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblVersaoDll = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.pnlLobby = new System.Windows.Forms.Panel();
+            this.pnlLobby.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmbStatusPartidas
             // 
             this.cmbStatusPartidas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatusPartidas.FormattingEnabled = true;
-            this.cmbStatusPartidas.Location = new System.Drawing.Point(161, 124);
+            this.cmbStatusPartidas.Location = new System.Drawing.Point(158, 134);
             this.cmbStatusPartidas.Name = "cmbStatusPartidas";
             this.cmbStatusPartidas.Size = new System.Drawing.Size(121, 21);
             this.cmbStatusPartidas.TabIndex = 27;
@@ -61,15 +61,17 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(168, 96);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.label5.Location = new System.Drawing.Point(163, 118);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.Size = new System.Drawing.Size(64, 13);
             this.label5.TabIndex = 26;
             this.label5.Text = "ID Criado:";
             // 
             // btnCriarPartida
             // 
-            this.btnCriarPartida.Location = new System.Drawing.Point(171, 34);
+            this.btnCriarPartida.Location = new System.Drawing.Point(204, 41);
             this.btnCriarPartida.Name = "btnCriarPartida";
             this.btnCriarPartida.Size = new System.Drawing.Size(75, 59);
             this.btnCriarPartida.TabIndex = 25;
@@ -80,15 +82,17 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 57);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.label4.Location = new System.Drawing.Point(47, 64);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 24;
             this.label4.Text = "Senha:";
             // 
             // txtSenha
             // 
-            this.txtSenha.Location = new System.Drawing.Point(17, 73);
+            this.txtSenha.Location = new System.Drawing.Point(50, 80);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.Size = new System.Drawing.Size(148, 20);
             this.txtSenha.TabIndex = 23;
@@ -96,15 +100,17 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 18);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.label3.Location = new System.Drawing.Point(47, 25);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 13);
+            this.label3.Size = new System.Drawing.Size(105, 13);
             this.label3.TabIndex = 22;
             this.label3.Text = "Nome da Partida:";
             // 
             // txtNomePartida
             // 
-            this.txtNomePartida.Location = new System.Drawing.Point(17, 34);
+            this.txtNomePartida.Location = new System.Drawing.Point(50, 41);
             this.txtNomePartida.Name = "txtNomePartida";
             this.txtNomePartida.Size = new System.Drawing.Size(148, 20);
             this.txtNomePartida.TabIndex = 21;
@@ -112,14 +118,14 @@
             // lstListaPartidas
             // 
             this.lstListaPartidas.FormattingEnabled = true;
-            this.lstListaPartidas.Location = new System.Drawing.Point(53, 164);
+            this.lstListaPartidas.Location = new System.Drawing.Point(50, 163);
             this.lstListaPartidas.Name = "lstListaPartidas";
             this.lstListaPartidas.Size = new System.Drawing.Size(229, 134);
             this.lstListaPartidas.TabIndex = 20;
             // 
             // btnListarPartida
             // 
-            this.btnListarPartida.Location = new System.Drawing.Point(53, 122);
+            this.btnListarPartida.Location = new System.Drawing.Point(50, 134);
             this.btnListarPartida.Name = "btnListarPartida";
             this.btnListarPartida.Size = new System.Drawing.Size(86, 23);
             this.btnListarPartida.TabIndex = 19;
@@ -130,7 +136,9 @@
             // lblIdGerado
             // 
             this.lblIdGerado.AutoSize = true;
-            this.lblIdGerado.Location = new System.Drawing.Point(222, 96);
+            this.lblIdGerado.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIdGerado.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.lblIdGerado.Location = new System.Drawing.Point(227, 118);
             this.lblIdGerado.Name = "lblIdGerado";
             this.lblIdGerado.Size = new System.Drawing.Size(0, 13);
             this.lblIdGerado.TabIndex = 28;
@@ -146,45 +154,26 @@
             // lblNomeGrupo
             // 
             this.lblNomeGrupo.AutoSize = true;
-            this.lblNomeGrupo.Location = new System.Drawing.Point(300, 358);
+            this.lblNomeGrupo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNomeGrupo.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.lblNomeGrupo.Location = new System.Drawing.Point(267, 365);
             this.lblNomeGrupo.Name = "lblNomeGrupo";
-            this.lblNomeGrupo.Size = new System.Drawing.Size(57, 13);
+            this.lblNomeGrupo.Size = new System.Drawing.Size(68, 13);
             this.lblNomeGrupo.TabIndex = 30;
             this.lblNomeGrupo.Text = "Primordiais";
             // 
             // txtListaPartida
             // 
-            this.txtListaPartida.Location = new System.Drawing.Point(53, 162);
+            this.txtListaPartida.Location = new System.Drawing.Point(50, 161);
             this.txtListaPartida.Multiline = true;
             this.txtListaPartida.Name = "txtListaPartida";
             this.txtListaPartida.Size = new System.Drawing.Size(229, 138);
             this.txtListaPartida.TabIndex = 31;
             this.txtListaPartida.Visible = false;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnEntrar);
-            this.groupBox1.Controls.Add(this.btnCriarPartida);
-            this.groupBox1.Controls.Add(this.txtNomePartida);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtSenha);
-            this.groupBox1.Controls.Add(this.cmbStatusPartidas);
-            this.groupBox1.Controls.Add(this.lblIdGerado);
-            this.groupBox1.Controls.Add(this.lstListaPartidas);
-            this.groupBox1.Controls.Add(this.btnListarPartida);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.txtListaPartida);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Location = new System.Drawing.Point(24, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(333, 343);
-            this.groupBox1.TabIndex = 33;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Lobby";
-            // 
             // btnEntrar
             // 
-            this.btnEntrar.Location = new System.Drawing.Point(99, 314);
+            this.btnEntrar.Location = new System.Drawing.Point(94, 311);
             this.btnEntrar.Name = "btnEntrar";
             this.btnEntrar.Size = new System.Drawing.Size(123, 23);
             this.btnEntrar.TabIndex = 32;
@@ -195,48 +184,79 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(237, 376);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.label1.Location = new System.Drawing.Point(204, 383);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 35;
             this.label1.Text = "Versão:";
             // 
             // lblVersaoDll
             // 
             this.lblVersaoDll.AutoSize = true;
-            this.lblVersaoDll.Location = new System.Drawing.Point(300, 376);
+            this.lblVersaoDll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersaoDll.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.lblVersaoDll.Location = new System.Drawing.Point(267, 383);
             this.lblVersaoDll.Name = "lblVersaoDll";
-            this.lblVersaoDll.Size = new System.Drawing.Size(43, 13);
+            this.lblVersaoDll.Size = new System.Drawing.Size(50, 13);
             this.lblVersaoDll.TabIndex = 34;
             this.lblVersaoDll.Text = "Versão:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(237, 358);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.label2.Location = new System.Drawing.Point(204, 365);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
+            this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 36;
             this.label2.Text = "Grupo:";
+            // 
+            // pnlLobby
+            // 
+            this.pnlLobby.BackColor = System.Drawing.Color.Transparent;
+            this.pnlLobby.BackgroundImage = global::SistemaAutonomo.Properties.Resources.FundoPanel;
+            this.pnlLobby.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlLobby.Controls.Add(this.lstListaPartidas);
+            this.pnlLobby.Controls.Add(this.cmbStatusPartidas);
+            this.pnlLobby.Controls.Add(this.txtListaPartida);
+            this.pnlLobby.Controls.Add(this.btnListarPartida);
+            this.pnlLobby.Controls.Add(this.btnEntrar);
+            this.pnlLobby.Controls.Add(this.lblIdGerado);
+            this.pnlLobby.Controls.Add(this.btnCriarPartida);
+            this.pnlLobby.Controls.Add(this.label4);
+            this.pnlLobby.Controls.Add(this.txtNomePartida);
+            this.pnlLobby.Controls.Add(this.txtSenha);
+            this.pnlLobby.Controls.Add(this.label5);
+            this.pnlLobby.Controls.Add(this.label3);
+            this.pnlLobby.Location = new System.Drawing.Point(12, 12);
+            this.pnlLobby.Name = "pnlLobby";
+            this.pnlLobby.Size = new System.Drawing.Size(323, 350);
+            this.pnlLobby.TabIndex = 37;
             // 
             // Lobby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 398);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ClientSize = new System.Drawing.Size(346, 398);
+            this.Controls.Add(this.pnlLobby);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblVersaoDll);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblNomeGrupo);
             this.Controls.Add(this.lblVersao);
+            this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Lobby";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Draftosauros-Lobby";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.pnlLobby.ResumeLayout(false);
+            this.pnlLobby.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,10 +277,10 @@
         private System.Windows.Forms.Label lblVersao;
         private System.Windows.Forms.Label lblNomeGrupo;
         private System.Windows.Forms.TextBox txtListaPartida;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnEntrar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblVersaoDll;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel pnlLobby;
     }
 }
