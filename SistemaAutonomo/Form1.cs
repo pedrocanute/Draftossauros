@@ -15,7 +15,7 @@ namespace SistemaAutonomo
 {
     public partial class Form1 : Form
     {
-        Partida partidaCriada; 
+        Partida partidaCriada; //= new Partida(); //Instanciando a partida
         List<Jogador> listaJogadores = new List<Jogador>();
         Dictionary<string, int> qtdDinossaurosCercado = new Dictionary<string, int>();
         Jogador jogadorAtual;
@@ -31,8 +31,9 @@ namespace SistemaAutonomo
             this.BackgroundImage = Properties.Resources.FundoGame;
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
+
             lblVersao2.Text = Jogo.versao;
-            lblIdPartida.Text = partidaCriada.IdPartida.ToString();
+            lblIdPartida.Text = partidaCriada.idPartida.ToString();
             lblNomePartida.Text = partidaCriada.NomePartida;
             lblDataPartida.Text = partidaCriada.DataPartida;
 
@@ -48,9 +49,8 @@ namespace SistemaAutonomo
 
         private void btnListarJogadores_Click(object sender, EventArgs e)
         {
-            string retorno = Jogo.ListarJogadores(partidaCriada.IdPartida); 
+            string retorno = Jogo.ListarJogadores(partidaCriada.idPartida);
             lstListaJogadores.Items.Clear();
-
             if (string.IsNullOrEmpty(retorno))
             {
                 lstListaJogadores.Items.Add("Não há jogadores");
@@ -58,7 +58,7 @@ namespace SistemaAutonomo
             }
 
             retorno = retorno.Replace("\r", "");
-            string[] jogadores = retorno.Split('\n'); 
+            string[] jogadores = retorno.Split('\n');
 
             lstListaJogadores.Items.Clear();
 
@@ -76,7 +76,8 @@ namespace SistemaAutonomo
                 MessageBox.Show("Quantidade maxima de jogadores: 5", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            string infoJogador = Jogo.Entrar(partidaCriada.IdPartida, txtNomeJogador.Text, partidaCriada.Senha);
+            string infoJogador = Jogo.Entrar(partidaCriada.idPartida, txtNomeJogador.Text, partidaCriada.Senha);
+
 
             if (infoJogador.StartsWith("ERRO"))
             {
@@ -85,7 +86,7 @@ namespace SistemaAutonomo
             }
 
             infoJogador = infoJogador.Replace("\r", "").Replace("\n", "");
-            string[] splitInfoJogador = infoJogador.Split(','); 
+            string[] splitInfoJogador = infoJogador.Split(',');
 
             int idJogador = Convert.ToInt32(splitInfoJogador[0]);
             string senhaJogador = splitInfoJogador[1];
@@ -94,7 +95,7 @@ namespace SistemaAutonomo
             lblSenhaJogador.Text = senhaJogador;
 
             CriarJogador(idJogador, txtNomeJogador.Text, senhaJogador);
-        } 
+        }
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
@@ -104,9 +105,9 @@ namespace SistemaAutonomo
                 return;
             }
 
-            Atualizarlistarogadores(); 
+            Atualizarlistarogadores();
 
-            LancarDado(jogadorAtual); 
+            LancarDado(jogadorAtual);
 
             ExibirMaoJogador(jogadorAtual.Id);
 
@@ -202,10 +203,17 @@ namespace SistemaAutonomo
 
             }
 
+
+            // Realiza a Jogada
+            //Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, siglaDinossauro, siglaCercado);
+            // preparar debug: quais siglas estão sendo enviadas
             string enviado = $"Dinossauro={dinossauroSelecionado}, Cercado={siglaCercado}";
 
+            // chamar jogar e checar retorno
+            //lblTesteDoThiago.Text = Jogo.VerificarTurno(partidaCriada.idPartida);
             string resultadoJogar = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, dinossauroSelecionado, siglaCercado);
 
+            // se houver erro, mostrar o que foi enviado e a resposta do servidor para diagnosticar
             if (!string.IsNullOrEmpty(resultadoJogar) && resultadoJogar.StartsWith("ERRO"))
             {
                 string msg = $"Erro ao jogar. Enviado: {enviado}\nResposta servidor: {resultadoJogar}";
@@ -215,7 +223,7 @@ namespace SistemaAutonomo
                 return;
             }
 
-            CriarDinossauroNoCercado(dinossauroSelecionado, siglaCercado); 
+            CriarDinossauroNoCercado(dinossauroSelecionado, siglaCercado); //ADICIONEI A FUNCAO DE COLOCAR O DINOSSAURo
 
             // Remove o dinossauro jogado da mão do jogador
             var dinossauroParaRemover = jogadorAtual.listaDinossauros.FirstOrDefault(d => d.SiglaNome == dinossauroSelecionado);
@@ -255,8 +263,8 @@ namespace SistemaAutonomo
                 return;
             }
 
-            jogadorAtual.listaDinossauros.Clear(); 
-            string maoJogador = Jogo.ExibirMao(jogadorAtual.Id, jogadorAtual.Senha); 
+            jogadorAtual.listaDinossauros.Clear();
+            string maoJogador = Jogo.ExibirMao(jogadorAtual.Id, jogadorAtual.Senha);
 
             if (maoJogador.StartsWith("ERRO"))
             {
@@ -275,7 +283,9 @@ namespace SistemaAutonomo
             {
                 if (dinossauros[i] == "") continue;
 
-                string[] splitDinossauros = dinossauros[i].Split(','); 
+                string[] splitDinossauros = dinossauros[i].Split(',');
+
+                if (splitDinossauros.Length < 2) continue;
 
                 string sigla = splitDinossauros[0];
                 string quantidade = splitDinossauros[1];
@@ -287,7 +297,7 @@ namespace SistemaAutonomo
                 {
                     Dinossauros dinossauro = new Dinossauros(sigla);
                     jogadorAtual.listaDinossauros.Add(dinossauro);
-                } 
+                }
 
                 switch (sigla)
                 {
@@ -315,7 +325,7 @@ namespace SistemaAutonomo
             AtualizarBotoesDinos(jogadorAtual.listaDinossauros);
         }
 
-        private void AtualizarBotoesDinos(List<Dinossauros> listaDinossauros) 
+        private void AtualizarBotoesDinos(List<Dinossauros> listaDinossauros)
         {
             Button[] botoes = { btnPrimeiroDino, btnSegundoDino, btnTerceiroDino, btnQuartoDino, btnQuintoDino, btnSextoDino };
 
@@ -359,7 +369,7 @@ namespace SistemaAutonomo
             }
         }
 
-        public void LancarDado(Jogador jogador) //Iniciar
+        public void LancarDado(Jogador jogador)
         {
             string dadoInicial = Jogo.Iniciar(jogador.Id, jogador.Senha);
 
@@ -367,7 +377,7 @@ namespace SistemaAutonomo
             {
                 MessageBox.Show(dadoInicial, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            } 
+            }
 
             string[] splitDadoInicial = dadoInicial.Split(',');
             int idJogador = Convert.ToInt32(splitDadoInicial[0]);
@@ -381,7 +391,7 @@ namespace SistemaAutonomo
                     break;
                 case "FL":
                     lblDadoSorteado.Text = "Floresta";
-                    pbDado.BackgroundImage = Properties.Resources.FaceFloresta; 
+                    pbDado.BackgroundImage = Properties.Resources.FaceFloresta;
                     break;
                 case "PR":
                     lblDadoSorteado.Text = "Pradaria";
@@ -400,12 +410,12 @@ namespace SistemaAutonomo
                     pbDado.BackgroundImage = Properties.Resources.FaceBanheiro;
                     break;
             }
-        } 
+        }
 
         public void ExibirTabuleiroJogador(Jogador jogador)
         {
             string tabuleiro = Jogo.ExibirTabuleiro(jogador.Id, jogador.Senha);
-            if (tabuleiro.StartsWith("ERRO"))
+            if (string.IsNullOrEmpty(tabuleiro) || tabuleiro.StartsWith("ERRO"))
             {
                 MessageBox.Show(tabuleiro, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -414,12 +424,20 @@ namespace SistemaAutonomo
             // Normaliza quebras de linha e espaços antes de fazer o split
             tabuleiro = tabuleiro.Replace("\r", "").Trim();
             string[] splitTabuleiro = tabuleiro.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            if (splitTabuleiro.Length < 3)
+            {
+                // resposta inesperada
+                lblTeste.Text = "Resposta do servidor inesperada: [" + tabuleiro + "]";
+                lblTeste.Visible = true;
+                return;
+            }
 
             string siglaCercado = splitTabuleiro[0].Trim();
             string siglaDinossauro = splitTabuleiro[1].Trim();
             string quantidade = splitTabuleiro[2].Trim();
-            
-            if (quantidade.Contains("\n")) quantidade = quantidade.Split('\n')[0].Trim(); 
+            // em alguns casos a quantidade pode trazer uma nova linha com outros registros;
+            // pega apenas a primeira linha
+            if (quantidade.Contains("\n")) quantidade = quantidade.Split('\n')[0].Trim();
 
             string dinossauro = "";
             switch (siglaDinossauro)
@@ -556,7 +574,7 @@ namespace SistemaAutonomo
 
         void Atualizarlistarogadores()
         {
-            string retornoJogadores = Jogo.ListarJogadores(partidaCriada.IdPartida);
+            string retornoJogadores = Jogo.ListarJogadores(partidaCriada.idPartida);
 
             if (retornoJogadores.StartsWith("ERRO"))
             {
@@ -588,9 +606,9 @@ namespace SistemaAutonomo
             }
         }
 
-        void AtualizarInformacoesJogador()  
+        void AtualizarInformacoesJogador()
         {
-            string retornoAtualizar = Jogo.VerificarPartida(partidaCriada.IdPartida);
+            string retornoAtualizar = Jogo.VerificarPartida(partidaCriada.idPartida);
 
             string[] linhas = retornoAtualizar.Split(',');
             string faceDoDado = linhas[4].Trim();

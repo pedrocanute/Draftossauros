@@ -49,8 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cercado.cs" />
-    <Compile Include="Dinossauro.cs" />
+    <Compile Include="Dinossauros.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

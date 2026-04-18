@@ -14,7 +14,7 @@ namespace SistemaAutonomo
 {
     public partial class Lobby : Form
     {
-        Partida partidaCriada = new Partida();
+        Partida partidaCriada = new Partida(); //Instanciando a partida
         public Lobby()
         {
             InitializeComponent();
@@ -30,6 +30,8 @@ namespace SistemaAutonomo
         {
             string status = cmbStatusPartidas.SelectedItem.ToString().Substring(0, 1);
             string retorno = Jogo.ListarPartidas(status);
+
+            txtListaPartida.Text = retorno;
 
             if (string.IsNullOrEmpty(retorno))
             {
@@ -70,7 +72,7 @@ namespace SistemaAutonomo
                 return;
             }
 
-            partidaCriada.IdPartida = Convert.ToInt32(idGerado);
+            partidaCriada.idPartida = Convert.ToInt32(idGerado);
             partidaCriada.Senha = txtSenha.Text;
             partidaCriada.NomePartida = txtNomePartida.Text;
             partidaCriada.DataPartida = DateTime.Now.ToString("dd/MM/yyyy");
@@ -88,7 +90,9 @@ namespace SistemaAutonomo
             string partida = lstListaPartidas.SelectedItem.ToString();
             string[] dadosPartida = partida.Split(',');
 
-            partidaCriada.IdPartida = Convert.ToInt32(dadosPartida[0]);
+            if (dadosPartida.Length < 3) return; //verifica se o split dividou partida em 3 partes
+
+            partidaCriada.idPartida = Convert.ToInt32(dadosPartida[0]);
             partidaCriada.Senha = txtSenha.Text;
             partidaCriada.NomePartida = dadosPartida[1];
             partidaCriada.DataPartida = dadosPartida[2];
@@ -105,7 +109,7 @@ namespace SistemaAutonomo
 
             if (dadosPartida.Length < 3) return;
 
-            partidaCriada.IdPartida = Convert.ToInt32(dadosPartida[0]);
+            partidaCriada.idPartida = Convert.ToInt32(dadosPartida[0]);
             partidaCriada.NomePartida = dadosPartida[1];
             partidaCriada.Senha = txtSenha.Text;
 

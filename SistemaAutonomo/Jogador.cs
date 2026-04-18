@@ -10,6 +10,7 @@ public class Jogador
     public List<Dinossauros> listaDinossauros = new List<Dinossauros>();
     string dinossauroSelecionado = null;
 
+
     public int Id
     {
         get { return id; }
