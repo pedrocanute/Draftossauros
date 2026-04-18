@@ -1,4 +1,4 @@
-﻿public class Dinossauros
+﻿public class Dinossauro
 {
     string siglaNome;
 
@@ -9,7 +9,7 @@
     }
 
 
-    public Dinossauros(string siglaNome)
+    public Dinossauro(string siglaNome)
     {
         this.siglaNome = siglaNome;
     }
