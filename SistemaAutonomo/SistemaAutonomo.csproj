@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cercado.cs" />
-    <Compile Include="Dinossauros.cs" />
+    <Compile Include="Dinossauro.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
