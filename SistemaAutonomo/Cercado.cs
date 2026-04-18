@@ -33,6 +33,7 @@ public abstract class Cercado
     public abstract int CalcularPontuacao();
 }
 
+
 public class Rio : Cercado
 {
     public Rio(int posX, int posY) : base(new List<Dinossauro>(), posX, posY)
