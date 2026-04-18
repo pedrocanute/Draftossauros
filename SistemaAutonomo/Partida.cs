@@ -1,16 +1,9 @@
-﻿using System.Collections.Generic;
-
-public class Partida
+﻿public class Partida
 {
     string nomePartida;
     string senha;
     string data;
-    int idPartida;
-    List<Jogador> jogadores = new List<Jogador>();
-    Jogador jogador;
-
-    public int IdPartida{ get; set; }
-
+    public int idPartida { get; set; }
     public string Senha
     {
         get { return senha; }
@@ -21,11 +14,12 @@ public class Partida
     {
         get { return nomePartida; }
         set { nomePartida = value; }
-    }
 
+    }
     public string DataPartida
     {
         get { return data; }
         set { data = value; }
+
     }
 }
