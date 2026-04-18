@@ -19,6 +19,7 @@ namespace SistemaAutonomo
         List<Jogador> listaJogadores = new List<Jogador>();
         Dictionary<string, int> qtdDinossaurosCercado = new Dictionary<string, int>();
         Jogador jogadorAtual;
+
         public Form1(Partida partida)
         {
             partidaCriada = partida;
