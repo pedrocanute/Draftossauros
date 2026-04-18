@@ -118,7 +118,58 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FaceCercadoVazio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FaceCercadoVazio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IniciarPartidaBtn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IniciarPartidaBtn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Espinossauro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Espinossauro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Braquiossauro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Braquiossauro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Estegossauro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Estegossauro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FundoPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FundoPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dadoFaces" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dadoFaces.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FundoPanelLarge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FundoPanelLarge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FaceTRex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FaceTRex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FaceFloresta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FaceFloresta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FaceAlimentacao" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FaceAlimentacao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Parasaurolofo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Parasaurolofo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FacePradaria" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FacePradaria.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FundoGame" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FundoGame.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Tabuleiro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tabuleiro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Triceratops" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Triceratops.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FaceBanheiro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FaceBanheiro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tiranossauro-Rex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tiranossauro-Rex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
