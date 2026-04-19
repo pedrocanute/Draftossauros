@@ -30,7 +30,7 @@ public class TradutorSigla
         };
     }
 
-    public string TraduzirSigla(string sigla)
+    public string Traduzir(string sigla)
     {
         if (siglaDinosauro.ContainsKey(sigla))
         {
