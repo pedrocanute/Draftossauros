@@ -20,7 +20,6 @@ namespace SistemaAutonomo
         Dictionary<string, int> qtdDinossaurosCercado = new Dictionary<string, int>();
         Jogador jogadorLocal;
         Tabuleiro tabuleiro = new Tabuleiro();
-        TradutorSigla tradutor = new TradutorSigla();
 
         public Form1(Partida partida)
         {
@@ -60,12 +59,6 @@ namespace SistemaAutonomo
 
             if (jogadores == null) { 
                 lstListaJogadores.Items.Add("Nao ha jogadores");
-                return;
-            }
-
-            if (jogadores.Length == 0)
-            {
-                lstListaJogadores.Items.Add("Não há jogadores.");
                 return;
             }
 
@@ -175,7 +168,7 @@ namespace SistemaAutonomo
             AtualizarInformacoesJogador();
         }
 
-        public void ExibirMaoJogador(int idJogador)
+        public void ExibirMaoJogador(int idJogador) //Chat Debugou e fez dois dicionarios
         {
             jogadorLocal.AtualizarMao();
 
