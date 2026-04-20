@@ -11,8 +11,10 @@ public class Partida
     int idPartida;
     List<Jogador> jogadores = new List<Jogador>();
     Jogador jogadorLocal;
+    Jogador jogadorComDado;
     Tabuleiro tabuleiro;
     string nomeGrupo = "Primordiais";
+    Dado dado = new Dado();
 
     public int IdPartida { get; set; }
 
@@ -26,9 +28,13 @@ public class Partida
 
     public Jogador JogadorLocal { get { return jogadorLocal; } set { jogadorLocal = value; } }
 
+    public Jogador JogadorComDado { get { return jogadorComDado; } set { jogadorComDado = value; } }
+
     public Tabuleiro Tabuleiro { get { return tabuleiro; } set { tabuleiro = value; } }
 
     public string NomeGrupo { get { return nomeGrupo; }}
+
+    public Dado Dado { get { return dado; } set { dado = value; } }
 
 
     public void CriarPartida()
@@ -76,15 +82,36 @@ public class Partida
 
     public void IniciarPartida()
     {
+        string retorno = Jogo.Iniciar(jogadorLocal.Id, jogadorLocal.Senha);
 
+        if (TratarErro.Verificar(retorno))
+            return;
+
+        string[] infoPrimeiroDado = TratarRetorno.SepararVirgula(retorno);
+
+        jogadorComDado.Id = Convert.ToInt32(infoPrimeiroDado[0]);
+
+        dado.DefinirFace(infoPrimeiroDado[1]);
     }
 
-    public void BuscarJogador(int id)
+    public Jogador BuscarJogador(int id)
     {
-
+        foreach (Jogador jogador in jogadores)
+        {
+            if (jogador.Id == id)
+            {
+                return jogador;
+            }
+        }
+        MessageBox.Show("Jogador ja existe", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return null;
     }
     public void AtualizarInfoJogador()
     {
-
+        string retorno = Jogo.VerificarPartida(IdPartida);
+        string [] linhas = TratarRetorno.SepararVirgula(retorno);
+        JogadorComDado = BuscarJogador(Convert.ToInt32(linhas[3].Trim()));
+        dado.DefinirFace(linhas[4].Trim());
+        //ExibirMaoJogador
     }
 }
