@@ -38,6 +38,11 @@ namespace SistemaAutonomo
             lblNomePartida.Text = partidaCriada.NomePartida;
             lblDataPartida.Text = partidaCriada.DataPartida;
 
+            jogadorLocal = new Jogador(0);
+            partidaCriada.JogadorLocal = jogadorLocal;
+            partidaCriada.JogadorComDado = new Jogador(0);
+            partidaCriada.Tabuleiro = tabuleiro;
+
             qtdDinossaurosCercado["FI"] = 0;
             qtdDinossaurosCercado["RS"] = 0;
             qtdDinossaurosCercado["MT"] = 0;
@@ -53,8 +58,10 @@ namespace SistemaAutonomo
             string[] jogadores = partidaCriada.ListarJogadores();
             lstListaJogadores.Items.Clear();
 
-            if (jogadores == null)
+            if (jogadores == null) { 
+                lstListaJogadores.Items.Add("Nao ha jogadores");
                 return;
+            }
 
             if (jogadores.Length == 0)
             {
@@ -70,24 +77,31 @@ namespace SistemaAutonomo
 
         private void btnCriarJogador_Click(object sender, EventArgs e) // feito
         {
-            if (listaJogadores.Count >= 5)
+            if (jogadorLocal != null && jogadorLocal.IdJogador > 0)
             {
-                MessageBox.Show("Quantidade maxima de jogadores: 5", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Somente um jogador por formulario", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (lblNomeJogador.Text == "")
+
+            if (partidaCriada.Jogadores.Count >= 5)
+            {
+                MessageBox.Show("Quantidade máxima de jogadores: 5", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtNomeJogador.Text == "")
             {
                 MessageBox.Show("Informe o nome do jogador.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            jogadorLocal.Nome = txtNomeJogador.Text;
+            jogadorLocal.NomeJogador = txtNomeJogador.Text;
 
             if (!partidaCriada.CriarJogador(jogadorLocal))
                 return;
 
-            lblIdJogador.Text = jogadorLocal.Id.ToString();
-            lblSenhaJogador.Text = jogadorLocal.Senha;
+            lblIdJogador.Text = jogadorLocal.IdJogador.ToString();
+            lblSenhaJogador.Text = jogadorLocal.SenhaJogador;
 
         } 
 
@@ -98,194 +112,96 @@ namespace SistemaAutonomo
                 MessageBox.Show("Crie um jogador!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (jogadorLocal.IdJogador == 0 || jogadorLocal.SenhaJogador == null)
+            {
+                MessageBox.Show("O jogador ainda não foi autenticado corretamente na partida.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             partidaCriada.IniciarPartida();
 
             lblDadoSorteado.Text = partidaCriada.Dado.ObterDescricao();
             pbDado.BackgroundImage = partidaCriada.Dado.ObterImagem();
 
-           // ExibirMaoJogador(jogadorAtual.Id); ===============================================================================================================
+           ExibirMaoJogador(jogadorLocal.IdJogador);
 
         }
 
         private void btnRealizarJogada_Click(object sender, EventArgs e)
         {
-            //Verifica qual dinossauro foi selecionado e atribui a sigla correspondente para realizar a jogada e trata o erro do jogador não ter selecionado um cercado para jogar
+            if (jogadorLocal.DinossauroSelecionado == null)
+            {
+                jogadorLocal.DinossauroSelecionado = ObterDinossauroSelecionadoNaLista();
+            }
+
             if (jogadorLocal.DinossauroSelecionado == null)
             {
                 MessageBox.Show("Selecione um dinossauro para jogar!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string dinossauroSelecionado = jogadorLocal.DinossauroSelecionado;
+            Cercado cercadoSelecionado = ObterCercadoSelecionado();
 
-            //Verifica qual cercado foi selecionado e atribui a sigla correspondente para realizar a jogada e trata o erro do jogador não ter selecionado um cercado para jogar
-            if (lstCercados.SelectedItem == null)
+            if (cercadoSelecionado == null)
             {
                 MessageBox.Show("Selecione um cercado para jogar!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string cercadoSelecionado = lstCercados.SelectedItem.ToString().Trim();
-            string siglaCercado = "";
+            ValidarJogada resultado = RegraJogada.Validar(partidaCriada.Dado,cercadoSelecionado,jogadorLocal,partidaCriada.JogadorComDado);
 
-            switch (cercadoSelecionado)
+            if (!resultado.Valido)
             {
-                case "Igualdade":
-                    siglaCercado = "FI";
-                    break;
-                case "Rei da Selva":
-                    siglaCercado = "RS";
-                    break;
-                case "Mata Tripla":
-                    siglaCercado = "MT";
-                    break;
-                case "Diferença":
-                    siglaCercado = "CD";
-                    break;
-                case "Amor":
-                    siglaCercado = "PA";
-                    break;
-                case "Solitária":
-                    siglaCercado = "IS";
-                    break;
-                case "Rio":
-                    siglaCercado = "RI";
-                    break;
-                default:
-                    siglaCercado = "";
-                    break;
-            }
-
-            //Realiza as checagens necessárias para validar a jogada (ignora o jogador que lançou o dado)
-            int IdJogadorDoDado = Convert.ToInt32(lblIdJogador.Text);
-            if (jogadorLocal.Id != IdJogadorDoDado)
-            {
-                switch (lblDadoSorteado.Text)
-                {
-                    case "Floresta":
-                        if (lstCercados.SelectedItem.ToString() == "Amor" || lstCercados.SelectedItem.ToString() == "Solitária" || lstCercados.SelectedItem.ToString() == "Diferença")
-                        {
-                            MessageBox.Show("O dado sorteado é Floresta, você só pode jogar nos cercados Igualdade, Rei da Selva ou Mata Tripla!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    case "Pradaria":
-                        if (lstCercados.SelectedItem.ToString() == "Igualdade" || lstCercados.SelectedItem.ToString() == "Mata Tripla" || lstCercados.SelectedItem.ToString() == "Rei da Selva")
-                        {
-                            MessageBox.Show("O dado sorteado é Pradaria, você só pode jogar nos cercados Amor, Solitária ou Diferença!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    case "Banheiros":
-                        if (lstCercados.SelectedItem.ToString() == "Igualdade" || lstCercados.SelectedItem.ToString() == "Mata Tripla" || lstCercados.SelectedItem.ToString() == "Amor")
-                        {
-                            MessageBox.Show("O dado sorteado é Banheiros, você só pode jogar nos cercados Rei da Selva, Solitária ou Diferença!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    case "Alimentação":
-                        if (lstCercados.SelectedItem.ToString() == "Diferença" || lstCercados.SelectedItem.ToString() == "Rei da Selva" || lstCercados.SelectedItem.ToString() == "Solitária")
-                        {
-                            MessageBox.Show("O dado sorteado é Alimentação, você só pode jogar nos cercados Rei da Selva, Solitária ou Diferença!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                }
-
-            }
-
-            string enviado = $"Dinossauro={dinossauroSelecionado}, Cercado={siglaCercado}";
-
-            string resultadoJogar = Jogo.Jogar(jogadorLocal.Id, jogadorLocal.Senha, dinossauroSelecionado, siglaCercado);
-
-            if (!string.IsNullOrEmpty(resultadoJogar) && resultadoJogar.StartsWith("ERRO"))
-            {
-                string msg = $"Erro ao jogar. Enviado: {enviado}\nResposta servidor: {resultadoJogar}";
-                MessageBox.Show(msg, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                lblTeste.Text = msg;
-                lblTeste.Visible = true;
+                MessageBox.Show(resultado.Mensagem, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            CriarDinossauroNoCercado(dinossauroSelecionado, siglaCercado); 
+            string resultadoJogar = Jogo.Jogar(jogadorLocal.IdJogador,jogadorLocal.SenhaJogador,jogadorLocal.DinossauroSelecionado.Sigla,cercadoSelecionado.SiglaCercado);
 
-            // Remove o dinossauro jogado da mão do jogador
-            var dinossauroParaRemover = jogadorLocal.listaDinossauros.FirstOrDefault(d => d.SiglaNome == dinossauroSelecionado);
-            if (dinossauroParaRemover != null)
+            if (!string.IsNullOrEmpty(resultadoJogar) && resultadoJogar.StartsWith("ERRO"))
             {
-                jogadorLocal.listaDinossauros.Remove(dinossauroParaRemover);
+                MessageBox.Show(resultadoJogar, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            int indice = cercadoSelecionado.Dinossauros.Count;
+
+            DesenharDinossauroNoCercado(jogadorLocal.DinossauroSelecionado,cercadoSelecionado,indice);
+
+            cercadoSelecionado.Dinossauros.Add(jogadorLocal.DinossauroSelecionado);
+            jogadorLocal.RemoverDinossauroDaMao(jogadorLocal.DinossauroSelecionado);
+            jogadorLocal.DinossauroSelecionado = null;
 
             AtualizarInformacoesJogador();
         }
 
         public void ExibirMaoJogador(int idJogador)
         {
-            if (jogadorLocal == null)
-            {
-                MessageBox.Show("Não temos a senha deste jogador localmente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            jogadorLocal.AtualizarMao();
 
-            jogadorLocal.listaDinossauros.Clear(); 
-            string maoJogador = Jogo.ExibirMao(jogadorLocal.Id, jogadorLocal.Senha); 
-
-            if (maoJogador.StartsWith("ERRO"))
-            {
-                MessageBox.Show(maoJogador, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            maoJogador = maoJogador.Replace("\r", "");
-            string[] dinossauros = maoJogador.Split('\n');
-
-            lblRodada.Text = dinossauros[0];
-
+            lblRodada.Text = jogadorLocal.RodadaAtual;
             lstMaoDinossauros.Items.Clear();
 
-            for (int i = 1; i < dinossauros.Length; i++)
+            Dictionary<string, int> contagem = new Dictionary<string, int>();
+            Dictionary<string, string> nomes = new Dictionary<string, string>();
+
+            foreach (Dinossauro dinossauro in jogadorLocal.Dinossauros)
             {
-                if (dinossauros[i] == "") continue;
-
-                string[] splitDinossauros = dinossauros[i].Split(','); 
-
-                string sigla = splitDinossauros[0];
-                string quantidade = splitDinossauros[1];
-
-                int quantidadeNumero = Convert.ToInt32(quantidade);
-
-                // Adiciona o dinossauro à mão do jogador
-                for (int j = 0; j < quantidadeNumero; j++)
+                if (!contagem.ContainsKey(dinossauro.Sigla))
                 {
-                    Dinossauros dinossauro = new Dinossauros(sigla);
-                    jogadorLocal.listaDinossauros.Add(dinossauro);
-                } 
-
-                switch (sigla)
-                {
-                    case "Br":
-                        lstMaoDinossauros.Items.Add("Braquiossauro Qtd: " + quantidade);
-                        break;
-                    case "Ep":
-                        lstMaoDinossauros.Items.Add("Espinossauro Qtd: " + quantidade);
-                        break;
-                    case "Et":
-                        lstMaoDinossauros.Items.Add("Estegossauro Qtd: " + quantidade);
-                        break;
-                    case "Pa":
-                        lstMaoDinossauros.Items.Add("Parasaurolófo Qtd: " + quantidade);
-                        break;
-                    case "Ti":
-                        lstMaoDinossauros.Items.Add("Tiranossauro-Rex Qtd: " + quantidade);
-                        break;
-                    case "Tr":
-                        lstMaoDinossauros.Items.Add("Tricerátops Qtd: " + quantidade);
-                        break;
+                    contagem[dinossauro.Sigla] = 0;
+                    nomes[dinossauro.Sigla] = dinossauro.NomeDinossauro;
                 }
+
+                contagem[dinossauro.Sigla]++;
             }
 
-            AtualizarBotoesDinos(jogadorLocal.listaDinossauros);
+            foreach (KeyValuePair<string, int> item in contagem)
+            {
+                lstMaoDinossauros.Items.Add(nomes[item.Key] + " Qtd: " + item.Value);
+            }
+
+            AtualizarBotoesDinos(jogadorLocal.Dinossauros);
         }
 
         private void AtualizarBotoesDinos(List<Dinossauro> listaDinossauros) 
@@ -296,54 +212,51 @@ namespace SistemaAutonomo
             {
                 if (i < listaDinossauros.Count)
                 {
-                    botoes[i].Tag = listaDinossauros[i].SiglaNome;
-                    switch (listaDinossauros[i].SiglaNome)
-                    {
-                        case "Br":
-                            botoes[i].BackgroundImage = Properties.Resources.Braquiossauro;
-                            break;
-                        case "Ep":
-                            botoes[i].BackgroundImage = Properties.Resources.Espinossauro;
-                            break;
-                        case "Et":
-                            botoes[i].BackgroundImage = Properties.Resources.Estegossauro;
-                            break;
-                        case "Pa":
-                            botoes[i].BackgroundImage = Properties.Resources.Parasaurolofo;
-                            break;
-                        case "Ti":
-                            botoes[i].BackgroundImage = Properties.Resources.Tiranossauro_Rex;
-                            break;
-                        case "Tr":
-                            botoes[i].BackgroundImage = Properties.Resources.Triceratops;
-                            break;
-                        default:
-                            botoes[i].BackgroundImage = null;
-                            botoes[i].Tag = null;
-                            break;
-                    }
+                    botoes[i].Tag = listaDinossauros[i];
+                    botoes[i].BackgroundImage = listaDinossauros[i].ImagemDinossauro;
                     botoes[i].Visible = true;
+                    botoes[i].BackgroundImageLayout = ImageLayout.Stretch;
                 }
                 else
                 {
+                    botoes[i].Tag = null;
                     botoes[i].BackgroundImage = null;
                     botoes[i].Visible = false;
                 }
             }
-        } 
+        }
 
         private void btnVerificarTurno_Click(object sender, EventArgs e)
+        {
+            partidaCriada.AtualizarJogadoresDoServidor();
+            partidaCriada.AtualizarInfoJogador();
+
+            lblDadoSorteado.Text = partidaCriada.Dado.ObterDescricao();
+            pbDado.BackgroundImage = partidaCriada.Dado.ObterImagem();
+
+            if (partidaCriada.JogadorComDado != null)
+                lblJogadorDado.Text = partidaCriada.JogadorComDado.NomeJogador;
+            else
+                lblJogadorDado.Text = "Desconhecido";
+
+            jogadorLocal.DinossauroSelecionado = null;
+
+            ExibirMaoJogador(jogadorLocal.IdJogador);
+        }
+
+        private void AtualizarInformacoesJogador()
         {
             partidaCriada.AtualizarInfoJogador();
 
             lblDadoSorteado.Text = partidaCriada.Dado.ObterDescricao();
             pbDado.BackgroundImage = partidaCriada.Dado.ObterImagem();
 
-            lblJogadorDado.Text = partidaCriada.JogadorComDado.Nome;
+            if (partidaCriada.JogadorComDado != null)
+                lblJogadorDado.Text = partidaCriada.JogadorComDado.NomeJogador;
 
             jogadorLocal.DinossauroSelecionado = null;
 
-            ExibirMaoJogador(jogadorLocal.Id);
+            ExibirMaoJogador(jogadorLocal.IdJogador);
         }
 
         private void DesenharDinossauroNoCercado(Dinossauro dinossauro, Cercado cercado, int indice)
@@ -361,69 +274,84 @@ namespace SistemaAutonomo
             novoDino.BringToFront();
         }
 
-        /* void Atualizarlistarogadores()
-         {
-             string retornoJogadores = Jogo.ListarJogadores(partidaCriada.IdPartida);
-
-             if (retornoJogadores.StartsWith("ERRO"))
-             {
-                 MessageBox.Show(retornoJogadores, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                 return;
-             }
-
-             string retorno = retornoJogadores.Replace("\r", "").Trim();
-             string[] linhas = retorno.Split('\n');
-
-             foreach (string linha in linhas)
-             {
-                 string[] dados = linha.Split(',');
-
-                 int id = Convert.ToInt32(dados[0]);
-                 string nome = dados[1];
-                 int pontuacao = Convert.ToInt32(dados[2]);
-
-                 Jogador jogador = new Jogador(id);
-                 jogador.Nome = nome;
-
-                 listaJogadores.Add(jogador);
-             }
-
-             if (listaJogadores.Count < 2)
-             {
-                 MessageBox.Show(retornoJogadores, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                 return;
-             }
-         }*/
-
-
         private void btnPrimeiroDino_Click(object sender, EventArgs e)
         {
-            jogadorLocal.DinossauroSelecionado = btnPrimeiroDino.Tag.ToString();
+            jogadorLocal.DinossauroSelecionado = btnPrimeiroDino.Tag as Dinossauro;
         }
 
         private void btnSegundoDino_Click(object sender, EventArgs e)
         {
-            jogadorLocal.DinossauroSelecionado = btnSegundoDino.Tag.ToString();
+            jogadorLocal.DinossauroSelecionado = btnSegundoDino.Tag as Dinossauro;
         }
 
         private void btnTerceiroDino_Click(object sender, EventArgs e)
         {
-            jogadorLocal.DinossauroSelecionado = btnTerceiroDino.Tag.ToString();
+            jogadorLocal.DinossauroSelecionado = btnTerceiroDino.Tag as Dinossauro;
         }
 
         private void btnQuartoDino_Click(object sender, EventArgs e)
         {
-            jogadorLocal.DinossauroSelecionado = btnQuartoDino.Tag.ToString();
+            jogadorLocal.DinossauroSelecionado = btnQuartoDino.Tag as Dinossauro;
         }
 
         private void btnQuintoDino_Click(object sender, EventArgs e)
         {
-            jogadorLocal.DinossauroSelecionado = btnQuintoDino.Tag.ToString();
+            jogadorLocal.DinossauroSelecionado = btnQuintoDino.Tag as Dinossauro;
         }
 
         private void btnSextoDino_Click(object sender, EventArgs e)
         {
-            jogadorLocal.DinossauroSelecionado = btnSextoDino.Tag.ToString();
+            jogadorLocal.DinossauroSelecionado = btnSextoDino.Tag as Dinossauro;
+        }
+
+        public Dinossauro ObterDinossauroSelecionadoNaLista()
+        {
+            if (lstMaoDinossauros.SelectedItem == null)
+                return null;
+
+            string textoSelecionado = lstMaoDinossauros.SelectedItem.ToString();
+
+            foreach (Dinossauro dinossauro in jogadorLocal.Dinossauros)
+            {
+                if (textoSelecionado.StartsWith(dinossauro.NomeDinossauro))
+                    return dinossauro;
+            }
+
+            return null;
+        }
+
+        public Cercado ObterCercadoSelecionado()
+        {
+            if (lstCercados.SelectedItem == null)
+                return null;
+
+            string nomeCercado = lstCercados.SelectedItem.ToString().Trim();
+
+            foreach (Cercado cercado in tabuleiro.Cercados)
+            {
+                if (nomeCercado == "Igualdade" && cercado is CercadoIgualdade)
+                    return cercado;
+
+                if (nomeCercado == "Rei da Selva" && cercado is CercadoReiFloresta)
+                    return cercado;
+
+                if (nomeCercado == "Mata Tripla" && cercado is CercadoMataTripla)
+                    return cercado;
+
+                if (nomeCercado == "Diferença" && cercado is CercadoDiferenca)
+                    return cercado;
+
+                if (nomeCercado == "Amor" && cercado is CercadoAmor)
+                    return cercado;
+
+                if (nomeCercado == "Solitária" && cercado is CercadoSolitario)
+                    return cercado;
+
+                if (nomeCercado == "Rio" && cercado is Rio)
+                    return cercado;
+            }
+
+            return null;
         }
     }
 }

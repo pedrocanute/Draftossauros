@@ -1,10 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public abstract class Cercado
 {
+    string siglaCercado;
+    string nomeCercado;
     List<Dinossauro> dinossauros;
     int posX;
     int posY;
+
+    public string SiglaCercado { get { return siglaCercado; } set {  siglaCercado = value;  } }
+
+    public string NomeCercado { get { return nomeCercado; } set { nomeCercado = value; } }
 
     public List<Dinossauro> Dinossauros
     {
@@ -23,8 +30,10 @@ public abstract class Cercado
         set { posY = value; }
     }
 
-    protected Cercado(List<Dinossauro> dinossauros, int posX, int posY)
+    protected Cercado(string sigla, string nome,List<Dinossauro> dinossauros, int posX, int posY)
     {
+        this.SiglaCercado = sigla;
+        this.NomeCercado = nome;
         this.Dinossauros = dinossauros;
         this.PosX = posX;
         this.PosY = posY;
@@ -36,7 +45,7 @@ public abstract class Cercado
 
 public class Rio : Cercado
 {
-    public Rio(int posX, int posY) : base(new List<Dinossauro>(), posX, posY)
+    public Rio(int posX, int posY) : base("RI", "Rio", new List<Dinossauro>(), posX, posY)
     {
     }
 
@@ -48,7 +57,7 @@ public class Rio : Cercado
 
 public class CercadoIgualdade : Cercado
 {
-    public CercadoIgualdade(int posX, int posY) : base(new List<Dinossauro>(), posX, posY)
+    public CercadoIgualdade(int posX, int posY) : base("FI", "Floresta da Igualdade", new List<Dinossauro>(), posX, posY)
     {
     }
     public override int CalcularPontuacao()
@@ -67,7 +76,7 @@ public class CercadoIgualdade : Cercado
 
 public class CercadoReiFloresta : Cercado
 {
-    public CercadoReiFloresta(int posX, int posY) : base(new List<Dinossauro>(), posX, posY)
+    public CercadoReiFloresta(int posX, int posY) : base("RS", "Rei da Selva", new List<Dinossauro>(), posX, posY)
     {
     }
     public override int CalcularPontuacao()
@@ -79,7 +88,7 @@ public class CercadoReiFloresta : Cercado
 
 public class CercadoMataTripla : Cercado
 {
-    public CercadoMataTripla(int posX, int posY) : base(new List<Dinossauro>(), posX, posY)
+    public CercadoMataTripla(int posX, int posY) : base("MT", "Mata Tripla", new List<Dinossauro>(), posX, posY)
     {
     }
     public override int CalcularPontuacao()
@@ -92,7 +101,7 @@ public class CercadoMataTripla : Cercado
 
 public class CercadoDiferenca : Cercado
 {
-    public CercadoDiferenca(int posX, int posY) : base(new List<Dinossauro>(), posX, posY)
+    public CercadoDiferenca(int posX, int posY) : base("CD", "Campina da Diferença", new List<Dinossauro>(), posX, posY)
     {
     }
     public override int CalcularPontuacao()
@@ -111,7 +120,7 @@ public class CercadoDiferenca : Cercado
 
 public class CercadoAmor : Cercado
 {
-    public CercadoAmor(int posX, int posY) : base(new List<Dinossauro>(), posX, posY)
+    public CercadoAmor(int posX, int posY) : base("PA", "Pradaria do Amor", new List<Dinossauro>(), posX, posY)
     {
     }
     public override int CalcularPontuacao()
@@ -128,7 +137,7 @@ public class CercadoAmor : Cercado
 
 public class CercadoSolitario : Cercado
 {
-    public CercadoSolitario(int posX, int posY) : base(new List<Dinossauro>(), posX, posY)
+    public CercadoSolitario(int posX, int posY) : base("IS", "Ilha Solitária", new List<Dinossauro>(), posX, posY)
     {
     }
     public override int CalcularPontuacao()

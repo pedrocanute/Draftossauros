@@ -37,14 +37,15 @@ public class Partida
     public Dado Dado { get { return dado; } set { dado = value; } }
 
 
-    public void CriarPartida()
+    public bool CriarPartida()
     {
         string retorno = Jogo.CriarPartida(NomePartida, Senha, NomeGrupo);
 
         if (TratarErro.Verificar(retorno))
-            return;
+            return false;
         
         this.IdPartida = Convert.ToInt32(retorno);
+        return true;
     }
 
     public string[] ListarPartidas(string status)
@@ -62,34 +63,43 @@ public class Partida
         string retorno = Jogo.ListarJogadores(IdPartida);
         if (TratarErro.Verificar(retorno))
             return null;
-       
+
+        if (retorno == "")
+            return null;
+
+
         return TratarRetorno.SepararLinha(retorno);
     }
 
     public bool CriarJogador(Jogador jogador)
     {
-        string retorno = Jogo.Entrar(IdPartida, jogadorLocal.Nome, Senha);
+        string retorno = Jogo.Entrar(IdPartida, jogador.NomeJogador, Senha);
 
         if (TratarErro.Verificar(retorno))
             return false;
 
         string[] infoJogador = TratarRetorno.SepararVirgula(retorno);
-        jogadorLocal.Id = Convert.ToInt32(infoJogador[0]);
-        jogadorLocal.Senha = infoJogador[1];
+        jogador.IdJogador = Convert.ToInt32(infoJogador[0]);
+        jogador.SenhaJogador = infoJogador[1];
+
+        if (!Jogadores.Contains(jogador))
+            Jogadores.Add(jogador);
+
+        JogadorLocal = jogador;
         return true;
 
     }
 
     public void IniciarPartida()
     {
-        string retorno = Jogo.Iniciar(jogadorLocal.Id, jogadorLocal.Senha);
+        string retorno = Jogo.Iniciar(jogadorLocal.IdJogador, jogadorLocal.SenhaJogador);
 
         if (TratarErro.Verificar(retorno))
             return;
 
         string[] infoPrimeiroDado = TratarRetorno.SepararVirgula(retorno);
 
-        jogadorComDado.Id = Convert.ToInt32(infoPrimeiroDado[0]);
+        jogadorComDado.IdJogador = Convert.ToInt32(infoPrimeiroDado[0]);
 
         dado.DefinirFace(infoPrimeiroDado[1]);
     }
@@ -98,14 +108,13 @@ public class Partida
     {
         foreach (Jogador jogador in jogadores)
         {
-            if (jogador.Id == id)
-            {
+            if (jogador.IdJogador == id)
                 return jogador;
-            }
         }
-        MessageBox.Show("Jogador ja existe", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         return null;
     }
+
     public void AtualizarInfoJogador()
     {
         string retorno = Jogo.VerificarPartida(IdPartida);
@@ -113,5 +122,48 @@ public class Partida
         JogadorComDado = BuscarJogador(Convert.ToInt32(linhas[3].Trim()));
         dado.DefinirFace(linhas[4].Trim());
         //ExibirMaoJogador
+    }
+
+    public void AtualizarJogadoresDoServidor()
+    {
+        string retorno = Jogo.ListarJogadores(IdPartida);
+
+        if (TratarErro.Verificar(retorno))
+            return;
+
+        string[] linhas = TratarRetorno.SepararLinha(retorno);
+
+        Jogadores.Clear();
+
+        foreach (string linha in linhas)
+        {
+            if (string.IsNullOrWhiteSpace(linha))
+                continue;
+
+            string[] dados = linha.Split(',');
+
+            if (dados.Length < 3)
+                continue;
+
+            int id;
+            int pontuacao;
+
+            if (!int.TryParse(dados[0].Trim(), out id))
+                continue;
+
+            if (!int.TryParse(dados[2].Trim(), out pontuacao))
+                pontuacao = 0;
+
+            Jogador jogador = new Jogador(id);
+            jogador.NomeJogador = dados[1].Trim();
+            jogador.Pontuacao = pontuacao;
+
+            if (JogadorLocal != null && jogador.IdJogador == JogadorLocal.IdJogador)
+            {
+                jogador.SenhaJogador = JogadorLocal.SenhaJogador;
+            }
+
+            Jogadores.Add(jogador);
+        }
     }
 }

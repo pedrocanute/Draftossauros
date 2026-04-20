@@ -51,10 +51,11 @@ namespace SistemaAutonomo
                 return;
             }
 
-            partidaCriada.CriarPartida();
             partidaCriada.Senha = txtSenha.Text;
             partidaCriada.NomePartida = txtNomePartida.Text;
             partidaCriada.DataPartida = DateTime.Now.ToString("dd/MM/yyyy");
+            if (!partidaCriada.CriarPartida())
+                return;
 
             lblIdGerado.Text = partidaCriada.IdPartida.ToString();
             Form1 janelaPrincipal = new Form1(partidaCriada);
