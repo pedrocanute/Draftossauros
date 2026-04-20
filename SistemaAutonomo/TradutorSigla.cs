@@ -42,6 +42,6 @@ public class TradutorSigla
             return siglaCercado[sigla];
         }
 
-        return;
+        return "";
     }
 }

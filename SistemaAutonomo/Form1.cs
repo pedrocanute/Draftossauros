@@ -18,7 +18,7 @@ namespace SistemaAutonomo
         Partida partidaCriada;
         List<Jogador> listaJogadores = new List<Jogador>();
         Dictionary<string, int> qtdDinossaurosCercado = new Dictionary<string, int>();
-        Jogador jogadorAtual;
+        Jogador jogadorLocal;
         Tabuleiro tabuleiro = new Tabuleiro();
 
         public Form1(Partida partida)
@@ -49,52 +49,45 @@ namespace SistemaAutonomo
 
         private void btnListarJogadores_Click(object sender, EventArgs e)
         {
-            string retorno = Jogo.ListarJogadores(partidaCriada.IdPartida); 
+            string[] jogadores = partidaCriada.ListarJogadores();
             lstListaJogadores.Items.Clear();
 
-            if (string.IsNullOrEmpty(retorno))
+            if (jogadores == null)
+                return;
+
+            if (jogadores.Length == 0)
             {
-                lstListaJogadores.Items.Add("Não há jogadores");
+                lstListaJogadores.Items.Add("Não há jogadores.");
                 return;
             }
-
-            retorno = retorno.Replace("\r", "");
-            string[] jogadores = retorno.Split('\n'); 
-
-            lstListaJogadores.Items.Clear();
 
             for (int i = 0; i < jogadores.Length; i++)
             {
                 lstListaJogadores.Items.Add(jogadores[i]);
             }
+        } //feito
 
-        }
-
-        private void btnCriarJogador_Click(object sender, EventArgs e)
+        private void btnCriarJogador_Click(object sender, EventArgs e) // feito
         {
             if (listaJogadores.Count >= 5)
             {
                 MessageBox.Show("Quantidade maxima de jogadores: 5", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            string infoJogador = Jogo.Entrar(partidaCriada.IdPartida, txtNomeJogador.Text, partidaCriada.Senha);
-
-            if (infoJogador.StartsWith("ERRO"))
+            if (lblNomeJogador.Text == "")
             {
-                MessageBox.Show(infoJogador, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Informe o nome do jogador.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            infoJogador = infoJogador.Replace("\r", "").Replace("\n", "");
-            string[] splitInfoJogador = infoJogador.Split(','); 
+            jogadorLocal.Nome = txtNomeJogador.Text;
 
-            int idJogador = Convert.ToInt32(splitInfoJogador[0]);
-            string senhaJogador = splitInfoJogador[1];
+            if (!partidaCriada.CriarJogador(jogadorLocal))
+                return;
 
-            lblIdJogador.Text = idJogador.ToString();
-            lblSenhaJogador.Text = senhaJogador;
+            lblIdJogador.Text = jogadorLocal.Id.ToString();
+            lblSenhaJogador.Text = jogadorLocal.Senha;
 
-            CriarJogador(idJogador, txtNomeJogador.Text, senhaJogador);
         } 
 
         private void btnIniciar_Click(object sender, EventArgs e)
@@ -226,12 +219,6 @@ namespace SistemaAutonomo
             }
 
             AtualizarInformacoesJogador();
-        }
-
-        public void CriarJogador(int id, string nome, string senha)
-        {
-            jogadorAtual = new Jogador(id, senha);
-            jogadorAtual.Nome = nome;
         }
 
         public Jogador BuscarJogador(int id)
