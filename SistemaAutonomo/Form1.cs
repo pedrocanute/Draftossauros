@@ -15,10 +15,11 @@ namespace SistemaAutonomo
 {
     public partial class Form1 : Form
     {
-        Partida partidaCriada; 
+        Partida partidaCriada;
         List<Jogador> listaJogadores = new List<Jogador>();
         Dictionary<string, int> qtdDinossaurosCercado = new Dictionary<string, int>();
         Jogador jogadorAtual;
+        Tabuleiro tabuleiro = new Tabuleiro();
 
         public Form1(Partida partida)
         {
@@ -404,72 +405,15 @@ namespace SistemaAutonomo
 
         public void ExibirTabuleiroJogador(Jogador jogador)
         {
-            string tabuleiro = Jogo.ExibirTabuleiro(jogador.Id, jogador.Senha);
-            if (tabuleiro.StartsWith("ERRO"))
+            string resultado = tabuleiro.ExibirTabuleiroJogador(jogador);
+
+            if (resultado.StartsWith("ERRO"))
             {
-                MessageBox.Show(tabuleiro, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resultado, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Normaliza quebras de linha e espaços antes de fazer o split
-            tabuleiro = tabuleiro.Replace("\r", "").Trim();
-            string[] splitTabuleiro = tabuleiro.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-            string siglaCercado = splitTabuleiro[0].Trim();
-            string siglaDinossauro = splitTabuleiro[1].Trim();
-            string quantidade = splitTabuleiro[2].Trim();
-            
-            if (quantidade.Contains("\n")) quantidade = quantidade.Split('\n')[0].Trim(); 
-
-            string dinossauro = "";
-            switch (siglaDinossauro)
-            {
-                case "Br":
-                    dinossauro = "Tem " + quantidade + " de Braquiossauro no ";
-                    break;
-                case "Ep":
-                    dinossauro = "Tem " + quantidade + " de Espinossauro no ";
-                    break;
-                case "Et":
-                    dinossauro = "Tem " + quantidade + " de Estegossauro no ";
-                    break;
-                case "Pa":
-                    dinossauro = "Tem " + quantidade + " de Parasaurolófo no ";
-                    break;
-                case "Ti":
-                    dinossauro = "Tem " + quantidade + " de Tiranossauro-Rex no ";
-                    break;
-                case "Tr":
-                    dinossauro = "Tem " + quantidade + " de Tricerátops no ";
-                    break;
-            }
-
-            string cercado = "";
-            switch (siglaCercado)
-            {
-                case "CD":
-                    cercado = "cercado da Diferença";
-                    break;
-                case "FI":
-                    cercado = "cercado da Igualdade";
-                    break;
-                case "IS":
-                    cercado = "cercado Solitário";
-                    break;
-                case "MT":
-                    cercado = "cercado Triplo";
-                    break;
-                case "PA":
-                    cercado = "cercado do Amor";
-                    break;
-                case "RI":
-                    cercado = "Rio";
-                    break;
-                case "RS":
-                    cercado = "cercado do Rei da Selva";
-                    break;
-            }
-            lblTeste.Text = dinossauro + cercado;
+            lblTeste.Text = resultado;
         }
 
         private void btnVerificarTurno_Click(object sender, EventArgs e)
