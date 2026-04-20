@@ -124,7 +124,7 @@ public class Partida
         //ExibirMaoJogador
     }
 
-    public void AtualizarJogadoresDoServidor()
+    public void AtualizarJogadoresDoServidor() //Chat debugou e fez com tryParse
     {
         string retorno = Jogo.ListarJogadores(IdPartida);
 
@@ -137,28 +137,28 @@ public class Partida
 
         foreach (string linha in linhas)
         {
-            if (string.IsNullOrWhiteSpace(linha))
+            if (string.IsNullOrWhiteSpace(linha)) //Aqui 1
                 continue;
 
             string[] dados = linha.Split(',');
 
-            if (dados.Length < 3)
+            if (dados.Length < 3) //Aqui 2
                 continue;
 
             int id;
             int pontuacao;
 
-            if (!int.TryParse(dados[0].Trim(), out id))
+            if (!int.TryParse(dados[0].Trim(), out id)) //Aqui 3
                 continue;
 
-            if (!int.TryParse(dados[2].Trim(), out pontuacao))
+            if (!int.TryParse(dados[2].Trim(), out pontuacao)) //Aqui 4
                 pontuacao = 0;
 
             Jogador jogador = new Jogador(id);
             jogador.NomeJogador = dados[1].Trim();
             jogador.Pontuacao = pontuacao;
 
-            if (JogadorLocal != null && jogador.IdJogador == JogadorLocal.IdJogador)
+            if (JogadorLocal != null && jogador.IdJogador == JogadorLocal.IdJogador) //Aqui 5
             {
                 jogador.SenhaJogador = JogadorLocal.SenhaJogador;
             }
