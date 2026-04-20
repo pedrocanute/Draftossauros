@@ -54,10 +54,16 @@ namespace SistemaAutonomo
 
         private void btnListarJogadores_Click(object sender, EventArgs e)
         {
+            ListarJogadores();
+        } //feito
+
+        private void ListarJogadores()
+        {
             string[] jogadores = partidaCriada.ListarJogadores();
             lstListaJogadores.Items.Clear();
 
-            if (jogadores == null) { 
+            if (jogadores == null)
+            {
                 lstListaJogadores.Items.Add("Nao ha jogadores");
                 return;
             }
@@ -66,7 +72,7 @@ namespace SistemaAutonomo
             {
                 lstListaJogadores.Items.Add(jogadores[i]);
             }
-        } //feito
+        }
 
         private void btnCriarJogador_Click(object sender, EventArgs e) // feito
         {
@@ -95,29 +101,25 @@ namespace SistemaAutonomo
 
             lblIdJogador.Text = jogadorLocal.IdJogador.ToString();
             lblSenhaJogador.Text = jogadorLocal.SenhaJogador;
-
         } 
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            if (jogadorLocal == null)
-            {
-                MessageBox.Show("Crie um jogador!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             if (jogadorLocal.IdJogador == 0 || jogadorLocal.SenhaJogador == null)
             {
                 MessageBox.Show("O jogador ainda não foi autenticado corretamente na partida.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            ListarJogadores();
+
             partidaCriada.IniciarPartida();
 
             lblDadoSorteado.Text = partidaCriada.Dado.ObterDescricao();
             pbDado.BackgroundImage = partidaCriada.Dado.ObterImagem();
+            lblJogadorDado.Text = partidaCriada.JogadorComDado.NomeJogador;
 
-           ExibirMaoJogador(jogadorLocal.IdJogador);
-
+            ExibirMaoJogador(jogadorLocal.IdJogador);
         }
 
         private void btnRealizarJogada_Click(object sender, EventArgs e)
@@ -157,9 +159,9 @@ namespace SistemaAutonomo
                 return;
             }
 
-            int indice = cercadoSelecionado.Dinossauros.Count;
+            int indicePosicaoDinossauro = cercadoSelecionado.Dinossauros.Count;
 
-            DesenharDinossauroNoCercado(jogadorLocal.DinossauroSelecionado,cercadoSelecionado,indice);
+            DesenharDinossauroNoCercado(jogadorLocal.DinossauroSelecionado,cercadoSelecionado, indicePosicaoDinossauro);
 
             cercadoSelecionado.Dinossauros.Add(jogadorLocal.DinossauroSelecionado);
             jogadorLocal.RemoverDinossauroDaMao(jogadorLocal.DinossauroSelecionado);
@@ -175,23 +177,25 @@ namespace SistemaAutonomo
             lblRodada.Text = jogadorLocal.RodadaAtual;
             lstMaoDinossauros.Items.Clear();
 
-            Dictionary<string, int> contagem = new Dictionary<string, int>();
-            Dictionary<string, string> nomes = new Dictionary<string, string>();
+            Dictionary<string, int> contagemDinossauros = new Dictionary<string, int>();
+            Dictionary<string, string> nomesDinossauros = new Dictionary<string, string>();
 
             foreach (Dinossauro dinossauro in jogadorLocal.Dinossauros)
             {
-                if (!contagem.ContainsKey(dinossauro.Sigla))
+                //Se não existir o dinossauro no dicionário, inicia a contagem e armazena o nome
+                if (!contagemDinossauros.ContainsKey(dinossauro.Sigla))
                 {
-                    contagem[dinossauro.Sigla] = 0;
-                    nomes[dinossauro.Sigla] = dinossauro.NomeDinossauro;
+                    contagemDinossauros[dinossauro.Sigla] = 0;
+                    nomesDinossauros[dinossauro.Sigla] = dinossauro.NomeDinossauro;
                 }
 
-                contagem[dinossauro.Sigla]++;
+                //Se já existir, apenas soma a quantidade
+                contagemDinossauros[dinossauro.Sigla]++;
             }
 
-            foreach (KeyValuePair<string, int> item in contagem)
+            foreach (KeyValuePair<string, int> item in contagemDinossauros) // !VERIFICAR O QUE SIGNIFICA O KeyValuePair!
             {
-                lstMaoDinossauros.Items.Add(nomes[item.Key] + " Qtd: " + item.Value);
+                lstMaoDinossauros.Items.Add(nomesDinossauros[item.Key] + " Qtd: " + item.Value);
             }
 
             AtualizarBotoesDinos(jogadorLocal.Dinossauros);
@@ -201,8 +205,10 @@ namespace SistemaAutonomo
         {
             Button[] botoes = { btnPrimeiroDino, btnSegundoDino, btnTerceiroDino, btnQuartoDino, btnQuintoDino, btnSextoDino };
 
+            //Itera sobre os botões
             for (int i = 0; i < botoes.Length; i++)
             {
+                //Atualiza o botão de acordo com os dinossarauros dentro da lista de dinossauros, e conforme os dinossauros forem sendo reduzidos, os botões se tornam invisíveis
                 if (i < listaDinossauros.Count)
                 {
                     botoes[i].Tag = listaDinossauros[i];

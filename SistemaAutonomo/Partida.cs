@@ -67,8 +67,19 @@ public class Partida
         if (retorno == "")
             return null;
 
+        jogadores.Clear();
 
-        return TratarRetorno.SepararLinha(retorno);
+        string[] listaJogadores = TratarRetorno.SepararLinha(retorno);
+
+        for(int i = 0; i < listaJogadores.Length - 1; i++) 
+        { 
+            int idJogador = Convert.ToInt32(listaJogadores[i].Split(',')[0]);
+            string nomeJogador = listaJogadores[i].Split(',')[1];
+
+            jogadores.Add(new Jogador(idJogador) { NomeJogador = nomeJogador });
+        }
+
+        return listaJogadores;
     }
 
     public bool CriarJogador(Jogador jogador)
@@ -100,6 +111,7 @@ public class Partida
         string[] infoPrimeiroDado = TratarRetorno.SepararVirgula(retorno);
 
         jogadorComDado.IdJogador = Convert.ToInt32(infoPrimeiroDado[0]);
+        jogadorComDado = BuscarJogador(jogadorComDado.IdJogador);
 
         dado.DefinirFace(infoPrimeiroDado[1]);
     }

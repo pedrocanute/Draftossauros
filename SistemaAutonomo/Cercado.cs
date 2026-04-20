@@ -13,23 +13,12 @@ public abstract class Cercado
 
     public string NomeCercado { get { return nomeCercado; } set { nomeCercado = value; } }
 
-    public List<Dinossauro> Dinossauros
-    {
-        get { return dinossauros; }
-        set { dinossauros = value; }
-    }
+    public List<Dinossauro> Dinossauros { get { return dinossauros; } set { dinossauros = value; } }
 
-    public int PosX
-    {
-        get { return posX; }
-        set { posX = value; }
-    }
-    public int PosY
-    {
-        get { return posY; }
-        set { posY = value; }
-    }
+    public int PosX { get { return posX; } set { posX = value; } }
+    public int PosY { get { return posY; } set { posY = value; } }
 
+    // Construtores
     protected Cercado(string sigla, string nome,List<Dinossauro> dinossauros, int posX, int posY)
     {
         this.SiglaCercado = sigla;
@@ -45,9 +34,7 @@ public abstract class Cercado
 
 public class Rio : Cercado
 {
-    public Rio(int posX, int posY) : base("RI", "Rio", new List<Dinossauro>(), posX, posY)
-    {
-    }
+    public Rio(int posX, int posY) : base("RI", "Rio", new List<Dinossauro>(), posX, posY) { }
 
     public override int CalcularPontuacao() 
     {
@@ -57,9 +44,8 @@ public class Rio : Cercado
 
 public class CercadoIgualdade : Cercado
 {
-    public CercadoIgualdade(int posX, int posY) : base("FI", "Floresta da Igualdade", new List<Dinossauro>(), posX, posY)
-    {
-    }
+    public CercadoIgualdade(int posX, int posY) : base("FI", "Floresta da Igualdade", new List<Dinossauro>(), posX, posY) { }
+    
     public override int CalcularPontuacao()
     {
         int[] tabelaPontuacao = { 0, 2, 4, 8, 12, 18, 24 };
@@ -76,9 +62,7 @@ public class CercadoIgualdade : Cercado
 
 public class CercadoReiFloresta : Cercado
 {
-    public CercadoReiFloresta(int posX, int posY) : base("RS", "Rei da Selva", new List<Dinossauro>(), posX, posY)
-    {
-    }
+    public CercadoReiFloresta(int posX, int posY) : base("RS", "Rei da Selva", new List<Dinossauro>(), posX, posY) { }
     public override int CalcularPontuacao()
     {
         //Adicionar condicao do dinossauro Rei
