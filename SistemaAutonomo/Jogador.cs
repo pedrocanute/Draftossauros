@@ -34,10 +34,29 @@ public class Jogador
     }
     public Jogador(int id) : this(id, null) { }
 
-    public void RealizarJogada()
+    public ValidarJogada RealizarJogada(Cercado cercadoSelecionado, Dado dado, Jogador jogadorComDado)
     {
-        
+        if (DinossauroSelecionado == null)
+            return new ValidarJogada(false, "Selecione um dinossauro para jogar!");
 
+        if (cercadoSelecionado == null)
+            return new ValidarJogada(false, "Selecione um cercado para jogar!");
+
+        ValidarJogada resultado = RegraJogada.Validar(dado, cercadoSelecionado, this, jogadorComDado);
+
+        if (!resultado.Valido)
+            return resultado;
+
+        string resultadoJogar = Jogo.Jogar(IdJogador, SenhaJogador, DinossauroSelecionado.Sigla, cercadoSelecionado.SiglaCercado);
+
+        if (TratarErro.Verificar(resultadoJogar))
+            return new ValidarJogada(false, resultadoJogar);
+
+        cercadoSelecionado.Dinossauros.Add(DinossauroSelecionado);
+        RemoverDinossauroDaMao(DinossauroSelecionado);
+        DinossauroSelecionado = null;
+
+        return new ValidarJogada(true, "Jogada realizada com sucesso!");
     }
 
     public void AtualizarMao()

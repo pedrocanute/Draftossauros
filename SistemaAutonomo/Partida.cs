@@ -72,11 +72,15 @@ public class Partida
         string[] listaJogadores = TratarRetorno.SepararLinha(retorno);
 
         for(int i = 0; i < listaJogadores.Length - 1; i++) 
-        { 
-            int idJogador = Convert.ToInt32(listaJogadores[i].Split(',')[0]);
-            string nomeJogador = listaJogadores[i].Split(',')[1];
+        {
+            string[] dados = listaJogadores[i].Split(',');
 
-            jogadores.Add(new Jogador(idJogador) { NomeJogador = nomeJogador });
+            Jogador jogador = new Jogador(Convert.ToInt32(dados[0]));
+            jogador.IdJogador = Convert.ToInt32(dados[0]);
+            jogador.NomeJogador = dados[1];
+            jogador.Pontuacao = Convert.ToInt32(dados[2]);
+
+            jogadores.Add(jogador);
         }
 
         return listaJogadores;

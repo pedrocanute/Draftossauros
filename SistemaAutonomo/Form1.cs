@@ -68,9 +68,10 @@ namespace SistemaAutonomo
                 return;
             }
 
-            for (int i = 0; i < jogadores.Length; i++)
+            for (int i = 0; i < partidaCriada.Jogadores.Count; i++)
             {
-                lstListaJogadores.Items.Add(jogadores[i]);
+                Jogador jogador = partidaCriada.Jogadores[i];
+                lstListaJogadores.Items.Add($"ID: {jogador.IdJogador} - Jogador: {jogador.NomeJogador} | Pontuação: {jogador.Pontuacao}");
             }
         }
 
@@ -129,21 +130,11 @@ namespace SistemaAutonomo
                 jogadorLocal.DinossauroSelecionado = ObterDinossauroSelecionadoNaLista();
             }
 
-            if (jogadorLocal.DinossauroSelecionado == null)
-            {
-                MessageBox.Show("Selecione um dinossauro para jogar!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             Cercado cercadoSelecionado = ObterCercadoSelecionado();
 
-            if (cercadoSelecionado == null)
-            {
-                MessageBox.Show("Selecione um cercado para jogar!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            Dinossauro dinossauroJogado = jogadorLocal.DinossauroSelecionado;
 
-            ValidarJogada resultado = RegraJogada.Validar(partidaCriada.Dado,cercadoSelecionado,jogadorLocal,partidaCriada.JogadorComDado);
+            ValidarJogada resultado = jogadorLocal.RealizarJogada(cercadoSelecionado, partidaCriada.Dado, partidaCriada.JogadorComDado );
 
             if (!resultado.Valido)
             {
@@ -151,21 +142,9 @@ namespace SistemaAutonomo
                 return;
             }
 
-            string resultadoJogar = Jogo.Jogar(jogadorLocal.IdJogador,jogadorLocal.SenhaJogador,jogadorLocal.DinossauroSelecionado.Sigla,cercadoSelecionado.SiglaCercado);
+            int indicePosicaoDinossauro = cercadoSelecionado.Dinossauros.Count - 1;
 
-            if (!string.IsNullOrEmpty(resultadoJogar) && resultadoJogar.StartsWith("ERRO"))
-            {
-                MessageBox.Show(resultadoJogar, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            int indicePosicaoDinossauro = cercadoSelecionado.Dinossauros.Count;
-
-            DesenharDinossauroNoCercado(jogadorLocal.DinossauroSelecionado,cercadoSelecionado, indicePosicaoDinossauro);
-
-            cercadoSelecionado.Dinossauros.Add(jogadorLocal.DinossauroSelecionado);
-            jogadorLocal.RemoverDinossauroDaMao(jogadorLocal.DinossauroSelecionado);
-            jogadorLocal.DinossauroSelecionado = null;
+            DesenharDinossauroNoCercado(dinossauroJogado, cercadoSelecionado, indicePosicaoDinossauro);
 
             AtualizarInformacoesJogador();
         }
