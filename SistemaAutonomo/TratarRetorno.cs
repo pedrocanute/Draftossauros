@@ -10,4 +10,11 @@
         retorno = retorno.Replace("\r", "");
         return retorno.Split(',');
     }
+
+    public static string[] PegarCaracter(string retorno)
+    {
+        retorno = retorno.Replace("\r", "");
+        retorno = retorno.Substring(0, retorno.Length - 1);
+        return retorno.Split('\n');
+    }
 }

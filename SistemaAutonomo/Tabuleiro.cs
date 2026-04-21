@@ -24,9 +24,9 @@ public class Tabuleiro
 
     public string ExibirTabuleiroJogador(Jogador jogador)
     {
-        string tabuleiro = Jogo.ExibirTabuleiro(jogador.Id, jogador.Senha);
-        if (tabuleiro.StartsWith("ERRO"))
-            return tabuleiro;
+        string tabuleiro = Jogo.ExibirTabuleiro(jogador.IdJogador, jogador.SenhaJogador);
+        if (TratarErro.Verificar(tabuleiro))
+            return "";
 
         // Normaliza quebras de linha e espaços antes de fazer o split
         tabuleiro = tabuleiro.Replace("\r", "").Trim();
