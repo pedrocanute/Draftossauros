@@ -57,9 +57,6 @@ public class Jogador
 
         for (int i = 1; i < linhas.Length; i++)
         {
-            /*if (string.IsNullOrWhiteSpace(linhas[i]))
-                continue;*/
-
             string[] splitDinossauro = linhas[i].Split(',');
 
             if (splitDinossauro.Length < 2)

@@ -72,9 +72,7 @@ public class CercadoReiFloresta : Cercado
 
 public class CercadoMataTripla : Cercado
 {
-    public CercadoMataTripla(int posX, int posY) : base("MT", "Mata Tripla", new List<Dinossauro>(), posX, posY)
-    {
-    }
+    public CercadoMataTripla(int posX, int posY) : base("MT", "Mata Tripla", new List<Dinossauro>(), posX, posY) { }
     public override int CalcularPontuacao()
     {
         if (Dinossauros.Count == 3)
@@ -85,9 +83,7 @@ public class CercadoMataTripla : Cercado
 
 public class CercadoDiferenca : Cercado
 {
-    public CercadoDiferenca(int posX, int posY) : base("CD", "Campina da Diferença", new List<Dinossauro>(), posX, posY)
-    {
-    }
+    public CercadoDiferenca(int posX, int posY) : base("CD", "Campina da Diferença", new List<Dinossauro>(), posX, posY) { }
     public override int CalcularPontuacao()
     {
         int[] tabelaPontuacao = { 1, 3, 6, 10, 15, 21 };
@@ -104,9 +100,7 @@ public class CercadoDiferenca : Cercado
 
 public class CercadoAmor : Cercado
 {
-    public CercadoAmor(int posX, int posY) : base("PA", "Pradaria do Amor", new List<Dinossauro>(), posX, posY)
-    {
-    }
+    public CercadoAmor(int posX, int posY) : base("PA", "Pradaria do Amor", new List<Dinossauro>(), posX, posY) { }
     public override int CalcularPontuacao()
     {
         int pontos = 0;
@@ -121,9 +115,7 @@ public class CercadoAmor : Cercado
 
 public class CercadoSolitario : Cercado
 {
-    public CercadoSolitario(int posX, int posY) : base("IS", "Ilha Solitária", new List<Dinossauro>(), posX, posY)
-    {
-    }
+    public CercadoSolitario(int posX, int posY) : base("IS", "Ilha Solitária", new List<Dinossauro>(), posX, posY) { }
     public override int CalcularPontuacao()
     {
         //Adicionar condicao do dinossauro Solitario

@@ -2,6 +2,7 @@
 {
     public static ValidarJogada Validar(Dado dado, Cercado cercado, Jogador jogadorLocal, Jogador jogadorComDado)
     {
+        // PROFESSOR pode REMOVER??????
         if (dado == null)
             return new ValidarJogada(false, "Dado inválido.");
 

@@ -133,10 +133,9 @@ public class Partida
         string [] linhas = TratarRetorno.SepararVirgula(retorno);
         JogadorComDado = BuscarJogador(Convert.ToInt32(linhas[3].Trim()));
         dado.DefinirFace(linhas[4].Trim());
-        //ExibirMaoJogador
     }
 
-    public void AtualizarJogadoresDoServidor() //Chat debugou e fez com tryParse
+    public void AtualizarJogadoresDoServidor() //Se der RUIM foi AQUI (C)
     {
         string retorno = Jogo.ListarJogadores(IdPartida);
 
@@ -149,31 +148,17 @@ public class Partida
 
         foreach (string linha in linhas)
         {
-            if (string.IsNullOrWhiteSpace(linha)) //Aqui 1
+            if (string.IsNullOrWhiteSpace(linha))
                 continue;
 
             string[] dados = linha.Split(',');
 
-            if (dados.Length < 3) //Aqui 2
-                continue;
-
-            int id;
-            int pontuacao;
-
-            if (!int.TryParse(dados[0].Trim(), out id)) //Aqui 3
-                continue;
-
-            if (!int.TryParse(dados[2].Trim(), out pontuacao)) //Aqui 4
-                pontuacao = 0;
+            int id = Convert.ToInt32(dados[0]);
+            int pontuacao = Convert.ToInt32(dados[2]);
 
             Jogador jogador = new Jogador(id);
             jogador.NomeJogador = dados[1].Trim();
             jogador.Pontuacao = pontuacao;
-
-            if (JogadorLocal != null && jogador.IdJogador == JogadorLocal.IdJogador) //Aqui 5
-            {
-                jogador.SenhaJogador = JogadorLocal.SenhaJogador;
-            }
 
             Jogadores.Add(jogador);
         }
