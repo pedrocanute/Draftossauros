@@ -32,7 +32,7 @@ namespace SistemaAutonomo
             string[] partidas = partidaCriada.ListarPartidas(status);
 
             lstListaPartidas.Items.Clear();
-            for (int i = 0; i < partidas.Length; i++)
+            for (int i = partidas.Length - 1; i >= 0; i--)
             {
                 lstListaPartidas.Items.Add(partidas[i]);
             }
