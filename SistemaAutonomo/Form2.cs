@@ -14,7 +14,7 @@ namespace SistemaAutonomo
 {
     public partial class Lobby : Form
     {
-        Partida partidaCriada = new Partida(); //Instanciando a partida
+        Partida partidaCriada = new Partida();
         public Lobby()
         {
             InitializeComponent();
@@ -26,32 +26,19 @@ namespace SistemaAutonomo
             cmbStatusPartidas.SelectedIndex = 0;
         }
 
-        private void btnListarPartida_Click(object sender, EventArgs e)
+        private void btnListarPartida_Click(object sender, EventArgs e) //feito
         {
             string status = cmbStatusPartidas.SelectedItem.ToString().Substring(0, 1);
-            string retorno = Jogo.ListarPartidas(status);
-
-            txtListaPartida.Text = retorno;
-
-            if (string.IsNullOrEmpty(retorno))
-            {
-                lstListaPartidas.Items.Clear();
-                lstListaPartidas.Items.Add("Não há partidas com este status");
-                return;
-            }
-
-            retorno = retorno.Replace("\r", "");
-            retorno = retorno.Substring(0, retorno.Length - 1);
-            string[] partidas = retorno.Split('\n');
+            string[] partidas = partidaCriada.ListarPartidas(status);
 
             lstListaPartidas.Items.Clear();
-            for (int i = 0; i < partidas.Length; i++)
+            for (int i = partidas.Length - 1; i >= 0; i--)
             {
                 lstListaPartidas.Items.Add(partidas[i]);
             }
         }
 
-        private void btnCriarPartida_Click(object sender, EventArgs e)
+        private void btnCriarPartida_Click(object sender, EventArgs e) //feito
         {
             if (txtNomePartida.Text == "")
             {
@@ -64,20 +51,13 @@ namespace SistemaAutonomo
                 return;
             }
 
-            string idGerado = Jogo.CriarPartida(txtNomePartida.Text, txtSenha.Text, lblNomeGrupo.Text);
-
-            if (idGerado.StartsWith("ERRO:"))
-            {
-                MessageBox.Show(idGerado, "ERRO AO CRIAR PARTIDA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            partidaCriada.idPartida = Convert.ToInt32(idGerado);
             partidaCriada.Senha = txtSenha.Text;
             partidaCriada.NomePartida = txtNomePartida.Text;
             partidaCriada.DataPartida = DateTime.Now.ToString("dd/MM/yyyy");
+            if (!partidaCriada.CriarPartida())
+                return;
 
-            lblIdGerado.Text = idGerado;
+            lblIdGerado.Text = partidaCriada.IdPartida.ToString();
             Form1 janelaPrincipal = new Form1(partidaCriada);
             janelaPrincipal.Show();
 
@@ -90,9 +70,7 @@ namespace SistemaAutonomo
             string partida = lstListaPartidas.SelectedItem.ToString();
             string[] dadosPartida = partida.Split(',');
 
-            if (dadosPartida.Length < 3) return; //verifica se o split dividou partida em 3 partes
-
-            partidaCriada.idPartida = Convert.ToInt32(dadosPartida[0]);
+            partidaCriada.IdPartida = Convert.ToInt32(dadosPartida[0]);
             partidaCriada.Senha = txtSenha.Text;
             partidaCriada.NomePartida = dadosPartida[1];
             partidaCriada.DataPartida = dadosPartida[2];
@@ -109,7 +87,7 @@ namespace SistemaAutonomo
 
             if (dadosPartida.Length < 3) return;
 
-            partidaCriada.idPartida = Convert.ToInt32(dadosPartida[0]);
+            partidaCriada.IdPartida = Convert.ToInt32(dadosPartida[0]);
             partidaCriada.NomePartida = dadosPartida[1];
             partidaCriada.Senha = txtSenha.Text;
 

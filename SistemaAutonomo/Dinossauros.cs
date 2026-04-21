@@ -1,18 +1,14 @@
-﻿public class Dinossauros
+﻿using System;
+
+public class Dinossauros
 {
-    string siglaNome;
-
-    public string SiglaNome
-    {
-        get { return siglaNome; }
-        set { siglaNome = value; }
-    }
-
+    public string SiglaNome { get; set; }
 
     public Dinossauros(string siglaNome)
     {
-        this.siglaNome = siglaNome;
+        if (string.IsNullOrWhiteSpace(siglaNome))
+            throw new ArgumentException("A sigla do dinossauro é obrigatória.", nameof(siglaNome));
+
+        SiglaNome = siglaNome;
     }
 }
-
-
