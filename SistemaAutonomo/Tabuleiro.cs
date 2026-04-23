@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using Draft;
 
+
 public class Tabuleiro
 {
     List<Cercado> cercados;
+    List<Dinossauro> dinossauros;
 
     public List<Cercado> Cercados { get { return cercados; } set { cercados = value; } }
 
@@ -20,6 +22,16 @@ public class Tabuleiro
                new CercadoSolitario(475, 309),
                new Rio(243, 345)
            };
+
+        dinossauros = new List<Dinossauro>
+        {
+            new Braquiossauro(),
+            new Espinossauro(),
+            new Estegossauro(),
+            new Parasaurolofo(),
+            new TiranossauroRex(),
+            new Triceratops()
+        };
     }
 
     public string ExibirTabuleiroJogador(Jogador jogador)
@@ -38,54 +50,27 @@ public class Tabuleiro
 
         if (quantidade.Contains("\n")) quantidade = quantidade.Split('\n')[0].Trim();
 
-        string dinossauro = "";
-        switch (siglaDinossauro)
+        string nomeDinossauro = "";
+        foreach (Dinossauro d in dinossauros)
         {
-            case "Br":
-                dinossauro = "Tem " + quantidade + " de Braquiossauro no ";
+            if (d.Sigla == siglaDinossauro)
+            {
+                nomeDinossauro = d.NomeDinossauro;
                 break;
-            case "Ep":
-                dinossauro = "Tem " + quantidade + " de Espinossauro no ";
-                break;
-            case "Et":
-                dinossauro = "Tem " + quantidade + " de Estegossauro no ";
-                break;
-            case "Pa":
-                dinossauro = "Tem " + quantidade + " de Parasaurolófo no ";
-                break;
-            case "Ti":
-                dinossauro = "Tem " + quantidade + " de Tiranossauro-Rex no ";
-                break;
-            case "Tr":
-                dinossauro = "Tem " + quantidade + " de Tricerátops no ";
-                break;
+            }
         }
+        string dinossauro = "Tem " + quantidade + " de " + nomeDinossauro + " no ";
 
         string cercado = "";
-        switch (siglaCercado)
+        foreach (Cercado c in cercados)
         {
-            case "CD":
-                cercado = "cercado da Diferença";
+            if (c.SiglaCercado == siglaCercado)
+            {
+                cercado = c.NomeCercado;
                 break;
-            case "FI":
-                cercado = "cercado da Igualdade";
-                break;
-            case "IS":
-                cercado = "cercado Solitário";
-                break;
-            case "MT":
-                cercado = "cercado Triplo";
-                break;
-            case "PA":
-                cercado = "cercado do Amor";
-                break;
-            case "RI":
-                cercado = "Rio";
-                break;
-            case "RS":
-                cercado = "cercado do Rei da Selva";
-                break;
+            }
         }
+
         return dinossauro + cercado;
     }
 }
