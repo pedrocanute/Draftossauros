@@ -1,4 +1,4 @@
-﻿public static class TratarRetorno
+﻿public class TratarRetorno
 {
     public static string[] SepararLinha(string retorno)
     {

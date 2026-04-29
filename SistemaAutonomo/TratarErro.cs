@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-public static class TratarErro
+public class TratarErro
 {
     public static bool Verificar(string retorno)
     {
