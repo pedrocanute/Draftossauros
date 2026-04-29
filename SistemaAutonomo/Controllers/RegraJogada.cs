@@ -60,7 +60,7 @@
                 break;
 
             case FaceDado.VZ:
-                if (cercado.Dinossauros.Count > 0)
+                if (!(cercado is Rio) && cercado.Dinossauros.Count > 0 )
                     return new ValidarJogada(false, "Dado Cercado Vazio: jogue em um cercado vazio.");
                 break;
 

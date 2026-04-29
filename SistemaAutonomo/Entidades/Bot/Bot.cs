@@ -73,13 +73,7 @@ public class Bot : Jogador
         {
             foreach (Cercado cercado in partida.Tabuleiro.Cercados)
             {
-                ValidarJogada resultado = RegraJogada.Validar(
-                    partida.Dado,
-                    cercado,
-                    dinossauro,
-                    this,
-                    partida.JogadorComDado
-                );
+                ValidarJogada resultado = RegraJogada.Validar(partida.Dado,cercado,dinossauro,this,partida.JogadorComDado);
 
                 if (resultado.Valido)
                     jogadasValidas.Add(new JogadaBot(dinossauro, cercado));
