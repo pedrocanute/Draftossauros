@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bot.cs" />
     <Compile Include="Cercado.cs" />
     <Compile Include="Dado.cs" />
     <Compile Include="Dinossauro.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="JogadaBot.cs" />
     <Compile Include="Jogador.cs" />
     <Compile Include="Partida.cs" />
     <Compile Include="Program.cs" />

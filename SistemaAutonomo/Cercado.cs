@@ -65,8 +65,10 @@ public class CercadoReiFloresta : Cercado
     public CercadoReiFloresta(int posX, int posY) : base("RS", "Rei da Selva", new List<Dinossauro>(), posX, posY) { }
     public override int CalcularPontuacao()
     {
-        //Adicionar condicao do dinossauro Rei
-        return 7;
+        if (Dinossauros.Count == 1)
+            return 7;
+
+        return 0;
     }
 }
 
@@ -86,13 +88,11 @@ public class CercadoDiferenca : Cercado
     public CercadoDiferenca(int posX, int posY) : base("CD", "Campina da Diferença", new List<Dinossauro>(), posX, posY) { }
     public override int CalcularPontuacao()
     {
-        int[] tabelaPontuacao = { 1, 3, 6, 10, 15, 21 };
+        int[] tabelaPontuacao = { 0, 1, 3, 6, 10, 15, 21 };
         int quantidade = Dinossauros.Count;
 
-        if (quantidade < 0 || quantidade >= tabelaPontuacao.Length) // Adicionar condicao de dinossauros diferentes
-        {
+        if (quantidade < 0 || quantidade >= tabelaPontuacao.Length)
             return 0;
-        }
 
         return tabelaPontuacao[quantidade];
     }
@@ -103,12 +103,24 @@ public class CercadoAmor : Cercado
     public CercadoAmor(int posX, int posY) : base("PA", "Pradaria do Amor", new List<Dinossauro>(), posX, posY) { }
     public override int CalcularPontuacao()
     {
-        int pontos = 0;
-        for (int i = 0; i < Dinossauros.Count; i++)
+        Dictionary<string, int> contagemPorEspecie = new Dictionary<string, int>();
+
+        foreach (Dinossauro dino in Dinossauros)
         {
-            if (i % 2 == 0) //Adicionar condicao de especie igual de dinossauros
-                pontos += 5;
+            if (!contagemPorEspecie.ContainsKey(dino.Sigla))
+                contagemPorEspecie[dino.Sigla] = 0;
+
+            contagemPorEspecie[dino.Sigla]++;
         }
+
+        int pontos = 0;
+
+        foreach (KeyValuePair<string, int> item in contagemPorEspecie)
+        {
+            int quantidadeDePares = item.Value / 2;
+            pontos += quantidadeDePares * 5;
+        }
+
         return pontos;
     }
 }
@@ -118,7 +130,9 @@ public class CercadoSolitario : Cercado
     public CercadoSolitario(int posX, int posY) : base("IS", "Ilha Solitária", new List<Dinossauro>(), posX, posY) { }
     public override int CalcularPontuacao()
     {
-        //Adicionar condicao do dinossauro Solitario
-        return 7;
+        if (Dinossauros.Count == 1)
+            return 7;
+
+        return 0;
     }
 }

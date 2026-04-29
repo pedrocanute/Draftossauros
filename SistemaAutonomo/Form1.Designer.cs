@@ -643,12 +643,11 @@
             // 
             // lblTeste
             // 
-            this.lblTeste.AutoSize = true;
             this.lblTeste.BackColor = System.Drawing.Color.Transparent;
             this.lblTeste.ForeColor = System.Drawing.Color.DarkSlateBlue;
             this.lblTeste.Location = new System.Drawing.Point(15, 70);
             this.lblTeste.Name = "lblTeste";
-            this.lblTeste.Size = new System.Drawing.Size(0, 13);
+            this.lblTeste.Size = new System.Drawing.Size(250, 100);
             this.lblTeste.TabIndex = 31;
             // 
             // lbl3
