@@ -161,38 +161,12 @@ namespace SistemaAutonomo
             AtivarBotAutomatico();
         }
 
-        private void btnRealizarJogada_Click(object sender, EventArgs e)
-        {
-            if (jogadorLocal.DinossauroSelecionado == null)
-            {
-                jogadorLocal.DinossauroSelecionado = ObterDinossauroSelecionadoNaLista();
-            }
-
-            Cercado cercadoSelecionado = ObterCercadoSelecionado();
-
-            Dinossauro dinossauroJogado = jogadorLocal.DinossauroSelecionado;
-
-            ValidarJogada resultado = jogadorLocal.RealizarJogada(cercadoSelecionado, partidaCriada.Dado, partidaCriada.JogadorComDado );
-
-            if (!resultado.Valido)
-            {
-                MessageBox.Show(resultado.Mensagem, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            int indicePosicaoDinossauro = cercadoSelecionado.Dinossauros.Count - 1;
-
-            DesenharDinossauroNoCercado(dinossauroJogado, cercadoSelecionado, indicePosicaoDinossauro);
-
-            AtualizarInformacoesJogador();
-        }
+ 
 
         public void ExibirMaoJogador(int idJogador) //Chat Debugou e fez dois dicionarios
         {
             jogadorLocal.AtualizarMao();
 
-            lblRodada.Text = jogadorLocal.RodadaAtual;
-            lstMaoDinossauros.Items.Clear();
 
             Dictionary<string, int> contagemDinossauros = new Dictionary<string, int>();
             Dictionary<string, string> nomesDinossauros = new Dictionary<string, string>();
@@ -209,12 +183,6 @@ namespace SistemaAutonomo
                 //Se já existir, apenas soma a quantidade
                 contagemDinossauros[dinossauro.Sigla]++;
             }
-
-            foreach (KeyValuePair<string, int> item in contagemDinossauros) // !VERIFICAR O QUE SIGNIFICA O KeyValuePair!
-            {
-                lstMaoDinossauros.Items.Add(nomesDinossauros[item.Key] + " Qtd: " + item.Value);
-            }
-
             AtualizarBotoesDinos(jogadorLocal.Dinossauros);
         }
 
@@ -318,56 +286,6 @@ namespace SistemaAutonomo
         private void btnSextoDino_Click(object sender, EventArgs e)
         {
             jogadorLocal.DinossauroSelecionado = btnSextoDino.Tag as Dinossauro;
-        }
-
-        public Dinossauro ObterDinossauroSelecionadoNaLista()
-        {
-            if (lstMaoDinossauros.SelectedItem == null)
-                return null;
-
-            string textoSelecionado = lstMaoDinossauros.SelectedItem.ToString();
-
-            foreach (Dinossauro dinossauro in jogadorLocal.Dinossauros)
-            {
-                if (textoSelecionado.StartsWith(dinossauro.NomeDinossauro))
-                    return dinossauro;
-            }
-
-            return null;
-        }
-
-        public Cercado ObterCercadoSelecionado()
-        {
-            if (lstCercados.SelectedItem == null)
-                return null;
-
-            string nomeCercado = lstCercados.SelectedItem.ToString().Trim();
-
-            foreach (Cercado cercado in tabuleiro.Cercados)
-            {
-                if (nomeCercado == "Igualdade" && cercado is CercadoIgualdade)
-                    return cercado;
-
-                if (nomeCercado == "Rei da Selva" && cercado is CercadoReiFloresta)
-                    return cercado;
-
-                if (nomeCercado == "Mata Tripla" && cercado is CercadoMataTripla)
-                    return cercado;
-
-                if (nomeCercado == "Diferença" && cercado is CercadoDiferenca)
-                    return cercado;
-
-                if (nomeCercado == "Amor" && cercado is CercadoAmor)
-                    return cercado;
-
-                if (nomeCercado == "Solitária" && cercado is CercadoSolitario)
-                    return cercado;
-
-                if (nomeCercado == "Rio" && cercado is Rio)
-                    return cercado;
-            }
-
-            return null;
         }
         private void TimerBot_Tick(object sender, EventArgs e)
         {
@@ -475,7 +393,7 @@ namespace SistemaAutonomo
                 );
 
                 lblTeste.Text =
-                    "Bot jogou no turno " + partidaCriada.TurnoAtual +
+                    $"{jogadorLocal.NomeJogador} jogou no turno " + partidaCriada.TurnoAtual +
                     " | Dino: " + dinossauroJogado.NomeDinossauro +
                     " | Cercado: " + cercadoEscolhido.NomeCercado +
                     " | Jogadas feitas: " + quantidadeJogadasAutomaticas;

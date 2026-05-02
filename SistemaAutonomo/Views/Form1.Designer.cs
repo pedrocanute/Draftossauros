@@ -32,15 +32,6 @@
             this.lblVersao = new System.Windows.Forms.Label();
             this.lblGrupo = new System.Windows.Forms.Label();
             this.lblNomeGrupo = new System.Windows.Forms.Label();
-            this.lstMaoDinossauros = new System.Windows.Forms.ListBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.gprPartida = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lstCercados = new System.Windows.Forms.ListBox();
-            this.btnRealizarJogada = new System.Windows.Forms.Button();
-            this.lblNomeJogador = new System.Windows.Forms.Label();
-            this.lblRodada = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -85,7 +76,6 @@
             this.lblNomePartida = new System.Windows.Forms.Label();
             this.lblIdPartida = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.gprPartida.SuspendLayout();
             this.pnlBotaoInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDado)).BeginInit();
             this.pnlMaoJogador.SuspendLayout();
@@ -128,104 +118,6 @@
             this.lblNomeGrupo.Size = new System.Drawing.Size(57, 13);
             this.lblNomeGrupo.TabIndex = 10;
             this.lblNomeGrupo.Text = "Primordiais";
-            // 
-            // lstMaoDinossauros
-            // 
-            this.lstMaoDinossauros.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lstMaoDinossauros.FormattingEnabled = true;
-            this.lstMaoDinossauros.Location = new System.Drawing.Point(6, 80);
-            this.lstMaoDinossauros.Name = "lstMaoDinossauros";
-            this.lstMaoDinossauros.Size = new System.Drawing.Size(151, 82);
-            this.lstMaoDinossauros.TabIndex = 27;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 64);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(87, 13);
-            this.label8.TabIndex = 28;
-            this.label8.Text = "Mão do Jogador:";
-            // 
-            // label11
-            // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 42);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(48, 13);
-            this.label11.TabIndex = 32;
-            this.label11.Text = "Rodada:";
-            // 
-            // gprPartida
-            // 
-            this.gprPartida.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.gprPartida.Controls.Add(this.label12);
-            this.gprPartida.Controls.Add(this.lstCercados);
-            this.gprPartida.Controls.Add(this.btnRealizarJogada);
-            this.gprPartida.Controls.Add(this.lblNomeJogador);
-            this.gprPartida.Controls.Add(this.lblRodada);
-            this.gprPartida.Controls.Add(this.lstMaoDinossauros);
-            this.gprPartida.Controls.Add(this.label8);
-            this.gprPartida.Controls.Add(this.label11);
-            this.gprPartida.Location = new System.Drawing.Point(12, 509);
-            this.gprPartida.Name = "gprPartida";
-            this.gprPartida.Size = new System.Drawing.Size(260, 170);
-            this.gprPartida.TabIndex = 34;
-            this.gprPartida.TabStop = false;
-            this.gprPartida.Text = "Partida";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(157, 64);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(50, 13);
-            this.label12.TabIndex = 39;
-            this.label12.Text = "Cercado:";
-            // 
-            // lstCercados
-            // 
-            this.lstCercados.FormattingEnabled = true;
-            this.lstCercados.Items.AddRange(new object[] {
-            "Igualdade",
-            "Rei da Selva",
-            "Mata Tripla",
-            "Diferença",
-            "Amor",
-            "Solitária",
-            "Rio"});
-            this.lstCercados.Location = new System.Drawing.Point(160, 80);
-            this.lstCercados.Name = "lstCercados";
-            this.lstCercados.Size = new System.Drawing.Size(95, 82);
-            this.lstCercados.TabIndex = 38;
-            // 
-            // btnRealizarJogada
-            // 
-            this.btnRealizarJogada.Location = new System.Drawing.Point(158, 19);
-            this.btnRealizarJogada.Name = "btnRealizarJogada";
-            this.btnRealizarJogada.Size = new System.Drawing.Size(97, 23);
-            this.btnRealizarJogada.TabIndex = 37;
-            this.btnRealizarJogada.Text = "Realizar Jogada";
-            this.btnRealizarJogada.UseVisualStyleBackColor = true;
-            this.btnRealizarJogada.Click += new System.EventHandler(this.btnRealizarJogada_Click);
-            // 
-            // lblNomeJogador
-            // 
-            this.lblNomeJogador.AutoSize = true;
-            this.lblNomeJogador.Location = new System.Drawing.Point(92, 64);
-            this.lblNomeJogador.Name = "lblNomeJogador";
-            this.lblNomeJogador.Size = new System.Drawing.Size(0, 13);
-            this.lblNomeJogador.TabIndex = 36;
-            // 
-            // lblRodada
-            // 
-            this.lblRodada.AutoSize = true;
-            this.lblRodada.Location = new System.Drawing.Point(60, 42);
-            this.lblRodada.Name = "lblRodada";
-            this.lblRodada.Size = new System.Drawing.Size(0, 13);
-            this.lblRodada.TabIndex = 34;
             // 
             // label3
             // 
@@ -762,7 +654,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.gprPartida);
             this.Controls.Add(this.pnlTabuleiro);
             this.Controls.Add(this.lblNomeGrupo);
             this.Controls.Add(this.lblGrupo);
@@ -776,8 +667,6 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Draftossauros";
-            this.gprPartida.ResumeLayout(false);
-            this.gprPartida.PerformLayout();
             this.pnlBotaoInfo.ResumeLayout(false);
             this.pnlBotaoInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDado)).EndInit();
@@ -800,19 +689,10 @@
         private System.Windows.Forms.Label lblGrupo;
         private System.Windows.Forms.Label lblNomeGrupo;
         private System.Windows.Forms.Panel pnlTabuleiro;
-        private System.Windows.Forms.ListBox lstMaoDinossauros;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.GroupBox gprPartida;
-        private System.Windows.Forms.Label lblRodada;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblVersao2;
-        private System.Windows.Forms.Label lblNomeJogador;
-        private System.Windows.Forms.Button btnRealizarJogada;
-        private System.Windows.Forms.ListBox lstCercados;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnVerificarTurno;
         private System.Windows.Forms.Panel pnlBotaoInfo;
