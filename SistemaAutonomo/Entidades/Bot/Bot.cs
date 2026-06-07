@@ -208,9 +208,9 @@ public class Bot : Jogador
                 return -99999; 
 
        
-            bool eBomParaOutrosLugares = VerificarSeDinoUtilEmOutrosCercados(dinossauro, partida);
+            bool colocarEmOutrosLugares = VerificarSeDinoUtilEmOutrosCercados(dinossauro, partida);
 
-            if (eBomParaOutrosLugares)
+            if (colocarEmOutrosLugares)
             {
                 prioridade += 5; 
             }
@@ -225,16 +225,14 @@ public class Bot : Jogador
         {
             if (cercado.Dinossauros.Count >= 1)
             {
-                System.Diagnostics.Debug.WriteLine($"IS: Cercado já ocupado!");
                 return -99999;
             }
             if (dinossauro is TiranossauroRex)
             {
-                System.Diagnostics.Debug.WriteLine($"IS: T-Rex não deve ir para Ilha Solitária! Melhor usar em outro cercado.");
                 return -99999; 
             }
 
-            bool especieJaExisteEmAlgumLugar = false;
+            bool especieJaExiste = false;
             string lugaresOndeExiste = "";
 
             foreach (Cercado outroCercado in partida.Tabuleiro.Cercados)
@@ -245,16 +243,15 @@ public class Bot : Jogador
                 {
                     if (dinoExistente.Sigla == dinossauro.Sigla)
                     {
-                        especieJaExisteEmAlgumLugar = true;
+                        especieJaExiste = true;
                         lugaresOndeExiste += $"{outroCercado.NomeCercado} ({outroCercado.SiglaCercado}), ";
                         break;
                     }
                 }
             }
 
-            if (especieJaExisteEmAlgumLugar)
+            if (especieJaExiste)
             {
-                System.Diagnostics.Debug.WriteLine($"❌ IS BLOQUEADA: {dinossauro.Sigla} já existe em: {lugaresOndeExiste}");
                 return -99999;
             }
 
@@ -267,11 +264,9 @@ public class Bot : Jogador
 
             if (quantidadeNaMao > 1)
             {
-                System.Diagnostics.Debug.WriteLine($"❌ IS BLOQUEADA: {dinossauro.Sigla} tem {quantidadeNaMao} cópias na mão! Vai perder pontuação depois.");
                 return -99999;
             }
 
-            System.Diagnostics.Debug.WriteLine($"✅ IS PERMITIDA: {dinossauro.Sigla} é ÚNICA no zoológico e não tem outra na mão! Pontuará 7 pontos.");
             prioridade += 150;
 
             return prioridade;
@@ -311,7 +306,7 @@ public class Bot : Jogador
 
         if (dinossauro is TiranossauroRex)
         {
-            if (cercado is CercadoIgualdade || cercado is CercadoDiferenca)
+            if (cercado is CercadoIgualdade || cercado is CercadoSolitario)
             {
                 prioridade -= 5000;
             }
@@ -326,10 +321,6 @@ public class Bot : Jogador
                 prioridade -= 100;
             }
 
-            if(cercado is CercadoSolitario)
-            {
-                prioridade -= 5000;
-            }
         }
 
         return prioridade;
