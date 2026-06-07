@@ -172,34 +172,77 @@ public class Bot : Jogador
                 prioridade += 30;
         }
 
-        
+
+
         if (cercado is CercadoAmor)
         {
             int qtdAtual = cercado.Dinossauros.Count;
 
             if (qtdAtual >= 6)
-                return -99999;
-
-            
+                return -99999; 
             int quantidadeEspecieNoCercado = 0;
+
             foreach (var dino in cercado.Dinossauros)
             {
                 if (dino.Sigla == dinossauro.Sigla)
+                {
                     quantidadeEspecieNoCercado++;
+                }
             }
 
             int paresAtuais = quantidadeEspecieNoCercado / 2;
             int paresFuturos = (quantidadeEspecieNoCercado + 1) / 2;
             int ganhoImediato = (paresFuturos - paresAtuais) * 5;
 
-            if (ganhoImediato > 0)
-                prioridade += ganhoImediato * 60;
 
-            if (quantidadeEspecieNoCercado == 1)
-                prioridade += 120;
+            switch(quantidadeEspecieNoCercado)
+            {
+                case 0:
+                    int quantidadeNaMao = 0;
+                    foreach (var dino in this.Dinossauros)
+                    {
+                        if (dino.Sigla == dinossauro.Sigla)
+                            quantidadeNaMao++;
+                    }
+                    if (quantidadeNaMao >= 2)
+                    {
+                        prioridade += 80;
+                    }
+                    else
+                    {
+                        prioridade += 20;
+                    }
+                    break;
+                case 1:
+                    prioridade += 400;
+                    break;
+                case 2:
+                    prioridade += 150;
+                    break;
+                case 3:
+                    prioridade += 350;
+                    break;
+                case 4:
+                    prioridade += 120;
+                    break;
+                case 5:
+                    prioridade += 300;
+                    break;
+                default:
+                    break;
+            }
 
-            if (quantidadeEspecieNoCercado == 2)
-                prioridade += 30;
+
+            if (partida.JogadorComDado != null &&
+                partida.JogadorComDado.IdJogador == this.IdJogador)
+            {
+                prioridade += 50;
+            }
+
+            if (dinossauro is TiranossauroRex)
+            {
+                prioridade -= 2000;
+            }
         }
 
         if (cercado is CercadoReiFloresta)
@@ -311,15 +354,6 @@ public class Bot : Jogador
                 prioridade -= 5000;
             }
 
-            if (cercado is CercadoMataTripla && cercado.Dinossauros.Count == 2)
-            {
-                prioridade -= 400;
-            }
-
-            if (cercado is CercadoAmor)
-            {
-                prioridade -= 100;
-            }
 
         }
 

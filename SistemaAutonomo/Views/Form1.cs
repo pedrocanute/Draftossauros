@@ -101,7 +101,7 @@ namespace SistemaAutonomo
             lblIdJogador.Text = jogadorLocal.IdJogador.ToString();
             lblSenhaJogador.Text = jogadorLocal.SenhaJogador;
 
-            MessageBox.Show("Bot criado com sucesso!");
+            //MessageBox.Show("Bot criado com sucesso!");
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
