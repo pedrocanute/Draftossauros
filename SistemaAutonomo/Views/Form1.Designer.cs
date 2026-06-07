@@ -76,6 +76,7 @@
             this.lblNomePartida = new System.Windows.Forms.Label();
             this.lblIdPartida = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnIniciarBot = new System.Windows.Forms.Button();
             this.pnlBotaoInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDado)).BeginInit();
             this.pnlMaoJogador.SuspendLayout();
@@ -514,7 +515,7 @@
             this.btnIniciar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnIniciar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnIniciar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIniciar.Location = new System.Drawing.Point(925, 589);
+            this.btnIniciar.Location = new System.Drawing.Point(12, 509);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(238, 86);
             this.btnIniciar.TabIndex = 48;
@@ -635,6 +636,24 @@
             this.panel1.Size = new System.Drawing.Size(260, 227);
             this.panel1.TabIndex = 49;
             // 
+            // btnIniciarBot
+            // 
+            this.btnIniciarBot.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnIniciarBot.BackColor = System.Drawing.Color.Transparent;
+            this.btnIniciarBot.BackgroundImage = global::SistemaAutonomo.Properties.Resources.IniciarBotBtn;
+            this.btnIniciarBot.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnIniciarBot.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnIniciarBot.FlatAppearance.BorderSize = 0;
+            this.btnIniciarBot.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnIniciarBot.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnIniciarBot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIniciarBot.Location = new System.Drawing.Point(12, 606);
+            this.btnIniciarBot.Name = "btnIniciarBot";
+            this.btnIniciarBot.Size = new System.Drawing.Size(238, 86);
+            this.btnIniciarBot.TabIndex = 50;
+            this.btnIniciarBot.UseVisualStyleBackColor = false;
+            this.btnIniciarBot.Click += new System.EventHandler(this.btnIniciarBot_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -643,6 +662,7 @@
             this.BackgroundImage = global::SistemaAutonomo.Properties.Resources.FundoGame;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1184, 749);
+            this.Controls.Add(this.btnIniciarBot);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnIniciar);
@@ -732,6 +752,7 @@
         private System.Windows.Forms.Label lblNomePartida;
         private System.Windows.Forms.Label lblIdPartida;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnIniciarBot;
     }
 }
 

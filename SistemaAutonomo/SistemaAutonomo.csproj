@@ -130,6 +130,7 @@
     <Content Include="Resources\FaceFloresta.png" />
     <Content Include="Resources\FacePradaria.png" />
     <Content Include="Resources\FaceTRex.png" />
+    <None Include="Resources\IniciarBotBtn.png" />
     <Content Include="Resources\Parasaurolofo.png" />
     <Content Include="Resources\Tiranossauro-Rex.png" />
     <Content Include="Resources\Triceratops.png" />

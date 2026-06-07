@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Bot : Jogador
 {
-    private static Random random = new Random();
 
     public JogadaBot UltimaJogada { get; private set; }
 
@@ -40,7 +40,6 @@ public class Bot : Jogador
         if (jogadasValidas.Count == 0)
             return new ValidarJogada(false, "Bot não encontrou jogada possível.");
 
-        EmbaralharJogadas(jogadasValidas);
 
         foreach (JogadaBot jogada in jogadasValidas)
         {
@@ -73,44 +72,335 @@ public class Bot : Jogador
         {
             foreach (Cercado cercado in partida.Tabuleiro.Cercados)
             {
-                ValidarJogada resultado = RegraJogada.Validar(partida.Dado,cercado,dinossauro,this,partida.JogadorComDado);
+                ValidarJogada resultado = RegraJogada.Validar(
+                    partida.Dado,
+                    cercado,
+                    dinossauro,
+                    this,
+                    partida.JogadorComDado
+                );
 
                 if (resultado.Valido)
-                    jogadasValidas.Add(new JogadaBot(dinossauro, cercado));
+                {
+                    int prioridade = CalcularPrioridadeJogada(cercado, dinossauro, partida);
+                    jogadasValidas.Add(new JogadaBot(dinossauro, cercado, prioridade));
+                }
             }
         }
 
-        jogadasValidas.Sort((jogadaA, jogadaB) =>
-        {
-            int ganhoA = CalcularGanhoDaJogada(jogadaA);
-            int ganhoB = CalcularGanhoDaJogada(jogadaB);
-
-            return ganhoB.CompareTo(ganhoA);
-        });
+        jogadasValidas = jogadasValidas.OrderByDescending(j => ((JogadaBot)j).Prioridade).ToList();
 
         return jogadasValidas;
     }
 
-    private int CalcularGanhoDaJogada(JogadaBot jogada)
+
+    private int CalcularPrioridadeJogada(Cercado cercado, Dinossauro dinossauro, Partida partida)
     {
-        int pontuacaoAntes = jogada.Cercado.CalcularPontuacao();
+        int prioridade = 0;
 
-        jogada.Cercado.Dinossauros.Add(jogada.Dinossauro);
-        int pontuacaoDepois = jogada.Cercado.CalcularPontuacao();
-        jogada.Cercado.Dinossauros.Remove(jogada.Dinossauro);
-
-        return pontuacaoDepois - pontuacaoAntes;
-    }
-
-    private void EmbaralharJogadas(List<JogadaBot> jogadas)
-    {
-        for (int i = 0; i < jogadas.Count; i++)
+        if (cercado is CercadoDiferenca)
         {
-            int indiceSorteado = random.Next(i, jogadas.Count);
+            bool especieJaExiste = false;
+            foreach (var dino in cercado.Dinossauros)
+            {
+                if (dino.Sigla == dinossauro.Sigla)
+                {
+                    especieJaExiste = true;
+                    break;
+                }
+            }
 
-            JogadaBot temp = jogadas[i];
-            jogadas[i] = jogadas[indiceSorteado];
-            jogadas[indiceSorteado] = temp;
+            if (especieJaExiste)
+            {
+                return -99999;
+            }
+
+            int qtdAtual = cercado.Dinossauros.Count;
+            int pontosAtuais = CalcularPontosDiferenca(qtdAtual);
+            int pontosFuturos = CalcularPontosDiferenca(qtdAtual + 1);
+            int ganhoImediato = pontosFuturos - pontosAtuais;
+
+            prioridade += ganhoImediato * 100; 
+            if (qtdAtual < 3)
+                prioridade += 50;
         }
+
+        if (cercado is CercadoIgualdade)
+        {
+            bool especieCompravel = true;
+            foreach (var dino in cercado.Dinossauros)
+            {
+                if (dino.Sigla != dinossauro.Sigla)
+                {
+                    especieCompravel = false;
+                    break;
+                }
+            }
+
+            if (!especieCompravel)
+                return -99999;
+
+            int qtdAtual = cercado.Dinossauros.Count;
+
+            if (qtdAtual >= 6)
+                return -99999; 
+
+            int pontosAtuais = CalcularPontosIgualdade(qtdAtual);
+            int pontosFuturos = CalcularPontosIgualdade(qtdAtual + 1);
+            int ganhoImediato = pontosFuturos - pontosAtuais;
+
+            prioridade += ganhoImediato * 80;
+
+     
+            if (qtdAtual >= 4)
+                prioridade += 200;
+        }
+
+        
+        if (cercado is CercadoMataTripla)
+        {
+            int qtdAtual = cercado.Dinossauros.Count;
+
+            if (qtdAtual >= 3)
+                return -99999;
+
+            if (qtdAtual == 2)
+                prioridade += 800;
+            else if (qtdAtual == 1)
+                prioridade += 150; 
+            else if (qtdAtual == 0)
+                prioridade += 30;
+        }
+
+        
+        if (cercado is CercadoAmor)
+        {
+            int qtdAtual = cercado.Dinossauros.Count;
+
+            if (qtdAtual >= 6)
+                return -99999;
+
+            
+            int quantidadeEspecieNoCercado = 0;
+            foreach (var dino in cercado.Dinossauros)
+            {
+                if (dino.Sigla == dinossauro.Sigla)
+                    quantidadeEspecieNoCercado++;
+            }
+
+            int paresAtuais = quantidadeEspecieNoCercado / 2;
+            int paresFuturos = (quantidadeEspecieNoCercado + 1) / 2;
+            int ganhoImediato = (paresFuturos - paresAtuais) * 5;
+
+            if (ganhoImediato > 0)
+                prioridade += ganhoImediato * 60;
+
+            if (quantidadeEspecieNoCercado == 1)
+                prioridade += 120;
+
+            if (quantidadeEspecieNoCercado == 2)
+                prioridade += 30;
+        }
+
+        if (cercado is CercadoReiFloresta)
+        {
+            if (cercado.Dinossauros.Count >= 1)
+                return -99999; 
+
+       
+            bool eBomParaOutrosLugares = VerificarSeDinoUtilEmOutrosCercados(dinossauro, partida);
+
+            if (eBomParaOutrosLugares)
+            {
+                prioridade += 5; 
+            }
+            else
+            {
+               
+                prioridade += 40;
+            }
+        }
+
+        if (cercado is CercadoSolitario)
+        {
+            if (cercado.Dinossauros.Count >= 1)
+            {
+                System.Diagnostics.Debug.WriteLine($"IS: Cercado já ocupado!");
+                return -99999;
+            }
+            if (dinossauro is TiranossauroRex)
+            {
+                System.Diagnostics.Debug.WriteLine($"IS: T-Rex não deve ir para Ilha Solitária! Melhor usar em outro cercado.");
+                return -99999; 
+            }
+
+            bool especieJaExisteEmAlgumLugar = false;
+            string lugaresOndeExiste = "";
+
+            foreach (Cercado outroCercado in partida.Tabuleiro.Cercados)
+            {
+                if (outroCercado == cercado) continue;
+
+                foreach (var dinoExistente in outroCercado.Dinossauros)
+                {
+                    if (dinoExistente.Sigla == dinossauro.Sigla)
+                    {
+                        especieJaExisteEmAlgumLugar = true;
+                        lugaresOndeExiste += $"{outroCercado.NomeCercado} ({outroCercado.SiglaCercado}), ";
+                        break;
+                    }
+                }
+            }
+
+            if (especieJaExisteEmAlgumLugar)
+            {
+                System.Diagnostics.Debug.WriteLine($"❌ IS BLOQUEADA: {dinossauro.Sigla} já existe em: {lugaresOndeExiste}");
+                return -99999;
+            }
+
+            int quantidadeNaMao = 0;
+            foreach (var dino in this.Dinossauros)
+            {
+                if (dino.Sigla == dinossauro.Sigla)
+                    quantidadeNaMao++;
+            }
+
+            if (quantidadeNaMao > 1)
+            {
+                System.Diagnostics.Debug.WriteLine($"❌ IS BLOQUEADA: {dinossauro.Sigla} tem {quantidadeNaMao} cópias na mão! Vai perder pontuação depois.");
+                return -99999;
+            }
+
+            System.Diagnostics.Debug.WriteLine($"✅ IS PERMITIDA: {dinossauro.Sigla} é ÚNICA no zoológico e não tem outra na mão! Pontuará 7 pontos.");
+            prioridade += 150;
+
+            return prioridade;
+        }
+
+        if (cercado is Rio)
+        {
+            
+            bool temOutraOpcao = false;
+            foreach (Cercado outroCercado in partida.Tabuleiro.Cercados)
+            {
+                if (outroCercado is Rio) continue;
+
+                ValidarJogada teste = RegraJogada.Validar(
+                    partida.Dado, outroCercado, dinossauro,
+                    this, partida.JogadorComDado
+                );
+
+                if (teste.Valido)
+                {
+                    temOutraOpcao = true;
+                    break;
+                }
+            }
+
+            if (temOutraOpcao)
+                return -10000; 
+            else
+                prioridade = -5000; 
+        }
+
+        if (partida.JogadorComDado != null &&
+            partida.JogadorComDado.IdJogador == this.IdJogador)
+        {
+            prioridade += 150;
+        }
+
+        if (dinossauro is TiranossauroRex)
+        {
+            if (cercado is CercadoIgualdade || cercado is CercadoDiferenca)
+            {
+                prioridade -= 5000;
+            }
+
+            if (cercado is CercadoMataTripla && cercado.Dinossauros.Count == 2)
+            {
+                prioridade -= 400;
+            }
+
+            if (cercado is CercadoAmor)
+            {
+                prioridade -= 100;
+            }
+
+            if(cercado is CercadoSolitario)
+            {
+                prioridade -= 5000;
+            }
+        }
+
+        return prioridade;
     }
+
+
+    private int CalcularPontosDiferenca(int quantidade)
+    {
+        int[] tabelaPontuacao = { 0, 1, 3, 6, 10, 15, 21 };
+        if (quantidade < 0 || quantidade >= tabelaPontuacao.Length)
+            return 0;
+        return tabelaPontuacao[quantidade];
+    }
+
+    private int CalcularPontosIgualdade(int quantidade)
+    {
+        int[] tabelaPontuacao = { 0, 2, 4, 8, 12, 18, 24 };
+        if (quantidade < 0 || quantidade >= tabelaPontuacao.Length)
+            return 0;
+        return tabelaPontuacao[quantidade];
+    }
+
+    private bool VerificarSeDinoUtilEmOutrosCercados(Dinossauro dinossauro, Partida partida)
+    {
+        foreach (Cercado cercado in partida.Tabuleiro.Cercados)
+        {
+            if (cercado is CercadoMataTripla && cercado.Dinossauros.Count == 2)
+            {
+                return true;
+            }
+        }
+        foreach (Cercado cercado in partida.Tabuleiro.Cercados)
+        {
+            if (cercado is CercadoAmor)
+            {
+                foreach (var dino in cercado.Dinossauros)
+                {
+                    if (dino.Sigla == dinossauro.Sigla)
+                        return true;
+                }
+            }
+        }
+        int quantidadeNaMao = 0;
+        foreach (var dino in this.Dinossauros)
+        {
+            if (dino.Sigla == dinossauro.Sigla)
+                quantidadeNaMao++;
+        }
+
+        if (quantidadeNaMao >= 2)
+            return true;
+
+        foreach (Cercado cercado in partida.Tabuleiro.Cercados)
+        {
+            if (cercado is CercadoDiferenca && cercado.Dinossauros.Count < 6)
+            {
+                bool especieJaExiste = false;
+                foreach (var dino in cercado.Dinossauros)
+                {
+                    if (dino.Sigla == dinossauro.Sigla)
+                    {
+                        especieJaExiste = true;
+                        break;
+                    }
+                }
+                if (!especieJaExiste)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
 }

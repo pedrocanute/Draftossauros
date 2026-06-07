@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlTypes;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -17,7 +18,6 @@ namespace SistemaAutonomo
     {
         Partida partidaCriada;
         List<Jogador> listaJogadores = new List<Jogador>();
-        Dictionary<string, int> qtdDinossaurosCercado = new Dictionary<string, int>();
         Jogador jogadorLocal;
         Tabuleiro tabuleiro = new Tabuleiro();
 
@@ -27,6 +27,7 @@ namespace SistemaAutonomo
         int quantidadeJogadasAutomaticas = 0;
         int quantidadeMaximaJogadas = 12;
         bool botAutomaticoAtivo = false;
+        bool botInicializado = false;
 
         public Form1(Partida partida)
         {
@@ -52,20 +53,13 @@ namespace SistemaAutonomo
             partidaCriada.JogadorComDado = new Jogador(0);
             partidaCriada.Tabuleiro = tabuleiro;
 
-            qtdDinossaurosCercado["FI"] = 0;
-            qtdDinossaurosCercado["RS"] = 0;
-            qtdDinossaurosCercado["MT"] = 0;
-            qtdDinossaurosCercado["CD"] = 0;
-            qtdDinossaurosCercado["PA"] = 0;
-            qtdDinossaurosCercado["IS"] = 0;
-            qtdDinossaurosCercado["RI"] = 0;
 
         }
 
         private void btnListarJogadores_Click(object sender, EventArgs e)
         {
             ListarJogadores();
-        } //feito
+        }
 
         private void ListarJogadores()
         {
@@ -85,7 +79,7 @@ namespace SistemaAutonomo
             }
         }
 
-        private void btnCriarJogador_Click(object sender, EventArgs e) // feito
+        private void btnCriarJogador_Click(object sender, EventArgs e) 
         {
             if (jogadorLocal != null && jogadorLocal.IdJogador > 0)
             {
@@ -120,37 +114,34 @@ namespace SistemaAutonomo
 
             partidaCriada.AtualizarJogadoresDoServidor();
 
-            bool partidaJaEstaJogando = false;
+            bool iniciou = partidaCriada.IniciarPartida();
 
-            if (partidaCriada.AtualizarInfoJogador())
+            if (!iniciou)
             {
-                if (partidaCriada.StatusPartida == "J")
-                    partidaJaEstaJogando = true;
-            }
-
-            if (!partidaJaEstaJogando)
-            {
-                bool iniciou = partidaCriada.IniciarPartida();
-
-                if (!iniciou)
+                bool atualizou = partidaCriada.AtualizarInfoJogador();
+                if (!atualizou)
                 {
-                    partidaCriada.AtualizarJogadoresDoServidor();
+                    MessageBox.Show(
+                        "Não foi possível iniciar a partida nem verificar seu se ela esta em andamento.",
+                        "ERRO",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return;
+                }
 
-                    bool atualizou = partidaCriada.AtualizarInfoJogador();
-
-                    if (!atualizou || partidaCriada.StatusPartida != "J")
-                    {
-                        MessageBox.Show(
-                            "Não foi possível iniciar nem encontrar a partida em andamento.",
-                            "ERRO",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning
-                        );
-
-                        return;
-                    }
+                if (partidaCriada.StatusPartida != "J")
+                {
+                    MessageBox.Show(
+                        "A partida ainda não está em andamento.",
+                        "AVISO",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                    return;
                 }
             }
+
 
             partidaCriada.AtualizarJogadoresDoServidor();
             partidaCriada.AtualizarInfoJogador();
@@ -158,12 +149,12 @@ namespace SistemaAutonomo
             AtualizarTelaPartida();
             ExibirMaoJogador(jogadorLocal.IdJogador);
 
-            AtivarBotAutomatico();
+            lblTeste.Text = "Partida iniciada/atualizada. Clique em Iniciar Bot para ativar o bot.";
         }
 
- 
 
-        public void ExibirMaoJogador(int idJogador) //Chat Debugou e fez dois dicionarios
+
+        public void ExibirMaoJogador(int idJogador)
         {
             jogadorLocal.AtualizarMao();
 
@@ -173,20 +164,20 @@ namespace SistemaAutonomo
 
             foreach (Dinossauro dinossauro in jogadorLocal.Dinossauros)
             {
-                //Se não existir o dinossauro no dicionário, inicia a contagem e armazena o nome
+
                 if (!contagemDinossauros.ContainsKey(dinossauro.Sigla))
                 {
                     contagemDinossauros[dinossauro.Sigla] = 0;
                     nomesDinossauros[dinossauro.Sigla] = dinossauro.NomeDinossauro;
                 }
 
-                //Se já existir, apenas soma a quantidade
+
                 contagemDinossauros[dinossauro.Sigla]++;
             }
             AtualizarBotoesDinos(jogadorLocal.Dinossauros);
         }
 
-        private void AtualizarBotoesDinos(List<Dinossauro> listaDinossauros) 
+        private void AtualizarBotoesDinos(List<Dinossauro> listaDinossauros)
         {
             Button[] botoes = { btnPrimeiroDino, btnSegundoDino, btnTerceiroDino, btnQuartoDino, btnQuintoDino, btnSextoDino };
 
@@ -418,7 +409,7 @@ namespace SistemaAutonomo
         {
             if (jogadorLocal.IdJogador == 0 || jogadorLocal.SenhaJogador == null)
             {
-                MessageBox.Show("O bot ainda não foi autenticado corretamente na partida.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"O {jogadorLocal.NomeJogador} ainda não foi autenticado corretamente na partida.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -431,6 +422,42 @@ namespace SistemaAutonomo
             lblTeste.Text = "Bot automático ativado.";
 
             ExecutarCicloBot();
+        }
+
+        private void btnIniciarBot_Click(object sender, EventArgs e)
+        {
+            if (botInicializado)
+            {
+                MessageBox.Show("Bot já está inicializado.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (jogadorLocal.IdJogador == 0 || jogadorLocal.SenhaJogador == null)
+            {
+                MessageBox.Show("O bot ainda não foi autenticado corretamente na partida.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            partidaCriada.AtualizarJogadoresDoServidor();
+            bool atualizou = partidaCriada.AtualizarInfoJogador();
+
+            if (!atualizou)
+            {
+                MessageBox.Show("Não foi possível atualizar as informações do jogador.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (partidaCriada.StatusPartida != "J")
+            {
+                MessageBox.Show("A partida não está em andamento.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+            AtualizarTelaPartida();
+            ExibirMaoJogador(jogadorLocal.IdJogador);
+            MessageBox.Show($"Bot automático de {jogadorLocal.NomeJogador} foi iniciado.", "BOT AUTOMÁTICO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            AtivarBotAutomatico();
+            botInicializado = true;
         }
     }
 }
