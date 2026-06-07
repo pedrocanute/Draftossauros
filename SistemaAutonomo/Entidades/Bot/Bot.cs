@@ -98,6 +98,23 @@ public class Bot : Jogador
     {
         int prioridade = 0;
 
+        if (!(cercado is CercadoSolitario))
+        {
+            foreach (Cercado outroCercado in partida.Tabuleiro.Cercados)
+            {
+                if (outroCercado is CercadoSolitario)
+                {
+                    foreach (var dinoExistente in outroCercado.Dinossauros)
+                    {
+                        if (dinoExistente.Sigla == dinossauro.Sigla)
+                        {
+                            return -99999; 
+                        }
+                    }
+                }
+            }
+        }
+
         if (cercado is CercadoDiferenca)
         {
             bool especieJaExiste = false;
@@ -351,7 +368,7 @@ public class Bot : Jogador
         {
             if (cercado is CercadoIgualdade || cercado is CercadoSolitario)
             {
-                prioridade -= 5000;
+                prioridade -= 99999;
             }
 
 

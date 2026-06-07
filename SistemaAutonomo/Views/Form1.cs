@@ -455,7 +455,7 @@ namespace SistemaAutonomo
 
             AtualizarTelaPartida();
             ExibirMaoJogador(jogadorLocal.IdJogador);
-            MessageBox.Show($"Bot automático de {jogadorLocal.NomeJogador} foi iniciado.", "BOT AUTOMÁTICO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show($"Bot automático de {jogadorLocal.NomeJogador} foi iniciado.", "BOT AUTOMÁTICO", MessageBoxButtons.OK, MessageBoxIcon.Information);
             AtivarBotAutomatico();
             botInicializado = true;
         }
