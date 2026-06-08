@@ -42,7 +42,7 @@ public class Jogador
         if (cercadoSelecionado == null)
             return new ValidarJogada(false, "Selecione um cercado para jogar!");
 
-        ValidarJogada resultado = RegraJogada.Validar(dado, cercadoSelecionado, this, jogadorComDado);
+        ValidarJogada resultado = RegraJogada.Validar(dado, cercadoSelecionado, DinossauroSelecionado, this, jogadorComDado);
 
         if (!resultado.Valido)
             return resultado;

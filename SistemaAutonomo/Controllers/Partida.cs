@@ -32,6 +32,10 @@ public class Partida
 
     public Tabuleiro Tabuleiro { get { return tabuleiro; } set { tabuleiro = value; } }
 
+    public string StatusPartida { get; set; }
+    public int TurnoAtual { get; set; }
+    public string StatusTurno { get; set; }
+
     public string NomeGrupo { get { return nomeGrupo; }}
 
     public Dado Dado { get { return dado; } set { dado = value; } }
@@ -105,19 +109,32 @@ public class Partida
 
     }
 
-    public void IniciarPartida()
+    public bool IniciarPartida()
     {
         string retorno = Jogo.Iniciar(jogadorLocal.IdJogador, jogadorLocal.SenhaJogador);
 
         if (TratarErro.Verificar(retorno))
-            return;
+            return false;
 
         string[] infoPrimeiroDado = TratarRetorno.SepararVirgula(retorno);
 
-        jogadorComDado.IdJogador = Convert.ToInt32(infoPrimeiroDado[0]);
-        jogadorComDado = BuscarJogador(jogadorComDado.IdJogador);
+        if (infoPrimeiroDado.Length < 2)
+            return false;
 
-        dado.DefinirFace(infoPrimeiroDado[1]);
+        int idJogadorComDado = Convert.ToInt32(infoPrimeiroDado[0].Trim());
+        string faceDado = infoPrimeiroDado[1].Trim();
+
+        JogadorComDado = BuscarJogador(idJogadorComDado);
+
+        if (JogadorComDado == null)
+        {
+            JogadorComDado = new Jogador(idJogadorComDado);
+            Jogadores.Add(JogadorComDado);
+        }
+
+        Dado.DefinirFace(faceDado);
+
+        return true;
     }
 
     public Jogador BuscarJogador(int id)
@@ -131,15 +148,42 @@ public class Partida
         return null;
     }
 
-    public void AtualizarInfoJogador()
+    public bool AtualizarInfoJogador()
     {
         string retorno = Jogo.VerificarPartida(IdPartida);
-        string [] linhas = TratarRetorno.SepararVirgula(retorno);
-        JogadorComDado = BuscarJogador(Convert.ToInt32(linhas[3].Trim()));
-        dado.DefinirFace(linhas[4].Trim());
+
+        if (TratarErro.Verificar(retorno))
+            return false;
+
+        if (string.IsNullOrWhiteSpace(retorno))
+            return false;
+
+        string[] dados = TratarRetorno.SepararVirgula(retorno);
+
+        if (dados.Length < 5)
+            return false;
+
+        StatusPartida = dados[0].Trim().ToUpper();
+        TurnoAtual = Convert.ToInt32(dados[1].Trim());
+        StatusTurno = dados[2].Trim().ToUpper();
+
+        int idJogadorComDado = Convert.ToInt32(dados[3].Trim());
+        string faceDado = dados[4].Trim().ToUpper();
+
+        JogadorComDado = BuscarJogador(idJogadorComDado);
+
+        if (JogadorComDado == null)
+        {
+            JogadorComDado = new Jogador(idJogadorComDado);
+            Jogadores.Add(JogadorComDado);
+        }
+
+        Dado.DefinirFace(faceDado);
+
+        return true;
     }
 
-    public void AtualizarJogadoresDoServidor() //Se der RUIM foi AQUI (C)
+    public void AtualizarJogadoresDoServidor()
     {
         string retorno = Jogo.ListarJogadores(IdPartida);
 
@@ -148,7 +192,7 @@ public class Partida
 
         string[] linhas = TratarRetorno.SepararLinha(retorno);
 
-        Jogadores.Clear();
+        List<Jogador> jogadoresAtualizados = new List<Jogador>();
 
         foreach (string linha in linhas)
         {
@@ -158,13 +202,30 @@ public class Partida
             string[] dados = linha.Split(',');
 
             int id = Convert.ToInt32(dados[0]);
+            string nome = dados[1].Trim();
             int pontuacao = Convert.ToInt32(dados[2]);
 
-            Jogador jogador = new Jogador(id);
-            jogador.NomeJogador = dados[1].Trim();
+            Jogador jogador;
+
+            if (JogadorLocal != null && JogadorLocal.IdJogador == id)
+            {
+                jogador = JogadorLocal;
+            }
+            else
+            {
+                jogador = BuscarJogador(id);
+
+                if (jogador == null)
+                    jogador = new Jogador(id);
+            }
+
+            jogador.IdJogador = id;
+            jogador.NomeJogador = nome;
             jogador.Pontuacao = pontuacao;
 
-            Jogadores.Add(jogador);
+            jogadoresAtualizados.Add(jogador);
         }
+
+        Jogadores = jogadoresAtualizados;
     }
 }

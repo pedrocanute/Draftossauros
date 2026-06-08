@@ -3,9 +3,10 @@
     "",
     "\\Client",
     "\\SistemaAutonomo",
+    "\\SistemaAutonomo\\Entidades",
     "\\SistemaAutonomo\\Properties",
     "\\SistemaAutonomo\\Resources"
   ],
-  "SelectedNode": "\\SistemaAutonomo\\Form1.cs",
+  "SelectedNode": "\\SistemaAutonomo\\SistemaAutonomo.csproj",
   "PreviewInSolutionExplorer": false
 }
